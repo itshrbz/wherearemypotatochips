@@ -465,9 +465,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossAI
   patrolSpeed: 2.85
-  chaseSpeed: 3.48
+  chaseSpeed: 4
   turnSpeed: 540
-  sightRange: 18
+  sightRange: 20
   fieldOfView: 110
   eyeHeight: 1.6
   hearingRange: 9
