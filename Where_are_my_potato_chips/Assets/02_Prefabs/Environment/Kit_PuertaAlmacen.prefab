@@ -457,6 +457,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8832460325287517413}
+  - component: {fileID: 4417203958810163542}
   m_Layer: 0
   m_Name: Kit_PuertaAlmacen
   m_TagString: Untagged
@@ -483,3 +484,22 @@ Transform:
   - {fileID: 1392217440788562305}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4417203958810163542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8317305585811533384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6756f16a1ed49b8ad3d2485c2f420a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ceilingLight: {fileID: 0}
+  doorLeaf: {fileID: 0}
+  closedLocalEuler: {x: 0, y: 0, z: 0}
+  audioSource: {fileID: 0}
+  bulbPopClip: {fileID: 0}
+  doorSlamClip: {fileID: 0}
+  unlockedFromStart: 0

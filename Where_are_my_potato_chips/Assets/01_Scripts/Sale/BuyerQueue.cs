@@ -96,6 +96,39 @@ public class BuyerQueue : MonoBehaviour
         OnAllBuyersServed?.Invoke();
     }
 
+    /// <summary>Final del juego: solo entra el comprador de las papas y repite su pedido.</summary>
+    public IEnumerator PlayEnding()
+    {
+        if (player == null)
+        {
+            var p = GameObject.FindWithTag("Player");
+            if (p != null) player = p.transform;
+        }
+
+        Buyer weird = null;
+        foreach (var b in buyers)
+        {
+            if (b.body != null) b.body.SetActive(false);
+            if (weird == null && b.variant != null && b.variant.requestsPotatoes) weird = b;
+        }
+        if (weird == null || weird.body == null) yield break;
+
+        weird.body.transform.position = entrance.position;
+        weird.body.SetActive(true);
+        yield return WalkTo(weird.body.transform, counterSpot.position);
+
+        for (float t = 0f; t < 1f; t += Time.deltaTime)
+        {
+            FacePlayer(weird.body.transform);
+            yield return null;
+        }
+
+        string line = weird.variant.potatoLines != null && weird.variant.potatoLines.Length > 0
+            ? weird.variant.potatoLines[0]
+            : "Potatos.";
+        yield return DialogueBox.SayAll(weird.variant.buyerName, new[] { line }, 3f);
+    }
+
     IEnumerator WalkTo(Transform body, Vector3 target)
     {
         target.y = body.position.y;
