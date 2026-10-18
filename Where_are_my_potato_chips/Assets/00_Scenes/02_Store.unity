@@ -8587,6 +8587,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8187011821638275050, guid: 3cfc8dddedda98847b133bb99cb00c70, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8253641740892832784, guid: 3cfc8dddedda98847b133bb99cb00c70, type: 3}
       propertyPath: m_Name
       value: Buyer_2
@@ -48802,7 +48806,7 @@ Transform:
   m_GameObject: {fileID: 965829413}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: -0.3}
+  m_LocalPosition: {x: 1, y: 0, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52523,7 +52527,7 @@ Transform:
   m_GameObject: {fileID: 1013482909}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 1, z: -0.64367}
+  m_LocalPosition: {x: 3, y: 0, z: -0.64367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -67186,7 +67190,7 @@ Transform:
   m_GameObject: {fileID: 1322710930}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 1, z: -0.64367}
+  m_LocalPosition: {x: 2, y: 0, z: -0.64367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -84979,6 +84983,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1088619214853060631, guid: 437bab76c12682e47a3731def7228256, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896250444204169888, guid: 437bab76c12682e47a3731def7228256, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7412935828358744990, guid: 437bab76c12682e47a3731def7228256, type: 3}
@@ -108152,6 +108160,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 965829417}
     m_Modifications:
+    - target: {fileID: 1481828577884578291, guid: d3101e85baf66244b983d156f5fb6300, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2129200840066709556, guid: d3101e85baf66244b983d156f5fb6300, type: 3}
       propertyPath: m_Name
       value: Buyer_1
