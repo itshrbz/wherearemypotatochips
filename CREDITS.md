@@ -20,6 +20,6 @@
 
 ## Herramientas
 
-Unity 6.5 · GitHub · Trello · Claude (Anthropic), usado como asistente de programación.
+Unity 6.5 · GitHub · Trello 
 
 Gracias por jugar.
