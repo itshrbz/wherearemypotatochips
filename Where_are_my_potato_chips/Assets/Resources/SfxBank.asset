@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4866f6d214019224b9b5923e525b31e8, type: 3}
+  m_Name: SfxBank
+  m_EditorClassIdentifier: Assembly-CSharp::SfxBank
+  entries:
+  - id: step_player
+    clips:
+    - {fileID: 8300000, guid: fb6ee18c0fcfd5d4a800b6bfbfaccf04, type: 3}
+    - {fileID: 8300000, guid: f9ecf5a5431a96646af9c9b3d7ff6c5c, type: 3}
+    - {fileID: 8300000, guid: 053f6df20ab953149a6eab6d549dc898, type: 3}
+    - {fileID: 8300000, guid: 96eaf48d503a3a14b8874e5b53ac6d42, type: 3}
+    volume: 1
+    pitch: {x: 0, y: 0}
+    maxDistance: 30
+  - id: boss_step
+    clips:
+    - {fileID: 8300000, guid: 7120dc7b9b078a24c977a89abd4768cd, type: 3}
+    - {fileID: 8300000, guid: a811831ed84fb1d41a4f76c14b48c383, type: 3}
+    - {fileID: 8300000, guid: d525b52e7f4f3484b91baaf33cc18bc4, type: 3}
+    - {fileID: 8300000, guid: 285fd89b5f69a3b4db7655e0a9038f73, type: 3}
+    volume: 1
+    pitch: {x: 0, y: 0}
+    maxDistance: 30
+  - id: boss_hand
+    clips:
+    - {fileID: 8300000, guid: 5169bed0ae59bea4096795ff965b7425, type: 3}
+    - {fileID: 8300000, guid: 7d49077490e14714da7c279d61efe85a, type: 3}
+    - {fileID: 8300000, guid: ad726fa9b4776084b909a1ae31c7ef41, type: 3}
+    - {fileID: 8300000, guid: a964ca597f0e1124782f200ad7a7c8af, type: 3}
+    volume: 1
+    pitch: {x: 0, y: 0}
+    maxDistance: 22
+  - id: cash_register
+    clips:
+    - {fileID: 8300000, guid: 6d422d1dea49f1940a680e3aa65b9888, type: 3}
+    volume: 1
+    pitch: {x: 0, y: 0}
+    maxDistance: 30
+  - id: bulb_burst
+    clips:
+    - {fileID: 8300000, guid: b728e1297fe87f840a8e7d374d93bf4c, type: 3}
+    volume: 1
+    pitch: {x: 0, y: 0}
+    maxDistance: 30
+  - id: boss_catch
+    clips:
+    - {fileID: 8300000, guid: 5169bed0ae59bea4096795ff965b7425, type: 3}
+    volume: 1
+    pitch: {x: 0, y: 0}
+    maxDistance: 30
+  - id: door_slam
+    clips:
+    - {fileID: 8300000, guid: db2ad347ffeb4514fb8ed85f9cddf478, type: 3}
+    volume: 1
+    pitch: {x: 0, y: 0}
+    maxDistance: 30
+  - id: scan_beep
+    clips:
+    - {fileID: 8300000, guid: d827584a19b196e4aaa836e838296559, type: 3}
+    volume: 1
+    pitch: {x: 0, y: 0}
+    maxDistance: 30

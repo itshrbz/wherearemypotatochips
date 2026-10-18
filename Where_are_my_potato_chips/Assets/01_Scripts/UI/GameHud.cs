@@ -14,6 +14,10 @@ public class GameHud : MonoBehaviour
     TMP_Text dialogueText;
     TMP_Text promptText;
     TMP_Text statusText;
+    TMP_Text objectiveText;
+    SaleSequence[] sales = new SaleSequence[0];
+    WarehouseDoor door;
+    float nextLookup;
     PlayerState playerState;
     PlayerController player;
     Vector3 crosshairScale = Vector3.one;
@@ -40,6 +44,7 @@ public class GameHud : MonoBehaviour
 
         promptText = CreateLabel("Prompt", -70f, 0.75f);
         statusText = CreateLabel("HidingStatus", -120f, 0.6f);
+        objectiveText = CreateObjectiveLabel();
         ShowLine(null, null);
     }
 
@@ -77,6 +82,8 @@ public class GameHud : MonoBehaviour
             else statusText.text = "";
         }
 
+        if (objectiveText != null) objectiveText.text = CurrentObjective();
+
         if (energyBar != null)
         {
             float stamina = player.Stamina01;
@@ -101,6 +108,51 @@ public class GameHud : MonoBehaviour
             dialogueText.gameObject.SetActive(visible);
             dialogueText.text = visible ? $"<b>{speaker}:</b> {line}" : "";
         }
+    }
+
+    // Guía de qué hacer, arriba de la pantalla. Lee el estado del juego en vez de que cada sistema la avise.
+    string CurrentObjective()
+    {
+        if (LevelFlowManager.IsLoading || LevelFlowManager.IsEnding) return "";
+
+        if (Time.time >= nextLookup)
+        {
+            nextLookup = Time.time + 1f;
+            sales = FindObjectsByType<SaleSequence>(FindObjectsSortMode.None);
+            door = FindAnyObjectByType<WarehouseDoor>();
+        }
+
+        foreach (var sale in sales)
+        {
+            if (sale == null) continue;
+            if (sale.CurrentStep == SaleSequence.Step.WaitingScan) return "Scan the product: look at it and press E";
+            if (sale.CurrentStep == SaleSequence.Step.WaitingCharge) return "Charge it: look at the register and press E";
+        }
+
+        if (LevelFlowManager.CurrentLevel < 0)
+        {
+            if (door != null && door.CanInteract) return "No potato chips on the shelves. Check the warehouse: the door behind the counter";
+            return "Wait behind the counter and serve the customers";
+        }
+
+        if (playerState != null && playerState.IsSafe) return "Wait for the customer at the counter";
+        return LevelContext.BossEnabled
+            ? "Find the store. Something hunts you: crouch (Ctrl) inside hiding spots and don't run near it"
+            : "Something's off. Find the store hidden somewhere in this place";
+    }
+
+    TMP_Text CreateObjectiveLabel()
+    {
+        var label = CreateLabel("Objective", 0f, 0.6f);
+        if (label == null) return null;
+
+        var rect = label.rectTransform;
+        rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 1f);
+        rect.pivot = new Vector2(0.5f, 1f);
+        rect.sizeDelta = new Vector2(1400f, 80f);
+        rect.anchoredPosition = new Vector2(0f, -30f);
+        label.color = new Color(1f, 1f, 1f, 0.85f);
+        return label;
     }
 
     TMP_Text CreateLabel(string labelName, float offsetY, float sizeFactor)

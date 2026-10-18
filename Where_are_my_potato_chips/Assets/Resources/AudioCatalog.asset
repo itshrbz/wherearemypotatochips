@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d20ab337f7c224ba898cc0116fbb8f, type: 3}
+  m_Name: AudioCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::AudioCatalog
+  menuMusic: {fileID: 8300000, guid: 8fb2bee60d28f4442beb928ee81e393f, type: 3}
+  outroMusic: {fileID: 8300000, guid: fa5e59ee764840e4aa2d9a0dd691e284, type: 3}
+  musicVolume: 0.78
+  humClip: {fileID: 8300000, guid: 8f26c90b9d005274190c991dde54414e, type: 3}
+  humVolume: 0.409
+  scenes:
+  - sceneName: 02_Store
+    ambience: {fileID: 8300000, guid: 8efb688d280eb714caf56e1043341d48, type: 3}
+    ambienceVolume: 0.384
+    fluorescentHum: 1
+  - sceneName: 10_Warehouse
+    ambience: {fileID: 8300000, guid: 650e2f98d4061e84e8866b5117be4163, type: 3}
+    ambienceVolume: 0.554
+    fluorescentHum: 1
+  - sceneName: 11_Pools
+    ambience: {fileID: 8300000, guid: e8be251360810064fac93fcecf9f294c, type: 3}
+    ambienceVolume: 0.548
+    fluorescentHum: 1
+  - sceneName: 12_Playground
+    ambience: {fileID: 8300000, guid: c782979105a1a4a4ba33a4d18b0fa254, type: 3}
+    ambienceVolume: 0.553
+    fluorescentHum: 0
+  fadeTime: 1

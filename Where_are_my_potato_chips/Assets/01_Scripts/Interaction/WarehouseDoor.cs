@@ -66,13 +66,13 @@ public class WarehouseDoor : MonoBehaviour, IInteractable
                     lights[l].intensity = i % 2 == 0 ? intensities[l] * 0.1f : intensities[l];
                 yield return new WaitForSeconds(Random.Range(0.04f, 0.16f));
             }
-            Play(bulbPopClip);
+            Play(bulbPopClip, "bulb_burst");
             foreach (var lamp in lights) lamp.enabled = false;
         }
 
         if (doorLeaf != null)
         {
-            Play(doorSlamClip);
+            Play(doorSlamClip, "door_slam");
             Quaternion from = doorLeaf.localRotation;
             Quaternion to = Quaternion.Euler(closedLocalEuler);
             for (float t = 0f; t < 1f; t += Time.deltaTime / 0.15f)
@@ -97,8 +97,9 @@ public class WarehouseDoor : MonoBehaviour, IInteractable
         return found.ToArray();
     }
 
-    void Play(AudioClip clip)
+    void Play(AudioClip clip, string id)
     {
         if (clip != null && audioSource != null) audioSource.PlayOneShot(clip);
+        else Sfx.Play(id);
     }
 }

@@ -37,6 +37,13 @@ public class BuyerQueue : MonoBehaviour
 
     public int CurrentIndex { get; private set; } = -1;
 
+    // Los compradores esperan ocultos. En Awake porque en el final este componente llega desactivado y Start no corre.
+    void Awake()
+    {
+        foreach (var b in buyers)
+            if (b.body != null) b.body.SetActive(false);
+    }
+
     IEnumerator Start()
     {
         if (player == null)
@@ -44,9 +51,6 @@ public class BuyerQueue : MonoBehaviour
             var p = GameObject.FindWithTag("Player");
             if (p != null) player = p.transform;
         }
-
-        foreach (var b in buyers)
-            if (b.body != null) b.body.SetActive(false);
 
         yield return new WaitForSeconds(startDelay);
 

@@ -7,6 +7,7 @@ public static class GameSettings
     const string InvertYKey = "InvertY";
     const string FovKey = "FieldOfView";
     const string VolumeKey = "MasterVolume";
+    const string CameraEffectsKey = "CameraEffects";
 
     public static float Sensitivity
     {
@@ -34,6 +35,13 @@ public static class GameSettings
             PlayerPrefs.SetFloat(VolumeKey, value);
             AudioListener.volume = value;
         }
+    }
+
+    /// <summary>Balanceo y sacudidas de cámara. Se puede apagar si marea.</summary>
+    public static bool CameraEffects
+    {
+        get => PlayerPrefs.GetInt(CameraEffectsKey, 1) == 1;
+        set => PlayerPrefs.SetInt(CameraEffectsKey, value ? 1 : 0);
     }
 
     public static void ApplyTo(PlayerController player)
