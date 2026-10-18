@@ -185,7 +185,8 @@ public class LevelContext : MonoBehaviour
     }
 
     // La réplica puesta por código puede quedar atravesada por columnas o paredes del nivel.
-    // Se apaga lo que ocupa su interior, sin tocar el piso ni el techo.
+    // Se apaga todo lo que ocupa su interior (sin tocar piso ni techo). Lo único que se
+    // respeta es una pieza que sea mucho más grande que la tienda, como un mesh de todo el nivel.
     static void ClearSpaceFor(GameObject replica)
     {
         var renderers = replica.GetComponentsInChildren<Renderer>();
@@ -193,21 +194,21 @@ public class LevelContext : MonoBehaviour
 
         Bounds area = renderers[0].bounds;
         foreach (var r in renderers) area.Encapsulate(r.bounds);
-        float areaVolume = area.size.x * area.size.y * area.size.z;
+        float areaFootprint = area.size.x * area.size.z;
 
-        foreach (var hit in Physics.OverlapBox(area.center, area.extents * 0.9f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore))
+        Physics.SyncTransforms();
+        foreach (var hit in Physics.OverlapBox(area.center, area.extents * 0.95f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore))
         {
-            if (hit.transform.IsChildOf(replica.transform)) continue;
+            if (hit == null || hit.transform.IsChildOf(replica.transform)) continue;
             if (hit.GetComponentInParent<PlayerState>() != null) continue;
 
             Bounds b = hit.bounds;
-            bool isFloor = b.max.y <= area.min.y + 0.25f;
-            bool isCeiling = b.min.y >= area.max.y - 0.25f;
-            if (isFloor || isCeiling) continue;
+            bool isFloor = b.max.y <= area.min.y + 0.3f;
+            bool isCeiling = b.min.y >= area.max.y - 0.3f;
+            bool hugeLevelMesh = b.size.x * b.size.z > areaFootprint * 4f;
+            if (isFloor || isCeiling || hugeLevelMesh) continue;
 
-            float volume = b.size.x * b.size.y * b.size.z;
-            if (volume < areaVolume * 2f) hit.gameObject.SetActive(false);
-            else hit.enabled = false;
+            hit.gameObject.SetActive(false);
         }
     }
 

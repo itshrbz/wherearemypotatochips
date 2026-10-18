@@ -28,6 +28,8 @@ public class BossAI : MonoBehaviour
 
     [Header("Persecución")]
     [SerializeField] float catchDistance = 1.2f;
+    [Tooltip("Pausa después de saltar o trepar antes de poder atrapar: evita que llegue y mate de golpe.")]
+    [SerializeField] float landRecovery = 0.6f;
     [SerializeField] float memoryTime = 3f;
     [SerializeField] float searchTime = 6f;
     [SerializeField] float searchRadius = 6f;
@@ -44,7 +46,7 @@ public class BossAI : MonoBehaviour
 
     public State Current { get; private set; } = State.Patrol;
     public bool IsChasing => Current == State.Chase;
-    public bool IsTraversing => traversal != null && traversal.IsTraversing;
+    public bool IsTraversing => jumping || (traversal != null && traversal.IsTraversing);
     public event Action PlayerCaught;
 
     NavMeshAgent agent;
@@ -58,6 +60,9 @@ public class BossAI : MonoBehaviour
     float stateTimer;
     int patrolIndex;
     bool caught;
+    bool jumping;
+    bool wasTraversing;
+    float recoverUntil;
 
     void Awake()
     {
@@ -68,7 +73,7 @@ public class BossAI : MonoBehaviour
         agent.updateRotation = true;
         agent.angularSpeed = turnSpeed;
         agent.autoBraking = true;
-        agent.autoTraverseOffMeshLink = traversal == null;
+        agent.autoTraverseOffMeshLink = false;
 
         // El prototipo anterior movía al jefe con física; con NavMesh eso lo hace patinar de lado.
         var oldBrain = GetComponent<EnemyStateMachine>();
@@ -107,12 +112,26 @@ public class BossAI : MonoBehaviour
         if (caught || !agent.isOnNavMesh) return;
         if (!FindPlayer()) return;
 
-        if (agent.isOnOffMeshLink)
+        if (agent.isOnOffMeshLink && !IsTraversing)
         {
-            if (traversal != null && !traversal.IsTraversing) traversal.Begin(agent);
+            if (traversal != null) traversal.Begin(agent);
+            else StartCoroutine(JumpLink());
+        }
+
+        if (IsTraversing)
+        {
+            wasTraversing = true;
             return;
         }
-        if (IsTraversing) return;
+        if (wasTraversing)
+        {
+            wasTraversing = false;
+            recoverUntil = Time.time + landRecovery;
+        }
+
+        bool recovering = Time.time < recoverUntil;
+        agent.isStopped = recovering;
+        if (recovering) return;
 
         float multiplier = LevelContext.BossSpeedMultiplier;
         bool detected = CanSeePlayer() || CanHearPlayer();
@@ -157,7 +176,9 @@ public class BossAI : MonoBehaviour
 
         agent.SetDestination(lastKnownPosition);
 
-        if (FlatDistance(transform.position, player.transform.position) <= catchDistance)
+        // Solo atrapa a la misma altura: si el jugador subió a un bloque, primero tiene que trepar
+        float height = Mathf.Abs(player.transform.position.y - transform.position.y);
+        if (FlatDistance(transform.position, player.transform.position) <= catchDistance && height < 1.3f)
             StartCoroutine(Catch());
     }
 
@@ -272,6 +293,37 @@ public class BossAI : MonoBehaviour
 
         yield return new WaitForSeconds(0.6f);
         LevelFlowManager.RestartLevel();
+    }
+
+    // Salto simple por un NavMeshLink cuando el jefe no tiene ProceduralTraversal (por ejemplo, el placeholder)
+    IEnumerator JumpLink()
+    {
+        jumping = true;
+        agent.updatePosition = false;
+
+        OffMeshLinkData link = agent.currentOffMeshLinkData;
+        Vector3 offset = Vector3.up * agent.baseOffset;
+        Vector3 start = transform.position;
+        Vector3 end = link.endPos + offset;
+
+        Vector3 flat = end - start;
+        flat.y = 0f;
+        if (flat.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(flat);
+
+        float arc = Mathf.Max(0.6f, end.y - start.y + 0.5f);
+        float duration = Mathf.Clamp(Vector3.Distance(start, end) / 3f, 0.5f, 1.3f);
+        for (float t = 0f; t < 1f; t += Time.deltaTime / duration)
+        {
+            Vector3 position = Vector3.Lerp(start, end, t);
+            position.y += Mathf.Sin(t * Mathf.PI) * arc;
+            transform.position = position;
+            yield return null;
+        }
+
+        agent.CompleteOffMeshLink();
+        agent.Warp(end - offset);
+        agent.updatePosition = true;
+        jumping = false;
     }
 
     bool FindPlayer()
