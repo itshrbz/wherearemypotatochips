@@ -15,7 +15,7 @@ MonoBehaviour:
   buyerName: ???
   greetingLines:
   - Hi. Just this, please.
-  productPrefab: {fileID: 0}
+  productPrefab: {fileID: 919132149155446097, guid: f41ecb72bf42d9047aaab51a0c182950, type: 3}
   productName: Soda
   afterSaleLines:
   - Thanks.
