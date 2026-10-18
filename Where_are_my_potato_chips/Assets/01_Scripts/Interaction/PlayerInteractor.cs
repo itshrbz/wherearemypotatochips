@@ -20,6 +20,12 @@ public class PlayerInteractor : MonoBehaviour
 
     public string CurrentPrompt { get; private set; }
 
+    public bool DrawFallbackUI
+    {
+        get => drawFallbackUI;
+        set => drawFallbackUI = value;
+    }
+
     IInteractable current;
     InputAction interactAction;
     PlayerState state;

@@ -35,6 +35,13 @@ public class SaleSequence : MonoBehaviour
         if (register != null) register.Bind(this);
     }
 
+    public void Configure(Transform spot, CashRegister cashRegister)
+    {
+        productSpot = spot;
+        register = cashRegister;
+        if (register != null) register.Bind(this);
+    }
+
     public void StartSale(SaleVariant variant)
     {
         if (CurrentStep != Step.Idle || variant == null) return;

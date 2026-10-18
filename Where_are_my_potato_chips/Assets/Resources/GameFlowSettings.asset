@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995fd1592fae498da46e50955cfa2290, type: 3}
+  m_Name: GameFlowSettings
+  m_EditorClassIdentifier: Assembly-CSharp::GameFlowSettings
+  menuScene: 01_Menu
+  storeScene: 02_Store
+  liminalScenes:
+  - 10_Warehouse
+  - 11_Pools
+  - 12_Playground
+  directPlayLevelIndex: 1
+  playerPrefab: {fileID: 6404997259987417386, guid: 71f4835c1d651564f8a9d1c3b5e769fb, type: 3}
+  hudPrefab: {fileID: 9109770933019832807, guid: 09015df04cf57314292d826269513125, type: 3}
+  bossPrefab: {fileID: 0}
+  buyerPrefab: {fileID: 0}
+  replicaVariants:
+  - {fileID: 11400000, guid: ae5be1a3bb984cd48e519ddf5024c624, type: 2}
+  - {fileID: 11400000, guid: cad47ddc8a424442b79ca79a851df66a, type: 2}
+  - {fileID: 11400000, guid: 8c9996b0a9614186acc1515cc484d5bd, type: 2}
+  fadeDuration: 0.6
+  minTicketTime: 4
+  ticketMessages:
+  - "ITEM NOT FOUND: POTATO CHIPS\nREALITY: OUT OF STOCK"
+  - "AISLE 7 IS STILL NOT\nTHE SNACK AISLE"
+  - "YOU CAN SMELL SALT AND VINEGAR.\nALMOST HOME. ALMOST."
+  credits: "WHERE ARE MY POTATO CHIPS?\n\nGameJam+ 2026\n\nGrover Amador\nRafael Taborga\nAlan Herbas\nCristhian Bullain\n\nThanks for playing."
+  tensionMusic: {fileID: 0}
+  printerClip: {fileID: 0}
+  caughtClip: {fileID: 0}
+  registerClip: {fileID: 0}

@@ -11,6 +11,9 @@ public class PlayerState : MonoBehaviour
     public bool IsCrouching { get; set; }
     public bool IsHidden { get; set; }
 
+    /// <summary>True dentro de una tienda réplica: el jefe no puede atraparlo.</summary>
+    public bool IsSafe { get; set; }
+
     /// <summary>True durante transiciones o escenas en las que el jugador no debe moverse.</summary>
     public bool InputLocked { get; set; }
 }
