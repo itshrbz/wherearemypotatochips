@@ -15,15 +15,15 @@ public class BossAI : MonoBehaviour
     public enum State { Patrol, Chase, Search }
 
     [Header("Velocidad")]
-    [SerializeField] float patrolSpeed = 2f;
+    [SerializeField] float patrolSpeed = 2.6f;
     [SerializeField] float chaseSpeed = 4.4f;
     [SerializeField] float turnSpeed = 540f;
 
     [Header("Sentidos")]
-    [SerializeField] float sightRange = 14f;
+    [SerializeField] float sightRange = 18f;
     [SerializeField, Range(10f, 180f)] float fieldOfView = 110f;
     [SerializeField] float eyeHeight = 1.6f;
-    [SerializeField] float hearingRange = 7f;
+    [SerializeField] float hearingRange = 9f;
     [SerializeField] LayerMask sightMask = ~0;
 
     [Header("Persecución")]
@@ -35,7 +35,12 @@ public class BossAI : MonoBehaviour
     [Header("Patrulla")]
     [SerializeField] Transform[] patrolPoints;
     [SerializeField] float wanderRadius = 15f;
-    [SerializeField] float waitAtPoint = 1.5f;
+    [SerializeField] float waitAtPoint = 0.6f;
+
+    [Header("Acecho")]
+    [Tooltip("Probabilidad de que el siguiente destino de patrulla sea cerca del jugador.")]
+    [SerializeField, Range(0f, 1f)] float huntChance = 0.6f;
+    [SerializeField] float huntRadius = 10f;
 
     public State Current { get; private set; } = State.Patrol;
     public bool IsChasing => Current == State.Chase;
@@ -129,6 +134,11 @@ public class BossAI : MonoBehaviour
     void UpdatePatrol(float multiplier)
     {
         agent.speed = patrolSpeed * multiplier;
+        if (!agent.pathPending && agent.pathStatus != NavMeshPathStatus.PathComplete)
+        {
+            GoToNextPatrolPoint();
+            return;
+        }
         if (agent.pathPending || agent.remainingDistance > agent.stoppingDistance + 0.2f) return;
 
         stateTimer -= Time.deltaTime;
@@ -181,9 +191,17 @@ public class BossAI : MonoBehaviour
         agent.SetDestination(lastKnownPosition);
     }
 
+    // El jefe no sabe dónde está el jugador, pero "intuye" la zona: así siempre anda cerca.
     void GoToNextPatrolPoint()
     {
         stateTimer = waitAtPoint;
+
+        if (player != null && UnityEngine.Random.value < huntChance
+            && RandomPointNear(player.transform.position, huntRadius, out var near))
+        {
+            agent.SetDestination(near);
+            return;
+        }
 
         if (patrolPoints != null && patrolPoints.Length > 0)
         {

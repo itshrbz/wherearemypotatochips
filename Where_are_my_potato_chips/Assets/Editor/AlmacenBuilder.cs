@@ -1,21 +1,22 @@
 // =====================================================================
-//  AlmacenBuilder.cs  v2   (Dev 4 - Entornos)   tarjeta N-02 (Almacen)
+//  AlmacenBuilder.cs  v3   (Dev 4 - Entornos)   tarjeta N-02 (Almacen)
 //  DONDE PONERLO:  Assets/Editor/AlmacenBuilder.cs   (reemplaza el anterior)
 //  ANTES DE USARLO: Tools > Kit > Generar kit y tienda (crea las piezas).
 //  COMO USARLO:    Tools > Kit > Construir almacen (N-02)   y despues, Bake.
 //
 //  LO QUE PIDE LA TARJETA N-02 Y COMO SE CUMPLE:
-//   - ~40 x 40 m ............ 10 x 10 losas de 4 m = 40 x 40 m (escena 10_Warehouse)
+//   - 64 x 64 m ............. 16 x 16 losas de 4 m (v3: el doble de grande que la v2)
 //   - pasillos de 2 m minimo . el mapa de la ZONA 2 usa celdas de 2 m: un pasillo
 //                              es 1 celda, o sea 2 m exactos
-//   - 3-4 ramas sin salida .. marcadas con H en el mapa (4), cada una con escondite
+//   - ramas sin salida ...... marcadas con H en el mapa (6), cada una con escondite
 //   - zona de parkour con NavMeshLink (max 2,2 m): sala central con plataforma de
 //                              2,0 m, escalones de 1 m y 4 NavMeshLink para el jefe
 //   - ReplicaStore al final . al norte, con la puerta mirando al pasillo-galeria
 //   - NavMeshSurface ........ objeto "NavMesh" listo; solo falta pulsar Bake
 //
-//  RUTAS DEL JUEGO: spawn al sur -> puerta del almacen. Ruta CORTA: pasillo
-//  central + sala de parkour (riesgosa). Rutas LARGAS: pasillos oeste y este.
+//  RUTAS DEL JUEGO: spawn al sur -> ReplicaStore al norte. El mapa es un laberinto
+//  con varios caminos (la ruta mas corta mide ~115 m) y la sala de parkour al centro.
+//  La puerta del sur es solo decorativa: queda cerrada detras del jugador.
 //  Todo queda en "Almacen_Generado". Al repetir, se borra y se recrea.
 // =====================================================================
 using UnityEditor;
@@ -32,21 +33,23 @@ public static class AlmacenBuilder
     const string CARPETA_MATS    = "Assets/03_Materials";
     const string NOMBRE_RAIZ     = "Almacen_Generado";
 
-    const int   LOSAS = 10;                // 10 x 10 losas de 4 m = 40 x 40 m
+    const int   LOSAS = 16;                // 16 x 16 losas de 4 m = 64 x 64 m
     const float CELDA = 2f;                // lado de cada celda del mapa (= ancho de pasillo)
     const float ALTO_MURO = 3f;            // altura de los bloques interiores
-    const float PROB_LUZ_APAGADA = 0.5f;   // 0 = todas encendidas, 1 = todas apagadas
+    const float PROB_LUZ_APAGADA = 0.75f;  // 0 = todas encendidas, 1 = todas apagadas (pocas luces = mejor rendimiento en WebGL)
 
-    static readonly Vector3 POS_TIENDA = new Vector3(0f, 0f, 16f);   // ocupa z 12..20
-    static readonly Vector3 POS_SPAWN  = new Vector3(1f, 0.1f, -19f);
+    static readonly Vector3 POS_TIENDA = new Vector3(0f, 0f, 28f);   // ocupa z 24..32
+    static readonly Vector3 POS_SPAWN  = new Vector3(1f, 0.1f, -31f);
 
-    // BossSpawn lejos del jugador (galeria oeste) y puntos de patrulla por los pasillos
-    static readonly Vector3 POS_BOSS_SPAWN = new Vector3(-17f, 0.1f, 11f);
+    // BossSpawn lejos del jugador (noroeste) y puntos de patrulla repartidos por el laberinto
+    static readonly Vector3 POS_BOSS_SPAWN = new Vector3(-29f, 0.1f, 17f);
     static readonly Vector3[] PUNTOS_PATRULLA =
     {
-        new Vector3(-13f, 0.1f, 11f), new Vector3(13f, 0.1f, 11f),     // galeria
-        new Vector3(13f, 0.1f, -9f),  new Vector3(-13f, 0.1f, -9f),    // cruce sur
-        new Vector3(1f, 0.1f, -5f),   new Vector3(1f, 0.1f, 7f)        // pasillo central
+        new Vector3(-19f, 0.1f, 29f), new Vector3(19f, 0.1f, 29f),     // norte
+        new Vector3(-21f, 0.1f, 9f),  new Vector3(21f, 0.1f, 9f),      // centro
+        new Vector3(-21f, 0.1f, -3f), new Vector3(13f, 0.1f, -3f),
+        new Vector3(-13f, 0.1f, -11f), new Vector3(9f, 0.1f, -19f),    // sur
+        new Vector3(-25f, 0.1f, -23f), new Vector3(17f, 0.1f, -27f)
     };
 
     // Sala de parkour (centro del almacen). El NavMeshLink salva MAX 2,2 m.
@@ -55,31 +58,44 @@ public static class AlmacenBuilder
     const float ANCHO_LINK = 1.5f;
 
     // ================== ZONA 2: MAPA DEL ALMACEN (EDITA AQUI) =========
-    //  20 x 20 celdas de 2 m.  Arriba = NORTE.
+    //  32 x 32 celdas de 2 m.  Arriba = NORTE.
     //  #  bloque (pared interior)      .  pasillo de 2 m
     //  H  rama sin salida con escondite   T  espacio de ReplicaStore
     static readonly string[] MAPA =
     {
-        "########TTTT########",   // r0
-        "###H####TTTT####H###",   // r1   H = rama sin salida (norte-oeste / norte-este)
-        "###.####TTTT####.###",   // r2
-        "###.####TTTT####.###",   // r3
-        "#..................#",   // r4   galeria frente a la tienda
-        "###.######.#####.###",   // r5
-        "###.######.#####.###",   // r6
-        "#H..######.#####.###",   // r7   H = rama sin salida (oeste)
-        "###.##........##.###",   // r8   sala de parkour (r8 a r11)
-        "###.##........##.###",   // r9
-        "###.##........##.###",   // r10
-        "###.##........##.###",   // r11
-        "###.######.#####.###",   // r12
-        "###.######.#####..H#",   // r13  H = rama sin salida (este)
-        "###..............###",   // r14  cruce oeste-este
-        "##########.#########",   // r15
-        "##########.#########",   // r16
-        "##########.#########",   // r17
-        "##########.#########",   // r18
-        "##########.#########"    // r19  entrada (puerta del almacen)
+        "##############TTTT##############",   // r0   T = ReplicaStore (norte)
+        "#............#TTTT#...........##",
+        "#.#.#.###.####TTTT#.#####.###.##",
+        "#.#.#...#....#TTTT#.......#...##",
+        "#.#.###.###...........###.#.####",   // r4   galeria frente a la tienda
+        "#H#...#.#.#.#...#...#...#.#...##",
+        "#####.#.#.#.#.###.#.###.#.#.#.##",
+        "#...#.#...#.#.....#.......#...##",
+        "#.#.#.###.#.#####.#######.#.#.##",
+        "#.#....H#.#...#.............#.H#",
+        "#.#.#.###.###.#.#####.#.###.#.##",
+        "#.#.#...#.......#.............##",
+        "#.#.#.#.#.#.#.#.#.#.#.###.#.#.##",
+        "#.#...#...#.#...#.#...#H#.#...##",
+        "#.#.###.#.#.........#.#.#.###.##",   // r14  sala de parkour (r14 a r17, c12 a c19)
+        "#.#...#...#.............#...#..#",
+        "#.#.#.###.#.........#####.#.####",
+        "#...#...................#.#...##",
+        "#.###.#########.#.###.#.###.#.##",
+        "#.............#...#.......#.#.##",
+        "###.#.#.#####.#.#.#.#####.###.##",
+        "#...#.#.#...#...#.#...........##",
+        "#.###.#.#.#.#.#######.#.###.#.##",
+        "#.....#.#.#...#.....#H#...#.#.H#",
+        "#####.#.#.###.#.###.#####.#.#.##",
+        "#.........#...#...#...#...#....#",
+        "#.#########.###.#.###.#.###.####",
+        "#.......#.....#...#...#...#...##",
+        "#.###.#.#####.#...#.#####.###.##",
+        "#.............#...........#...##",
+        "#####.#####.###..###############",
+        "################.###############"    // r31  entrada (spawn)
+
     };
 
     // ================== ZONA 3: MENU PRINCIPAL ========================
@@ -117,7 +133,7 @@ public static class AlmacenBuilder
         EditorSceneManager.MarkSceneDirty(escena);
         EditorSceneManager.SaveScene(escena);
         Selection.activeGameObject = raiz;
-        Debug.Log("Almacen construido. Selecciona el objeto NavMesh y presiona Bake.");
+        Debug.Log("Almacen construido. El NavMesh se esta horneando: cuando termine, guarda la escena (Ctrl+S).");
     }
 
     // ================== ZONA 4: PARTES DEL ALMACEN ====================
@@ -157,23 +173,19 @@ public static class AlmacenBuilder
         CrearLuz(techos.transform, "Luz_Parkour_E", new Vector3(4f, 5f, 0f));
     }
 
-    // Perimetro con paredes de 2 m. Puerta del almacen al sur (hoja abierta).
+    // Perimetro con paredes de 2 m. Puerta del almacen al sur (cerrada, decorativa).
     static void CrearParedesPerimetro(Transform padre)
     {
         GameObject g = Vacio("Perimetro", padre, Vector3.zero);
-        float medio = LOSAS * 4f / 2f;   // 20
+        float medio = LOSAS * 4f / 2f;   // 32
 
         for (float x = -medio + 1f; x < medio; x += 2f)
         {
             Poner(g.transform, "Kit_Pared", new Vector3(x, 0, medio), 0f);
             if (Mathf.Approximately(x, 1f))
             {
-                GameObject puerta = Poner(g.transform, "Kit_PuertaAlmacen", new Vector3(x, 0, -medio), 0f);
-                if (puerta != null)
-                {
-                    Transform hoja = puerta.transform.Find("Hoja");
-                    if (hoja != null) hoja.gameObject.SetActive(false);   // puerta abierta
-                }
+                Poner(g.transform, "Kit_PuertaAlmacen", new Vector3(x, 0, -medio), 0f);
+                // Puerta cerrada detras del jugador: es decorativa (WarehouseDoor solo funciona en la tienda)
             }
             else Poner(g.transform, "Kit_Pared", new Vector3(x, 0, -medio), 0f);
         }
@@ -267,6 +279,7 @@ public static class AlmacenBuilder
         SerializedObject so = new SerializedObject(c);
         SerializedProperty geo = so.FindProperty("m_UseGeometry");   // 1 = Physics Colliders
         if (geo != null) { geo.intValue = 1; so.ApplyModifiedProperties(); }
+        NivelBake.Hornear(c);
     }
 
     // BossSpawn y PatrolPoints (los pide el checklist del equipo).

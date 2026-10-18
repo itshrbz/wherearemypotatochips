@@ -64,7 +64,8 @@ public class LevelContext : MonoBehaviour
         Transform anchor = FindByName("ReplicaStore_Anchor");
         if (anchor != null && replicaPrefab != null)
         {
-            Instantiate(replicaPrefab, anchor.position, anchor.rotation);
+            var replica = Instantiate(replicaPrefab, anchor.position, anchor.rotation);
+            ClearSpaceFor(replica);
             replicaPosition = anchor.position;
             return;
         }
@@ -181,6 +182,33 @@ public class LevelContext : MonoBehaviour
         if (NavMesh.SamplePosition(Vector3.MoveTowards(point, origin, 1f), out var hit, 2f, NavMesh.AllAreas))
             point = hit.position;
         return true;
+    }
+
+    // La réplica puesta por código puede quedar atravesada por columnas o paredes del nivel.
+    // Se apaga lo que ocupa su interior, sin tocar el piso ni el techo.
+    static void ClearSpaceFor(GameObject replica)
+    {
+        var renderers = replica.GetComponentsInChildren<Renderer>();
+        if (renderers.Length == 0) return;
+
+        Bounds area = renderers[0].bounds;
+        foreach (var r in renderers) area.Encapsulate(r.bounds);
+        float areaVolume = area.size.x * area.size.y * area.size.z;
+
+        foreach (var hit in Physics.OverlapBox(area.center, area.extents * 0.9f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore))
+        {
+            if (hit.transform.IsChildOf(replica.transform)) continue;
+            if (hit.GetComponentInParent<PlayerState>() != null) continue;
+
+            Bounds b = hit.bounds;
+            bool isFloor = b.max.y <= area.min.y + 0.25f;
+            bool isCeiling = b.min.y >= area.max.y - 0.25f;
+            if (isFloor || isCeiling) continue;
+
+            float volume = b.size.x * b.size.y * b.size.z;
+            if (volume < areaVolume * 2f) hit.gameObject.SetActive(false);
+            else hit.enabled = false;
+        }
     }
 
     static Vector3 OnGround(Vector3 position)

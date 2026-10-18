@@ -1,18 +1,20 @@
 // =====================================================================
-//  ParqueBuilder.cs  v2   (Dev 4 - Entornos)   tarjeta N-04
+//  ParqueBuilder.cs  v3   (Dev 4 - Entornos)   tarjeta N-04
 //  DONDE PONERLO:  Assets/Editor/ParqueBuilder.cs   (reemplaza el anterior)
 //  ANTES DE USARLO: Tools > Kit > Generar kit y tienda (crea ReplicaStore).
 //  COMO USARLO:    Tools > Kit > Construir parque (N-04)   y despues, Bake.
 //
-//  DISENO DEL PARQUE (70 x 70 m, el jugador entra por el SUR y la meta,
+//  DISENO DEL PARQUE (90 x 90 m, el jugador entra por el SUR y la meta,
 //  ReplicaStore, esta al NORTE):
-//   - Camino claro del spawn a la tienda: es la ruta rapida y OBVIA.
-//   - Plaza central abierta con piscina de pelotas grande: zona de riesgo.
+//   - v3: un SETO que cruza el parque de lado a lado obliga a rodear por
+//     dos pasos (oeste y este). Ya no hay camino directo a la tienda.
+//   - Muros de juego bajos repartidos: cortan la vista del jefe.
+//   - Piscina de pelotas grande al centro-sur: tapa la linea recta.
 //   - Al sur: toboganes, casitas y columpios (zona de juego, escondites).
-//   - Al oeste: LABERINTO de setos (se edita con el mapa de la ZONA 2).
-//   - Al este: red de tubos y piscinas de pelotas.
+//   - Al noroeste: LABERINTO de setos (se edita con el mapa de la ZONA 2).
+//   - Al noreste: red de tubos (3 con escondite) y piscinas de pelotas.
 //   - Bosque con arboles y ARBUSTOS escondite repartidos al azar.
-//   Hay ~27 escondites: casi siempre hay uno a menos de 12 m.
+//   Hay ~45 escondites: casi siempre hay uno a menos de 10 m.
 //  Todo queda en "Parque_Generado". Al repetir el script, se borra y se
 //  vuelve a crear. Suelo_Parque se agranda y la cerca antigua se DESACTIVA.
 // =====================================================================
@@ -30,51 +32,70 @@ public static class ParqueBuilder
     const string CARPETA_MATS = "Assets/03_Materials";
     const string NOMBRE_RAIZ  = "Parque_Generado";
 
-    const float TAM_PARQUE = 70f;               // lado del parque (de -35 a 35)
+    const float TAM_PARQUE = 90f;               // lado del parque (de -45 a 45)
     const bool  DESACTIVAR_CERCA_ANTIGUA = true; // desactiva los muros viejos de 40 m
 
-    static readonly Vector3 POS_SPAWN = new Vector3(0f, 0.1f, -31f);
-    static readonly Vector3 POS_TIENDA = new Vector3(0f, 0f, 30f);
+    static readonly Vector3 POS_SPAWN = new Vector3(0f, 0.1f, -41f);
+    static readonly Vector3 POS_TIENDA = new Vector3(0f, 0f, 38f);
 
     // BossSpawn en la esquina noreste (lejos del spawn del jugador) y puntos de patrulla
-    static readonly Vector3 POS_BOSS_SPAWN = new Vector3(30f, 0.1f, 30f);
+    static readonly Vector3 POS_BOSS_SPAWN = new Vector3(40f, 0.1f, 41f);
     static readonly Vector3[] PUNTOS_PATRULLA =
     {
-        new Vector3(1f, 0.1f, -20f), new Vector3(1f, 0.1f, -5f), new Vector3(1f, 0.1f, 10f),
-        new Vector3(1f, 0.1f, 22f),  new Vector3(14f, 0.1f, -14f), new Vector3(-15f, 0.1f, -17f)
+        new Vector3(0f, 0.1f, -30f),  new Vector3(-20f, 0.1f, -28f), new Vector3(22f, 0.1f, -28f),
+        new Vector3(0f, 0.1f, -16f),  new Vector3(-30f, 0.1f, 0f),   new Vector3(30f, 0.1f, 0f),
+        new Vector3(-26f, 0.1f, 6f),  new Vector3(26f, 0.1f, 6f),    new Vector3(10f, 0.1f, 18f),
+        new Vector3(30f, 0.1f, 27f),  new Vector3(-12f, 0.1f, 41f),  new Vector3(8f, 0.1f, 30f)
     };
 
     // Toboganes (la rampa baja hacia +Z con giro 0)
     static readonly Vector3[] POS_TOBOGANES =
-        { new Vector3(-24f, 0f, -22f), new Vector3(22f, 0f, -22f), new Vector3(-9f, 0f, -14f) };
+        { new Vector3(-32f, 0f, -36f), new Vector3(32f, 0f, -36f), new Vector3(-8f, 0f, -26f), new Vector3(8f, 0f, -26f) };
     const float ALTURA_TOBOGAN = 2f;
 
     // Casitas: la entrada mira hacia el camino central
     static readonly Vector3[] POS_CASITAS =
-        { new Vector3(-14f, 0f, -27f), new Vector3(14f, 0f, -27f), new Vector3(30f, 0f, -12f), new Vector3(28f, 0f, 22f) };
-    static readonly float[] GIRO_CASITAS = { -90f, 90f, 90f, 90f };
+    {
+        new Vector3(-16f, 0f, -36f), new Vector3(16f, 0f, -36f), new Vector3(-38f, 0f, -22f), new Vector3(38f, 0f, -22f),
+        new Vector3(36f, 0f, -4f),   new Vector3(40f, 0f, 30f),  new Vector3(-4f, 0f, 26f)
+    };
+    static readonly float[] GIRO_CASITAS = { -90f, 90f, -90f, 90f, 90f, 90f, -90f };
 
-    static readonly Vector3[] POS_COLUMPIOS = { new Vector3(-20f, 0f, -31f), new Vector3(20f, 0f, -31f) };
+    static readonly Vector3[] POS_COLUMPIOS = { new Vector3(-22f, 0f, -42f), new Vector3(22f, 0f, -42f), new Vector3(-20f, 0f, -4f) };
 
     // Tubos: posicion, giro y si tiene escondite dentro
-    static readonly Vector3[] POS_TUBOS = { new Vector3(20f, 0f, 6f), new Vector3(25f, 0f, 12f), new Vector3(12f, 0f, 15f) };
-    static readonly float[] GIRO_TUBOS = { 0f, 90f, 0f };
-    static readonly bool[] ESCONDITE_TUBOS = { false, true, false };
+    static readonly Vector3[] POS_TUBOS = { new Vector3(14f, 0f, 24f), new Vector3(24f, 0f, 22f), new Vector3(34f, 0f, 14f), new Vector3(30f, 0f, 36f) };
+    static readonly float[] GIRO_TUBOS = { 0f, 90f, 0f, 90f };
+    static readonly bool[] ESCONDITE_TUBOS = { false, true, true, true };
     const float LARGO_TUBO = 10f;
 
     // Piscinas de pelotas: posicion y lado
-    static readonly Vector3[] POS_PISCINAS = { new Vector3(9f, 0f, 0f), new Vector3(-26f, 0f, 26f), new Vector3(22f, 0f, -6f) };
-    static readonly float[] TAM_PISCINAS = { 10f, 8f, 6f };
+    static readonly Vector3[] POS_PISCINAS = { new Vector3(0f, 0f, -8f), new Vector3(16f, 0f, 12f), new Vector3(-22f, 0f, -16f), new Vector3(24f, 0f, -14f) };
+    static readonly float[] TAM_PISCINAS = { 10f, 8f, 6f, 6f };
     const float ALTO_MURO_PISCINA = 1.2f;
 
     // Laberinto
-    static readonly Vector3 POS_LABERINTO = new Vector3(-19f, 0f, 4f);
+    static readonly Vector3 POS_LABERINTO = new Vector3(-24f, 0f, 22f);
     const float CELDA_LAB = 3f;     // lado de cada celda (m)
     const float ALTO_SETO = 2.4f;   // altura de los setos (m)
 
     // Bosque
-    const int CANT_ARBOLES  = 24;
-    const int CANT_ARBUSTOS = 14;
+    const int CANT_ARBOLES  = 40;
+    const int CANT_ARBUSTOS = 24;
+
+    // Seto que cruza el parque (este-oeste) con dos pasos: obliga a rodear
+    const float Z_SETO_CRUZADO = 4f;
+    static readonly float[] PASOS_SETO = { -26f, 26f };   // centro x de cada paso
+    const float ANCHO_PASO = 4f;
+
+    // Muros de juego bajos (posicion y giro): cortan la linea de vision del jefe
+    static readonly Vector3[] POS_MUROS_JUEGO =
+    {
+        new Vector3(-20f, 0f, -28f), new Vector3(20f, 0f, -22f), new Vector3(-30f, 0f, -10f), new Vector3(12f, 0f, -2f),
+        new Vector3(-10f, 0f, -12f), new Vector3(38f, 0f, 6f),   new Vector3(6f, 0f, 20f),    new Vector3(20f, 0f, 32f),
+        new Vector3(-2f, 0f, 12f),   new Vector3(24f, 0f, -30f)
+    };
+    static readonly float[] GIRO_MUROS_JUEGO = { 0f, 90f, 90f, 0f, 0f, 0f, 90f, 90f, 0f, 90f };
 
     // ================== ZONA 2: MAPA DEL LABERINTO (EDITA AQUI) =======
     //  # = seto (pared)   . = pasillo   H = escondite (arbusto en el pasillo)
@@ -138,6 +159,8 @@ public static class ParqueBuilder
         CrearLaberinto(raiz.transform, seto, verde);
         CrearTubos(raiz.transform, naranja, azul);
         CrearPiscinas(raiz.transform, rojo, pelotas);
+        CrearSetoCruzado(raiz.transform, seto);
+        CrearMurosJuego(raiz.transform, azul, amarillo);
         CrearTienda(raiz.transform, replica);
         CrearBossYPatrulla(raiz.transform);           // antes del bosque: reserva su zona
         CrearBosque(raiz.transform, marron, verde);   // al final: usa las zonas ocupadas
@@ -149,7 +172,7 @@ public static class ParqueBuilder
         EditorSceneManager.MarkSceneDirty(escena);
         EditorSceneManager.SaveScene(escena);
         Selection.activeGameObject = raiz;
-        Debug.Log("Parque construido. Selecciona el objeto NavMesh y presiona Bake.");
+        Debug.Log("Parque construido. El NavMesh se esta horneando: cuando termine, guarda la escena (Ctrl+S).");
     }
 
     // ================== ZONA 4: ZONAS DEL PARQUE ======================
@@ -185,7 +208,7 @@ public static class ParqueBuilder
         {
             string n = go.name.ToLower();
             if (go.name == NOMBRE_RAIZ || go.name == "Suelo_Parque") continue;
-            if (n.Contains("muro") || n.Contains("pared"))
+            if (n.Contains("muro") || n.Contains("pared") || n.StartsWith("kit_"))   // cerca vieja y piezas sueltas de prueba
             {
                 go.SetActive(false);
                 Debug.Log("Cerca antigua desactivada: " + go.name);
@@ -198,9 +221,10 @@ public static class ParqueBuilder
     {
         Vacio("PlayerSpawn", padre, POS_SPAWN);
         // Camino: franja baja y sin collider (solo guia visual)
-        Caja(padre, "Camino", new Vector3(0f, 0.02f, -2f), new Vector3(3f, 0.04f, 52f), matCamino, false);
-        AddZona(-8f, 8f, -35f, -27f);     // area del spawn
-        AddZona(-3f, 3f, -30f, 24f);      // franja del camino
+        // Camino corto: solo marca la salida del spawn, no lleva hasta la tienda
+        Caja(padre, "Camino", new Vector3(0f, 0.02f, -37f), new Vector3(3f, 0.04f, 14f), matCamino, false);
+        AddZona(-8f, 8f, -45f, -36f);     // area del spawn
+        AddZona(-3f, 3f, -44f, -30f);     // franja del camino
     }
 
     static void CrearToboganes(Transform padre, Material torre1, Material rampa1, Material torre2, Material rampa2)
@@ -343,6 +367,50 @@ public static class ParqueBuilder
         SerializedObject so = new SerializedObject(c);
         SerializedProperty geo = so.FindProperty("m_UseGeometry");   // 0 = Render Meshes, 1 = Physics Colliders
         if (geo != null) { geo.intValue = 1; so.ApplyModifiedProperties(); }
+        NivelBake.Hornear(c);
+    }
+
+    // Seto alto que cruza todo el parque con dos pasos estrechos.
+    static void CrearSetoCruzado(Transform padre, Material matSeto)
+    {
+        GameObject g = Vacio("SetoCruzado", padre, Vector3.zero);
+        float m = TAM_PARQUE / 2f;
+        float desde = -m;
+        int tramo = 0;
+        foreach (float paso in PASOS_SETO)
+        {
+            float hasta = paso - ANCHO_PASO / 2f;
+            CrearTramoSeto(g.transform, "Tramo_" + tramo++, desde, hasta, matSeto);
+            desde = paso + ANCHO_PASO / 2f;
+        }
+        CrearTramoSeto(g.transform, "Tramo_" + tramo, desde, m, matSeto);
+        AddZona(-m, m, Z_SETO_CRUZADO - 2f, Z_SETO_CRUZADO + 2f);
+    }
+
+    static void CrearTramoSeto(Transform padre, string nombre, float xDesde, float xHasta, Material mat)
+    {
+        float largo = xHasta - xDesde;
+        if (largo <= 0.1f) return;
+        Caja(padre, nombre, new Vector3((xDesde + xHasta) / 2f, ALTO_SETO / 2f, Z_SETO_CRUZADO),
+             new Vector3(largo, ALTO_SETO, 1.2f), mat);
+    }
+
+    // Muro de juego: pared de 4 m x 2,2 m; detras (lado +Z local) hay un escondite.
+    static void CrearMurosJuego(Transform padre, Material mat1, Material mat2)
+    {
+        GameObject g = Vacio("MurosJuego", padre, Vector3.zero);
+        for (int i = 0; i < POS_MUROS_JUEGO.Length; i++)
+        {
+            Vector3 p = POS_MUROS_JUEGO[i];
+            GameObject r = Vacio("MuroJuego", g.transform, p);
+            r.transform.rotation = Quaternion.Euler(0f, GIRO_MUROS_JUEGO[i], 0f);
+            Material mat = i % 2 == 0 ? mat1 : mat2;
+            Caja(r.transform, "Pared",  new Vector3(0f, 1.1f, 0f),    new Vector3(4f, 2.2f, 0.3f), mat);
+            Caja(r.transform, "Remate", new Vector3(0f, 2.3f, 0f),    new Vector3(4.4f, 0.2f, 0.5f), mat2 == mat ? mat1 : mat2);
+            CrearEscondite(r.transform, "HidingSpot_Muro_" + i, r.transform.TransformPoint(new Vector3(0f, 0.7f, 0.9f)),
+                           new Vector3(3.6f, 1.4f, 1.4f)).transform.rotation = r.transform.rotation;
+            AddZona(p.x - 3f, p.x + 3f, p.z - 3f, p.z + 3f);
+        }
     }
 
     // ================== ZONA 5: PIEZAS ================================
