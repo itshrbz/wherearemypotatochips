@@ -32,7 +32,6 @@ public class WarehouseDoor : MonoBehaviour, IInteractable
             return;
         }
 
-        if (ceilingLight == null) ceilingLight = FindAnyObjectByType<Light>();
         unlocked = unlockedFromStart;
         var queue = FindAnyObjectByType<BuyerQueue>();
         if (queue != null) queue.OnPotatoRequest.AddListener(Unlock);
@@ -51,16 +50,24 @@ public class WarehouseDoor : MonoBehaviour, IInteractable
     {
         if (player != null) player.InputLocked = true;
 
-        if (ceilingLight != null)
+        Light[] lights = ceilingLight != null ? new[] { ceilingLight } : SceneLights();
+        if (lights.Length > 0)
         {
-            float intensity = ceilingLight.intensity;
+            float[] intensities = new float[lights.Length];
+            for (int l = 0; l < lights.Length; l++)
+            {
+                intensities[l] = lights[l].intensity;
+                if (lights[l].TryGetComponent(out LightFlicker flicker)) flicker.enabled = false;
+            }
+
             for (int i = 0; i < 7; i++)
             {
-                ceilingLight.intensity = i % 2 == 0 ? intensity * 0.1f : intensity;
+                for (int l = 0; l < lights.Length; l++)
+                    lights[l].intensity = i % 2 == 0 ? intensities[l] * 0.1f : intensities[l];
                 yield return new WaitForSeconds(Random.Range(0.04f, 0.16f));
             }
             Play(bulbPopClip);
-            ceilingLight.enabled = false;
+            foreach (var lamp in lights) lamp.enabled = false;
         }
 
         if (doorLeaf != null)
@@ -78,6 +85,16 @@ public class WarehouseDoor : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(0.6f);
         LevelFlowManager.StartRun();
+    }
+
+    // Las luces interiores de la tienda (todas menos la del sol), para el apagón al abrir la puerta
+    static Light[] SceneLights()
+    {
+        var found = new System.Collections.Generic.List<Light>();
+        foreach (var root in SceneManager.GetActiveScene().GetRootGameObjects())
+            foreach (var lamp in root.GetComponentsInChildren<Light>())
+                if (lamp.type != LightType.Directional) found.Add(lamp);
+        return found.ToArray();
     }
 
     void Play(AudioClip clip)
