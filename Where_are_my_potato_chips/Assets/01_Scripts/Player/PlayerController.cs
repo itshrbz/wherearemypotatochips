@@ -14,12 +14,16 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movimiento")]
-    public float speed = 2;
-    public float jumpHeight = 0.5f;
-    public float gravity = -9.8f;
+    public float speed = 2.5f;
+    [Tooltip("Altura máxima del salto en metros.")]
+    public float jumpHeight = 1.1f;
+    public float gravity = -15f;
+    [Tooltip("Margen para saltar justo después de dejar el borde o justo antes de tocar el piso.")]
+    public float jumpGrace = 0.15f;
 
     [Header("Cámara")]
     public float Sensibility = 0.5f;
+    public bool invertY;
     public float maxLimit = 80f;
     public float minLimit = -80f;
     [FormerlySerializedAs("camera")] public Transform cameraTransform;
@@ -58,8 +62,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private Vector2 look;
     private Vector3 velocity;
-    private bool jumpPressed;
-    private bool groundedPlayer;
+    private float lastJumpPressTime = -1f;
+    private float lastGroundedTime = -1f;
     private float vRotation;
 
     private float stamina;
@@ -118,7 +122,6 @@ public class PlayerController : MonoBehaviour
         inputAction.Player.Look.canceled += obj => look = Vector2.zero;
 
         inputAction.Player.Jump.performed += setJump;
-        inputAction.Player.Jump.canceled += obj => jumpPressed = false;
     }
 
     private void OnEnable()
@@ -146,7 +149,7 @@ public class PlayerController : MonoBehaviour
     {
         bool locked = state.InputLocked;
         Vector2 move = locked ? Vector2.zero : movement;
-        if (locked) jumpPressed = false;
+        if (locked) lastJumpPressTime = -1f;
 
         Crouch(locked);
         Sprint(move, locked);
@@ -160,12 +163,13 @@ public class PlayerController : MonoBehaviour
         characterController.enabled = false;
         transform.SetPositionAndRotation(position, Quaternion.Euler(0f, yaw, 0f));
         velocity = Vector3.zero;
+        lastJumpPressTime = -1f;
         characterController.enabled = true;
     }
 
     private void setJump(InputAction.CallbackContext obj)
     {
-        jumpPressed = true;
+        lastJumpPressTime = Time.time;
     }
 
     private void setLook(InputAction.CallbackContext obj)
@@ -182,6 +186,7 @@ public class PlayerController : MonoBehaviour
     {
         if (cameraTransform == null) return;
         Vector2 mouse = look * Sensibility;
+        if (invertY) mouse.y = -mouse.y;
         vRotation = Mathf.Clamp(vRotation - mouse.y, minLimit, maxLimit);
         cameraTransform.localRotation = Quaternion.Euler(vRotation, 0, 0);
         transform.Rotate(Vector3.up * mouse.x);
@@ -244,26 +249,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Un solo Move por frame: así isGrounded no se pierde al chocar de frente con un obstáculo.
     private void Movement(Vector2 move)
     {
         float multiplier = state.IsCrouching ? crouchSpeedMultiplier : (IsSprinting ? sprintMultiplier : 1f);
         Vector3 direction = transform.right * move.x + transform.forward * move.y;
         if (direction.sqrMagnitude > 1f) direction.Normalize();
-        characterController.Move(direction * speed * multiplier * Time.deltaTime);
 
-        groundedPlayer = characterController.isGrounded;
-        if (groundedPlayer && velocity.y < 0)
+        if (characterController.isGrounded)
         {
-            velocity.y = -2f; // mantiene al CharacterController pegado al piso
+            lastGroundedTime = Time.time;
+            if (velocity.y < 0f) velocity.y = -2f;
         }
-        if (jumpPressed && groundedPlayer && !state.IsCrouching)
+
+        bool wantsJump = Time.time - lastJumpPressTime <= jumpGrace;
+        bool canJump = Time.time - lastGroundedTime <= jumpGrace && !state.IsCrouching;
+        if (wantsJump && canJump)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-            jumpPressed = false;
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            lastJumpPressTime = -1f;
+            lastGroundedTime = -1f;
         }
 
         velocity.y += gravity * Time.deltaTime;
-        characterController.Move(velocity * Time.deltaTime);
+
+        Vector3 motion = direction * (speed * multiplier) + Vector3.up * velocity.y;
+        CollisionFlags hits = characterController.Move(motion * Time.deltaTime);
+        if ((hits & CollisionFlags.Above) != 0 && velocity.y > 0f) velocity.y = 0f;
     }
 
     private void OnGUI()

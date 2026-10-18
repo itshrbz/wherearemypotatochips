@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Puerta del almacén en la tienda real. Se habilita cuando el tercer comprador pide las papas
@@ -19,11 +20,17 @@ public class WarehouseDoor : MonoBehaviour, IInteractable
     bool used;
 
     public string Prompt => "Look for potato chips";
-    public bool CanInteract => unlocked && !used;
+    public bool CanInteract => enabled && unlocked && !used;
 
     void Start()
     {
-        if (LevelFlowManager.IsEnding) return;
+        // El prefab de la puerta también se usa como decoración en los niveles
+        bool inStore = SceneManager.GetActiveScene().name == LevelFlowManager.Settings.storeScene;
+        if (!inStore || LevelFlowManager.IsEnding)
+        {
+            enabled = false;
+            return;
+        }
 
         if (ceilingLight == null) ceilingLight = FindAnyObjectByType<Light>();
         unlocked = unlockedFromStart;

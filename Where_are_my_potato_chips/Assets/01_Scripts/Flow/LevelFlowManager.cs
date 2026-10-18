@@ -30,6 +30,7 @@ public class LevelFlowManager : MonoBehaviour
     public static int CurrentLevel => Instance.levelIndex;
     public static bool IsEnding => Instance.ending;
     public static GameFlowSettings Settings => Instance.settings;
+    public static bool IsLoading => Instance.loader.IsBusy;
 
     public static void StartNewGame() => Instance.LoadStore(false);
     public static void StartRun() => Instance.BeginRun();
@@ -52,6 +53,7 @@ public class LevelFlowManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         settings = GameFlowSettings.Load();
+        GameSettings.ApplyAudio();
         loader = gameObject.AddComponent<SceneLoader>();
         loader.Setup(settings);
         ShuffleOrder();
@@ -92,6 +94,9 @@ public class LevelFlowManager : MonoBehaviour
         if (settings.hudPrefab != null && FindAnyObjectByType<GameHud>() == null)
             Instantiate(settings.hudPrefab).AddComponent<GameHud>();
 
+        if (FindAnyObjectByType<PauseMenu>() == null)
+            new GameObject("PauseMenu").AddComponent<PauseMenu>();
+
         if (liminal && settings.tensionMusic != null && FindAnyObjectByType<ProximityMusic>() == null)
             new GameObject("TensionMusic").AddComponent<ProximityMusic>().Play(settings.tensionMusic);
 
@@ -119,7 +124,8 @@ public class LevelFlowManager : MonoBehaviour
 
     void BeginRun()
     {
-        if (loader.IsBusy) return;
+        // Solo desde la tienda: una puerta de almacén dentro de un nivel no reinicia la partida
+        if (loader.IsBusy || levelIndex >= 0) return;
         ShuffleOrder();
         levelIndex = 0;
         ending = false;
