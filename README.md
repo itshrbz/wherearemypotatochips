@@ -53,4 +53,3 @@ En el editor: **F2** salta al siguiente espacio y **F3** reinicia el actual.
 ## Herramientas
 
 Unity 6.5, Universal Render Pipeline, Input System, AI Navigation, Animation Rigging, ProBuilder y TextMesh Pro.
-Parte del código se escribió con ayuda de Claude (Anthropic).
