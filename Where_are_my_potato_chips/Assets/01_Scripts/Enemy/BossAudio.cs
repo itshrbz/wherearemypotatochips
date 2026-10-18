@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class BossAudio : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public ProceduralLeg[] legs;
+    public WallHand[] hands;
+    void OnEnable()
     {
-        
+        foreach (var l in legs) l.Planted += OnStep;
+        foreach (var h in hands) h.Planted += OnHand;
     }
-
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
     {
-        
+        foreach (var l in legs) l.Planted -= OnStep;
+        foreach (var h in hands) h.Planted -= OnHand;
     }
+    void OnStep(Vector3 p) => Sfx.Play("boss_step", p);
+    void OnHand(Vector3 p) => Sfx.Play("boss_hand", p);
 }

@@ -67,6 +67,8 @@ public class WallHand : MonoBehaviour
             Debug.LogWarning("WallHand: asigna Hand Bone para que la mano gire correctamente.", this);
     }
 
+
+
     // Úsalo cuando otro script suelta el control de la mano
     public void SyncFromTarget()
     {
