@@ -85,6 +85,7 @@ public class LevelFlowManager : MonoBehaviour
             ? LevelContext.Current
             : new GameObject("LevelContext").AddComponent<LevelContext>();
 
+        if (liminal) context.EnsureReplica(settings.replicaStorePrefab);
         context.EnsurePlayer(settings.playerPrefab);
         if (liminal) context.SetupBoss(settings.bossPrefab);
 

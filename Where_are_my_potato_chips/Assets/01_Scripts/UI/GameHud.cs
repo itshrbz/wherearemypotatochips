@@ -13,6 +13,8 @@ public class GameHud : MonoBehaviour
     GameObject dialoguePanel;
     TMP_Text dialogueText;
     TMP_Text promptText;
+    TMP_Text statusText;
+    PlayerState playerState;
     PlayerController player;
     Vector3 crosshairScale = Vector3.one;
 
@@ -36,7 +38,8 @@ public class GameHud : MonoBehaviour
             energyBar.interactable = false;
         }
 
-        CreatePromptLabel();
+        promptText = CreateLabel("Prompt", -70f, 0.75f);
+        statusText = CreateLabel("HidingStatus", -120f, 0.6f);
         ShowLine(null, null);
     }
 
@@ -62,8 +65,16 @@ public class GameHud : MonoBehaviour
             if (player == null) return;
 
             player.drawStaminaBar = false;
+            playerState = player.GetComponent<PlayerState>();
             var interactor = player.GetComponent<PlayerInteractor>();
             if (interactor != null) interactor.DrawFallbackUI = false;
+        }
+
+        if (statusText != null && playerState != null)
+        {
+            if (playerState.IsHidden) statusText.text = "HIDDEN";
+            else if (playerState.InHidingSpot) statusText.text = "Crouch to hide (Ctrl)";
+            else statusText.text = "";
         }
 
         if (energyBar != null)
@@ -92,22 +103,23 @@ public class GameHud : MonoBehaviour
         }
     }
 
-    void CreatePromptLabel()
+    TMP_Text CreateLabel(string labelName, float offsetY, float sizeFactor)
     {
-        if (dialogueText == null) return;
+        if (dialogueText == null) return null;
 
-        promptText = Instantiate(dialogueText, transform);
-        promptText.name = "Prompt";
-        promptText.gameObject.SetActive(true);
-        promptText.text = "";
-        promptText.fontSize = dialogueText.fontSize * 0.75f;
-        promptText.alignment = TextAlignmentOptions.Center;
+        var label = Instantiate(dialogueText, transform);
+        label.name = labelName;
+        label.gameObject.SetActive(true);
+        label.text = "";
+        label.fontSize = dialogueText.fontSize * sizeFactor;
+        label.alignment = TextAlignmentOptions.Center;
 
-        var rect = promptText.rectTransform;
+        var rect = label.rectTransform;
         rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
         rect.pivot = new Vector2(0.5f, 0.5f);
         rect.sizeDelta = new Vector2(900f, 60f);
-        rect.anchoredPosition = new Vector2(0f, -70f);
+        rect.anchoredPosition = new Vector2(0f, offsetY);
+        return label;
     }
 
     T FindChild<T>(string childName) where T : Component

@@ -20,7 +20,9 @@ public class HidingSpot : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         var s = other.GetComponentInParent<PlayerState>();
-        if (s != null) inside = s;
+        if (s == null) return;
+        inside = s;
+        inside.InHidingSpot = true;
     }
 
     void OnTriggerExit(Collider other)
@@ -29,6 +31,7 @@ public class HidingSpot : MonoBehaviour
         if (s != null && s == inside)
         {
             s.IsHidden = false;
+            s.InHidingSpot = false;
             inside = null;
         }
     }
@@ -40,7 +43,11 @@ public class HidingSpot : MonoBehaviour
 
     void OnDisable()
     {
-        if (inside != null) inside.IsHidden = false;
+        if (inside != null)
+        {
+            inside.IsHidden = false;
+            inside.InHidingSpot = false;
+        }
         inside = null;
     }
 }

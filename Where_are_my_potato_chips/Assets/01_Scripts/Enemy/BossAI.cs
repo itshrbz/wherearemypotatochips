@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -53,12 +54,11 @@ public class BossAI : MonoBehaviour
     int patrolIndex;
     bool caught;
 
-    public void SetEyeHeight(float height) => eyeHeight = height;
-
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         traversal = GetComponent<ProceduralTraversal>();
+        UseSceneAgentType(agent);
 
         agent.updateRotation = true;
         agent.angularSpeed = turnSpeed;
@@ -74,8 +74,15 @@ public class BossAI : MonoBehaviour
 
     void Start()
     {
-        if (!agent.isOnNavMesh && NavMesh.SamplePosition(transform.position, out var hit, 3f, NavMesh.AllAreas))
+        if (!agent.isOnNavMesh && NavMesh.SamplePosition(transform.position, out var hit, 10f, NavMesh.AllAreas))
             agent.Warp(hit.position);
+
+        if (!agent.isOnNavMesh)
+        {
+            Debug.LogWarning("BossAI: el jefe no está sobre un NavMesh; queda desactivado en este nivel.", this);
+            enabled = false;
+            return;
+        }
 
         if ((patrolPoints == null || patrolPoints.Length == 0) && LevelContext.Current != null)
         {
@@ -255,6 +262,20 @@ public class BossAI : MonoBehaviour
         player = FindAnyObjectByType<PlayerState>();
         if (player != null) playerController = player.GetComponent<PlayerController>();
         return player != null;
+    }
+
+    /// <summary>Cada nivel puede hornear su NavMesh con otro tipo de agente; el jefe usa el de la escena.</summary>
+    public static void UseSceneAgentType(NavMeshAgent navAgent)
+    {
+        var surface = FindAnyObjectByType<NavMeshSurface>();
+        if (surface == null || surface.agentTypeID == navAgent.agentTypeID) return;
+
+        navAgent.agentTypeID = surface.agentTypeID;
+        if (navAgent.isActiveAndEnabled)
+        {
+            navAgent.enabled = false;
+            navAgent.enabled = true;
+        }
     }
 
     static bool RandomPointNear(Vector3 center, float radius, out Vector3 point)
