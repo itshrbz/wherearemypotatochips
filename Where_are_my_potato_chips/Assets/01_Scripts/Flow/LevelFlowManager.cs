@@ -89,11 +89,13 @@ public class LevelFlowManager : MonoBehaviour
 
         if (liminal) context.EnsureReplica(settings.replicaStorePrefab);
         context.EnsurePlayer(settings.playerPrefab);
+        if (liminal) HidingSpotGenerator.EnsureSpots();
         if (liminal) context.SetupBoss(settings.bossPrefab);
 
         var player = FindAnyObjectByType<PlayerController>();
         if (player != null && player.GetComponent<CameraEffects>() == null) player.gameObject.AddComponent<CameraEffects>();
         if (liminal) new GameObject("ScreenEffects").AddComponent<ScreenEffects>();
+        if (store) PlayerAreaLimit.ForStore();
 
         if (settings.hudPrefab != null && FindAnyObjectByType<GameHud>() == null)
             Instantiate(settings.hudPrefab).AddComponent<GameHud>();
