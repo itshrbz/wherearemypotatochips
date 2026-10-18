@@ -39,6 +39,11 @@ public static class KitGreyboxGenerator
     const string CARPETA_ANTIGUA = "Assets/02_Prefabs/Kit";
     const string CARPETA_PREFABS = "Assets/02_Prefabs/Environment";
     const string RUTA_REPLICA    = "Assets/02_Prefabs/ReplicaStore.prefab";
+
+    // IMPORTANTE: si Rafael ya le agrego scripts a ReplicaStore.prefab, regenerarlo
+    // los BORRARIA. Por eso solo se crea si todavia no existe. Ponlo en true solo
+    // si quieres rehacer la tienda desde cero (perdiendo lo que tenga encima).
+    const bool REGENERAR_REPLICA = false;
     const string CARPETA_MATS    = "Assets/03_Materials";
 
     // ================== ZONA 3: MENU PRINCIPAL ========================
@@ -80,7 +85,10 @@ public static class KitGreyboxGenerator
         AssetDatabase.Refresh();
 
         // ---- ReplicaStore (usa las piezas de arriba) ----
-        CrearReplicaStore();
+        if (REGENERAR_REPLICA || AssetDatabase.LoadAssetAtPath<GameObject>(RUTA_REPLICA) == null)
+            CrearReplicaStore();
+        else
+            Debug.Log("ReplicaStore.prefab ya existe: no se toca (REGENERAR_REPLICA = false).");
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
