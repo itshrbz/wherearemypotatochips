@@ -19,7 +19,8 @@ public class SettingsScreens
         "<b>Esc</b>  Pause\n\n" +
         "<color=#F2C640>Serve customers: scan the product, then charge it at the register.\n" +
         "The replica store at the end of each place is safe.\n" +
-        "It sees you when you are in front of it, and it hears you run.</color>";
+        "It sees you when you are in front of it, and it hears you run.\n" +
+        "If it sees you hide, it knows where you are.</color>";
 
     public GameObject Settings { get; }
     public GameObject Controls { get; }
@@ -28,6 +29,7 @@ public class SettingsScreens
     Slider fovSlider;
     Slider volumeSlider;
     TextMeshProUGUI invertYLabel;
+    TextMeshProUGUI cameraEffectsLabel;
     TextMeshProUGUI fullscreenLabel;
 
     public SettingsScreens(Transform root, UnityAction onBack)
@@ -44,6 +46,7 @@ public class SettingsScreens
         fovSlider.SetValueWithoutNotify(GameSettings.FieldOfView);
         volumeSlider.SetValueWithoutNotify(GameSettings.Volume);
         invertYLabel.text = "Invert Y: " + (GameSettings.InvertY ? "On" : "Off");
+        cameraEffectsLabel.text = "Camera effects: " + (GameSettings.CameraEffects ? "On" : "Off");
         fullscreenLabel.text = "Fullscreen: " + (Screen.fullScreen ? "On" : "Off");
     }
 
@@ -71,14 +74,20 @@ public class SettingsScreens
         UiBuilder.CreateOptionLabel(panel, "Volume", 40f);
         volumeSlider = UiBuilder.CreateSlider(panel, new Vector2(240f, 40f), 0f, 1f, GameSettings.Volume, value => GameSettings.Volume = value);
 
-        invertYLabel = WideButton(panel, "Invert Y", -80f, () =>
+        invertYLabel = WideButton(panel, "Invert Y", new Vector2(-260f, -80f), () =>
         {
             GameSettings.InvertY = !GameSettings.InvertY;
             ApplyToPlayer();
             Refresh();
         });
 
-        fullscreenLabel = WideButton(panel, "Fullscreen", -190f, () =>
+        cameraEffectsLabel = WideButton(panel, "Camera effects", new Vector2(260f, -80f), () =>
+        {
+            GameSettings.CameraEffects = !GameSettings.CameraEffects;
+            Refresh();
+        });
+
+        fullscreenLabel = WideButton(panel, "Fullscreen", new Vector2(0f, -190f), () =>
         {
             Screen.fullScreen = !Screen.fullScreen;
             // El cambio se aplica al final del frame; se muestra el valor que va a quedar
@@ -106,9 +115,9 @@ public class SettingsScreens
         return panel.gameObject;
     }
 
-    static TextMeshProUGUI WideButton(Transform panel, string text, float y, UnityAction onClick)
+    static TextMeshProUGUI WideButton(Transform panel, string text, Vector2 position, UnityAction onClick)
     {
-        var button = UiBuilder.CreateButton(panel, text, new Vector2(0f, y), onClick);
+        var button = UiBuilder.CreateButton(panel, text, position, onClick);
         ((RectTransform)button.transform).sizeDelta = new Vector2(460f, 90f);
         return button.GetComponentInChildren<TextMeshProUGUI>();
     }
