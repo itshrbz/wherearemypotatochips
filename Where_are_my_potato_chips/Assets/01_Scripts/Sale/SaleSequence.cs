@@ -53,6 +53,7 @@ public class SaleSequence : MonoBehaviour
 
         if (product.GetComponentInChildren<Collider>() == null)
             product.AddComponent<BoxCollider>();
+        PlaceOnSurface(product);
 
         var saleProduct = product.GetComponent<SaleProduct>();
         if (saleProduct == null) saleProduct = product.AddComponent<SaleProduct>();
@@ -88,8 +89,35 @@ public class SaleSequence : MonoBehaviour
         var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
         go.name = "Product";
         go.transform.SetPositionAndRotation(productSpot.position, productSpot.rotation);
-        go.transform.localScale = new Vector3(0.15f, 0.25f, 0.15f);
+        go.transform.localScale = new Vector3(0.2f, 0.3f, 0.2f);
+        go.GetComponent<Renderer>().material.color = new Color(0.85f, 0.2f, 0.15f);
         return go;
+    }
+
+    // El punto del producto suele quedar dentro del mostrador: lo apoya encima de lo que haya debajo.
+    void PlaceOnSurface(GameObject item)
+    {
+        var renderers = item.GetComponentsInChildren<Renderer>();
+        if (renderers.Length == 0) return;
+
+        Bounds bounds = renderers[0].bounds;
+        foreach (var r in renderers) bounds.Encapsulate(r.bounds);
+        float pivotAboveBottom = item.transform.position.y - bounds.min.y;
+
+        Vector3 origin = productSpot.position + Vector3.up * 2f;
+        float nearest = float.MaxValue;
+        Vector3 surface = productSpot.position;
+        foreach (var hit in Physics.RaycastAll(origin, Vector3.down, 4f, ~0, QueryTriggerInteraction.Ignore))
+        {
+            if (hit.transform.IsChildOf(item.transform) || hit.distance >= nearest) continue;
+            if (hit.collider.GetComponentInParent<PlayerState>() != null) continue;
+            nearest = hit.distance;
+            surface = hit.point;
+        }
+
+        Vector3 position = item.transform.position;
+        position.y = surface.y + pivotAboveBottom + 0.01f;
+        item.transform.position = position;
     }
 
     void Play(AudioClip clip)

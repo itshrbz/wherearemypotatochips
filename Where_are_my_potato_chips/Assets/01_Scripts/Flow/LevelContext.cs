@@ -123,7 +123,7 @@ public class LevelContext : MonoBehaviour
 
     static void DisableOtherCameras(Transform player)
     {
-        foreach (var cam in FindObjectsByType<Camera>(FindObjectsSortMode.None))
+        foreach (var cam in Camera.allCameras)
             if (!cam.transform.IsChildOf(player)) cam.gameObject.SetActive(false);
     }
 

@@ -10,7 +10,8 @@ using UnityEngine.InputSystem;
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] Camera viewCamera;
-    [SerializeField] float range = 2.5f;
+    [SerializeField] float range = 3f;
+    [SerializeField] float aimRadius = 0.08f;
     [SerializeField] LayerMask mask = ~0;
     [Tooltip("Dibuja un punto de mira y el texto de ayuda con OnGUI mientras no exista la UI final.")]
     [SerializeField] bool drawFallbackUI = true;
@@ -72,7 +73,9 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (viewCamera == null) return null;
         var ray = new Ray(viewCamera.transform.position, viewCamera.transform.forward);
-        if (!Physics.Raycast(ray, out RaycastHit hit, range, mask, QueryTriggerInteraction.Ignore))
+        // Un rayo grueso para que los objetos chicos (producto, caja) no cuesten de apuntar
+        if (!Physics.SphereCast(ray, aimRadius, out RaycastHit hit, range, mask, QueryTriggerInteraction.Ignore)
+            && !Physics.Raycast(ray, out hit, range, mask, QueryTriggerInteraction.Ignore))
             return null;
 
         var target = hit.collider.GetComponentInParent<IInteractable>();

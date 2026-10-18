@@ -29,7 +29,7 @@ public class DialogueBox : MonoBehaviour
         }
     }
 
-    public static void Say(string who, string line, float seconds = 2.5f)
+    public static void Say(string who, string line, float seconds = 3.5f)
     {
         var box = Instance;
         box.speaker = who;
@@ -39,7 +39,7 @@ public class DialogueBox : MonoBehaviour
     }
 
     /// <summary>Muestra las líneas una tras otra. Usar con yield return.</summary>
-    public static IEnumerator SayAll(string who, string[] lines, float secondsEach = 2.5f)
+    public static IEnumerator SayAll(string who, string[] lines, float secondsEach = 3.5f)
     {
         if (lines == null) yield break;
         foreach (var line in lines)
