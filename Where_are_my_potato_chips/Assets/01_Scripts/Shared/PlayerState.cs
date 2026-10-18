@@ -10,6 +10,7 @@ public class PlayerState : MonoBehaviour
 {
     public bool IsCrouching { get; set; }
     public bool IsHidden { get; set; }
+    public bool InHidingSpot { get; set; }
 
     /// <summary>True dentro de una tienda réplica: el jefe no puede atraparlo.</summary>
     public bool IsSafe { get; set; }

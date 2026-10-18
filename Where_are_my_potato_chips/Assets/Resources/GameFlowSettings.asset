@@ -23,6 +23,7 @@ MonoBehaviour:
   hudPrefab: {fileID: 9109770933019832807, guid: 09015df04cf57314292d826269513125, type: 3}
   bossPrefab: {fileID: 0}
   buyerPrefab: {fileID: 0}
+  replicaStorePrefab: {fileID: 2266161346985808183, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
   replicaVariants:
   - {fileID: 11400000, guid: ae5be1a3bb984cd48e519ddf5024c624, type: 2}
   - {fileID: 11400000, guid: cad47ddc8a424442b79ca79a851df66a, type: 2}

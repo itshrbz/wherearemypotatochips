@@ -15,6 +15,7 @@ public class GameFlowSettings : ScriptableObject
     public GameObject hudPrefab;
     public GameObject bossPrefab;
     public GameObject buyerPrefab;
+    public GameObject replicaStorePrefab;
 
     [Header("Tiendas réplica (una por espacio)")]
     public SaleVariant[] replicaVariants;
