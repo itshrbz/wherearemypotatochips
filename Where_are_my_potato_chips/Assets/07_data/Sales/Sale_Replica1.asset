@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b910d718632f11b4c9badb379058393e, type: 3}
   m_Name: Sale_Replica1
   m_EditorClassIdentifier: Assembly-CSharp::SaleVariant
-  buyerName: "Customer?"
+  buyerName: Customer?
   greetingLines:
-  - "Hi. Just this, please."
-  productPrefab: {fileID: 0}
+  - Hi. Just this, please.
+  productPrefab: {fileID: 919132149155446097, guid: 128f8f2330d5ae541a70b72fa34883a9, type: 3}
   productName: Soda
   afterSaleLines:
-  - "Thanks."
-  - "...Have you seen any potato chips?"
+  - Thanks.
+  - ...Have you seen any potato chips?
   requestsPotatoes: 0
   potatoLines: []
