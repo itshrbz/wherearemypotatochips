@@ -35,7 +35,7 @@ public class LevelFlowManager : MonoBehaviour
     public static void StartNewGame() => Instance.LoadStore(false);
     public static void StartRun() => Instance.BeginRun();
     public static void GoToNextLevel() => Instance.Advance();
-    public static void RestartLevel() => Instance.Restart();
+    public static void RestartLevel(bool playSting = true) => Instance.Restart(playSting);
     public static void BackToMenu() => Instance.LoadMenu();
     public static void FinishGame() => Instance.StartCoroutine(Instance.CreditsRoutine());
 
@@ -90,6 +90,10 @@ public class LevelFlowManager : MonoBehaviour
         if (liminal) context.EnsureReplica(settings.replicaStorePrefab);
         context.EnsurePlayer(settings.playerPrefab);
         if (liminal) context.SetupBoss(settings.bossPrefab);
+
+        var player = FindAnyObjectByType<PlayerController>();
+        if (player != null && player.GetComponent<CameraEffects>() == null) player.gameObject.AddComponent<CameraEffects>();
+        if (liminal) new GameObject("ScreenEffects").AddComponent<ScreenEffects>();
 
         if (settings.hudPrefab != null && FindAnyObjectByType<GameHud>() == null)
             Instantiate(settings.hudPrefab).AddComponent<GameHud>();
@@ -149,10 +153,10 @@ public class LevelFlowManager : MonoBehaviour
         loader.Load(order[levelIndex], SceneLoader.Reveal.WakeUp, message);
     }
 
-    void Restart()
+    void Restart(bool playSting)
     {
         if (loader.IsBusy) return;
-        loader.Load(SceneManager.GetActiveScene().name, SceneLoader.Reveal.WakeUp, null, settings.caughtClip);
+        loader.Load(SceneManager.GetActiveScene().name, SceneLoader.Reveal.WakeUp, null, playSting ? settings.caughtClip : null);
     }
 
     IEnumerator CreditsRoutine()
@@ -193,7 +197,7 @@ public class LevelFlowManager : MonoBehaviour
             if (levelIndex < 0) BeginRun();
             else Advance();
         }
-        if (keyboard.f3Key.wasPressedThisFrame) Restart();
+        if (keyboard.f3Key.wasPressedThisFrame) Restart(true);
     }
 #endif
 }

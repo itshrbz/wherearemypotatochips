@@ -19,6 +19,15 @@ public class SceneLoader : MonoBehaviour
     TextMeshProUGUI centerText;
     AudioSource sfx;
 
+    // Ticket de caja
+    RectTransform ticket;
+    TextMeshProUGUI ticketText;
+    static readonly Color PaperColor = new Color(0.95f, 0.93f, 0.85f);
+    static readonly Color InkColor = new Color(0.13f, 0.12f, 0.11f);
+    const string MonoOpen = "<mspace=0.6em>";
+    const float TicketWidth = 620f;
+    const float TicketHeight = 860f;
+
     public bool IsBusy { get; private set; }
 
     public void Setup(GameFlowSettings flowSettings)
@@ -64,6 +73,7 @@ public class SceneLoader : MonoBehaviour
         while (!operation.isDone) yield return null;
 
         centerText.text = "";
+        ticket.gameObject.SetActive(false);
         SetPlayerLocked(true);
 
         if (reveal == Reveal.WakeUp) yield return WakeUp();
@@ -76,26 +86,66 @@ public class SceneLoader : MonoBehaviour
     IEnumerator PrintTicket(string message)
     {
         float startedAt = Time.unscaledTime;
+        System.DateTime now = System.DateTime.Now;
+
         string[] lines =
         {
-            "POTATO MART   #0047",
+            "<align=center><b>POTATO MART</b>",
+            "<align=center>STORE #0047",
+            "<align=center>OPEN 24 HOURS (ALWAYS)",
+            "",
+            "<align=left>DATE  " + now.ToString("yyyy-MM-dd") + "   " + now.ToString("HH:mm"),
+            "<align=left>REG   03        CASHIER  ???",
             "------------------------------",
-            "1 x POTATO CHIPS        ---.--",
+            "<align=left>1 x POTATO CHIPS        ---.--",
+            "<align=left>    (CLASSIC SALTED)",
             "------------------------------",
-            message,
+            "<align=left>SUBTOTAL               ---.--",
+            "<align=left>TOTAL                  ---.--",
             "------------------------------",
-            "THANK YOU. PLEASE COME BACK."
+            "<align=center>" + message.Replace("\n", "\n<align=center>"),
+            "------------------------------",
+            "<align=center>THANK YOU.",
+            "<align=center>PLEASE COME BACK."
         };
 
-        centerText.text = "";
+        ticketText.text = MonoOpen;
+        ticket.gameObject.SetActive(true);
+        ticket.localRotation = Quaternion.Euler(0f, 0f, -1.6f);
+        ticket.anchoredPosition = new Vector2(0f, -TicketHeight - 200f);
+        foreach (Transform child in ticket) child.gameObject.SetActive(child.name != "Barcode");
+
+        // el papel sube desde abajo
+        yield return SlideTicket(-TicketHeight - 200f, 0f, 0.55f);
+
+        // se imprime línea a línea
         foreach (string line in lines)
         {
-            centerText.text += line + "\n";
+            ticketText.text += line + "\n";
             if (settings.printerClip != null) sfx.PlayOneShot(settings.printerClip, 0.6f);
             yield return new WaitForSecondsRealtime(0.22f);
         }
 
-        while (Time.unscaledTime - startedAt < settings.minTicketTime) yield return null;
+        ticket.Find("Barcode").gameObject.SetActive(true);
+        if (settings.printerClip != null) sfx.PlayOneShot(settings.printerClip, 0.6f);
+
+        // pequeño temblor mientras espera (papel colgando)
+        while (Time.unscaledTime - startedAt < settings.minTicketTime)
+        {
+            float sway = Mathf.Sin(Time.unscaledTime * 1.7f) * 0.35f;
+            ticket.localRotation = Quaternion.Euler(0f, 0f, -1.6f + sway);
+            yield return null;
+        }
+    }
+
+    IEnumerator SlideTicket(float fromY, float toY, float duration)
+    {
+        for (float t = 0f; t < 1f; t += Time.unscaledDeltaTime / duration)
+        {
+            ticket.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, toY, Mathf.SmoothStep(0f, 1f, t)));
+            yield return null;
+        }
+        ticket.anchoredPosition = new Vector2(0f, toY);
     }
 
     IEnumerator WakeUp()
@@ -168,6 +218,8 @@ public class SceneLoader : MonoBehaviour
         bottomLid = CreatePanel("BottomLid", root.transform).rectTransform;
         SetLids(1f);
 
+        BuildTicket(root.transform);
+
         var textObject = new GameObject("CenterText", typeof(RectTransform));
         textObject.transform.SetParent(root.transform, false);
         centerText = textObject.AddComponent<TextMeshProUGUI>();
@@ -179,6 +231,89 @@ public class SceneLoader : MonoBehaviour
         rect.anchorMin = new Vector2(0.2f, 0.1f);
         rect.anchorMax = new Vector2(0.8f, 0.9f);
         rect.offsetMin = rect.offsetMax = Vector2.zero;
+    }
+
+    void BuildTicket(Transform parent)
+    {
+        var paper = new GameObject("Ticket", typeof(RectTransform), typeof(Image));
+        paper.transform.SetParent(parent, false);
+        ticket = (RectTransform)paper.transform;
+        ticket.anchorMin = ticket.anchorMax = new Vector2(0.5f, 0.5f);
+        ticket.pivot = new Vector2(0.5f, 0.5f);
+        ticket.sizeDelta = new Vector2(TicketWidth, TicketHeight);
+        var paperImage = paper.GetComponent<Image>();
+        paperImage.color = PaperColor;
+        paperImage.raycastTarget = false;
+
+        // sombra suave
+        var shadow = paper.AddComponent<Shadow>();
+        shadow.effectColor = new Color(0f, 0f, 0f, 0.55f);
+        shadow.effectDistance = new Vector2(10f, -12f);
+
+        // bordes dentados (arriba y abajo), cuadrados girados del color del fondo
+        for (int i = 0; i < 2; i++)
+        {
+            float y = i == 0 ? TicketHeight * 0.5f : -TicketHeight * 0.5f;
+            for (float x = -TicketWidth * 0.5f; x <= TicketWidth * 0.5f + 1f; x += 28f)
+            {
+                var tooth = new GameObject("Tooth", typeof(RectTransform), typeof(Image));
+                tooth.transform.SetParent(ticket, false);
+                var r = (RectTransform)tooth.transform;
+                r.sizeDelta = new Vector2(20f, 20f);
+                r.anchoredPosition = new Vector2(x, y);
+                r.localRotation = Quaternion.Euler(0f, 0f, 45f);
+                var img = tooth.GetComponent<Image>();
+                img.color = Color.black;
+                img.raycastTarget = false;
+            }
+        }
+
+        // texto monoespaciado con tinta oscura
+        var textObject = new GameObject("TicketText", typeof(RectTransform));
+        textObject.transform.SetParent(ticket, false);
+        ticketText = textObject.AddComponent<TextMeshProUGUI>();
+        ticketText.text = "";
+        ticketText.richText = true;
+        ticketText.fontSize = 27f;
+        ticketText.color = InkColor;
+        ticketText.alignment = TextAlignmentOptions.TopLeft;
+        ticketText.textWrappingMode = TextWrappingModes.NoWrap;
+        ticketText.lineSpacing = 8f;
+        ticketText.raycastTarget = false;
+        var tr = ticketText.rectTransform;
+        tr.anchorMin = Vector2.zero;
+        tr.anchorMax = Vector2.one;
+        tr.offsetMin = new Vector2(36f, 130f);
+        tr.offsetMax = new Vector2(-36f, -46f);
+
+        // código de barras
+        var barcode = new GameObject("Barcode", typeof(RectTransform));
+        barcode.transform.SetParent(ticket, false);
+        var br = (RectTransform)barcode.transform;
+        br.anchorMin = br.anchorMax = new Vector2(0.5f, 0f);
+        br.pivot = new Vector2(0.5f, 0f);
+        br.sizeDelta = new Vector2(420f, 70f);
+        br.anchoredPosition = new Vector2(0f, 40f);
+        var rng = new System.Random(4700);
+        float bx = 0f;
+        while (bx < 420f)
+        {
+            float w = rng.Next(1, 4) * 3f;
+            var bar = new GameObject("Bar", typeof(RectTransform), typeof(Image));
+            bar.transform.SetParent(br, false);
+            var rr = (RectTransform)bar.transform;
+            rr.anchorMin = Vector2.zero;
+            rr.anchorMax = new Vector2(0f, 1f);
+            rr.pivot = new Vector2(0f, 0.5f);
+            rr.sizeDelta = new Vector2(w, 0f);
+            rr.anchoredPosition = new Vector2(bx, 0f);
+            var bi = bar.GetComponent<Image>();
+            bi.color = InkColor;
+            bi.raycastTarget = false;
+            bx += w + rng.Next(1, 4) * 3f;
+        }
+
+        ticket.gameObject.SetActive(false);
     }
 
     static Image CreatePanel(string name, Transform parent)
