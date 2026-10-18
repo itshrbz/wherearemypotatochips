@@ -65,7 +65,7 @@ public class SaleSequence : MonoBehaviour
     internal void Scan()
     {
         if (CurrentStep != Step.WaitingScan) return;
-        Play(scanClip);
+        Play(scanClip, "scan_beep");
         if (product != null) product.transform.position += productSpot.right * 0.3f;
         CurrentStep = Step.WaitingCharge;
     }
@@ -73,7 +73,7 @@ public class SaleSequence : MonoBehaviour
     internal void Charge()
     {
         if (CurrentStep != Step.WaitingCharge) return;
-        Play(chargeClip);
+        Play(chargeClip, "cash_register");
         if (product != null) Destroy(product);
 
         var finished = CurrentVariant;
@@ -120,8 +120,9 @@ public class SaleSequence : MonoBehaviour
         item.transform.position = position;
     }
 
-    void Play(AudioClip clip)
+    void Play(AudioClip clip, string id)
     {
         if (clip != null && audioSource != null) audioSource.PlayOneShot(clip);
+        else Sfx.Play(id);
     }
 }

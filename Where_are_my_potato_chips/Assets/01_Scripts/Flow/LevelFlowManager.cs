@@ -157,6 +157,7 @@ public class LevelFlowManager : MonoBehaviour
 
     IEnumerator CreditsRoutine()
     {
+        AudioDirector.PlayOutro();
         yield return loader.ShowCredits(settings.credits, 7f, settings.registerClip);
         LoadMenu();
     }
