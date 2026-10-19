@@ -11,6 +11,8 @@
 
 ## Recursos de terceros
 
+| Recurso | Autor | Licencia |
+| --- | --- | --- |
 | Fuente Creepster | Sideshow (Google Fonts) | SIL Open Font License 1.1 |
 | Rig y animación base del jefe (huesos mixamorig) | Mixamo (Adobe) | Licencia de uso de Mixamo |
 | Rig y animación base de los compradores (huesos mixamorig) | Mixamo (Adobe) | Licencia de uso de Mixamo |

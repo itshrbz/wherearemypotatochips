@@ -89,6 +89,7 @@ public class LevelFlowManager : MonoBehaviour
 
         if (liminal) context.EnsureReplica(settings.replicaStorePrefab);
         context.EnsurePlayer(settings.playerPrefab);
+        if (liminal) SurfaceTiling.Apply();
         if (liminal) HidingSpotGenerator.EnsureSpots();
         if (liminal) context.SetupBoss(settings.bossPrefab);
 
