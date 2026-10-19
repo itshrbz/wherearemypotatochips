@@ -91,6 +91,13 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
+    // Vuelve a empezar el espacio actual (por si el jugador queda atascado)
+    void Restart()
+    {
+        Resume();
+        LevelFlowManager.RestartLevel(false);
+    }
+
     void BackToMenu()
     {
         Resume();
@@ -118,12 +125,13 @@ public class PauseMenu : MonoBehaviour
         canvas.transform.SetParent(transform, false);
 
         var panel = UiBuilder.CreatePanel(root, "Main");
-        UiBuilder.CreateLabel(panel, "PAUSED", 90f, new Vector2(0f, 330f)).color = UiBuilder.Accent;
-        UiBuilder.CreateButton(panel, "Resume", new Vector2(0f, 170f), Resume);
-        UiBuilder.CreateButton(panel, "Settings", new Vector2(0f, 60f), () => Show(screens.Settings));
-        UiBuilder.CreateButton(panel, "Controls", new Vector2(0f, -50f), () => Show(screens.Controls));
-        UiBuilder.CreateButton(panel, "Main menu", new Vector2(0f, -160f), BackToMenu);
-        UiBuilder.CreateButton(panel, "Quit", new Vector2(0f, -270f), UiBuilder.Quit);
+        UiBuilder.CreateLabel(panel, "PAUSED", 90f, new Vector2(0f, 360f)).color = UiBuilder.Accent;
+        UiBuilder.CreateButton(panel, "Resume", new Vector2(0f, 220f), Resume);
+        UiBuilder.CreateButton(panel, "Restart", new Vector2(0f, 115f), Restart);
+        UiBuilder.CreateButton(panel, "Settings", new Vector2(0f, 10f), () => Show(screens.Settings));
+        UiBuilder.CreateButton(panel, "Controls", new Vector2(0f, -95f), () => Show(screens.Controls));
+        UiBuilder.CreateButton(panel, "Main menu", new Vector2(0f, -200f), BackToMenu);
+        UiBuilder.CreateButton(panel, "Quit", new Vector2(0f, -305f), UiBuilder.Quit);
         mainPanel = panel.gameObject;
 
         screens = new SettingsScreens(root, ShowMain);

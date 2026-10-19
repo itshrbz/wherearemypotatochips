@@ -32,7 +32,7 @@ public class LevelFlowManager : MonoBehaviour
     public static GameFlowSettings Settings => Instance.settings;
     public static bool IsLoading => Instance.loader.IsBusy;
 
-    public static void StartNewGame() => Instance.LoadStore(false);
+    public static void StartNewGame() => Instance.StartCoroutine(Instance.NewGameRoutine());
     public static void StartRun() => Instance.BeginRun();
     public static void GoToNextLevel() => Instance.Advance();
     public static void RestartLevel(bool playSting = true) => Instance.Restart(playSting);
@@ -120,6 +120,22 @@ public class LevelFlowManager : MonoBehaviour
         levelIndex = -1;
         ending = false;
         loader.Load(settings.menuScene, SceneLoader.Reveal.Fade);
+    }
+
+    static readonly string[] IntroLines =
+    {
+        "Night shift at Potato Mart. Again.",
+        "Same humming lights. Same empty aisles. Customers who never really look at you.",
+        "Tonight, one of them asks for potato chips.",
+        "The shelf is empty, but there should be a box in the warehouse.",
+        "Just go to the back and get it. It will only take a minute.",
+    };
+
+    IEnumerator NewGameRoutine()
+    {
+        if (loader.IsBusy) yield break;
+        yield return loader.ShowStory(IntroLines, 3.5f);
+        LoadStore(false);
     }
 
     void LoadStore(bool asEnding)
