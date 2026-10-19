@@ -15,9 +15,26 @@ public class GameHud : MonoBehaviour
     TMP_Text promptText;
     TMP_Text statusText;
     TMP_Text objectiveText;
+    TMP_Text guideText;
     SaleSequence[] sales = new SaleSequence[0];
     WarehouseDoor door;
+    ReplicaCheckout replica;
     float nextLookup;
+    float levelStartTime;
+    float startHeight;
+    bool fell;
+
+    const float TutorialStepSeconds = 6f;
+    const float FallDistance = 20f;
+    static bool tutorialDone;
+
+    static readonly string[] TutorialSteps =
+    {
+        "Move with <b>W A S D</b> and look around with the <b>mouse</b>",
+        "Hold <b>SHIFT</b> to run. It uses stamina, and running makes noise",
+        "Hold <b>CTRL</b> to crouch. Crouching inside a hiding spot (the cardboard boxes) hides you",
+        "Press <b>SPACE</b> to jump onto boxes and ledges",
+    };
     PlayerState playerState;
     PlayerController player;
     Vector3 crosshairScale = Vector3.one;
@@ -44,7 +61,8 @@ public class GameHud : MonoBehaviour
 
         promptText = CreateLabel("Prompt", -70f, 0.75f);
         statusText = CreateLabel("HidingStatus", -120f, 0.6f);
-        objectiveText = CreateObjectiveLabel();
+        objectiveText = CreateTopLabel("Objective", -30f, 0.8f, Color.white);
+        guideText = CreateTopLabel("Guide", -95f, 0.6f, UiBuilder.Accent);
         ShowLine(null, null);
     }
 
@@ -73,7 +91,11 @@ public class GameHud : MonoBehaviour
             playerState = player.GetComponent<PlayerState>();
             var interactor = player.GetComponent<PlayerInteractor>();
             if (interactor != null) interactor.DrawFallbackUI = false;
+            levelStartTime = Time.time;
+            startHeight = player.transform.position.y;
         }
+
+        CheckFall();
 
         if (statusText != null && playerState != null)
         {
@@ -83,6 +105,7 @@ public class GameHud : MonoBehaviour
         }
 
         if (objectiveText != null) objectiveText.text = CurrentObjective();
+        if (guideText != null) guideText.text = StoreDirection();
 
         if (energyBar != null)
         {
@@ -120,6 +143,7 @@ public class GameHud : MonoBehaviour
             nextLookup = Time.time + 1f;
             sales = FindObjectsByType<SaleSequence>(FindObjectsSortMode.None);
             door = FindAnyObjectByType<WarehouseDoor>();
+            replica = FindAnyObjectByType<ReplicaCheckout>();
         }
 
         foreach (var sale in sales)
@@ -135,23 +159,65 @@ public class GameHud : MonoBehaviour
             return "Wait behind the counter and serve the customers";
         }
 
-        if (playerState != null && playerState.IsSafe) return "Wait for the customer at the counter";
+        if (playerState != null && playerState.IsSafe) return "You made it. Wait for the customer at the counter";
+
+        // Primer espacio: enseña los controles uno por uno antes de dar el objetivo
+        if (LevelFlowManager.CurrentLevel == 0 && !tutorialDone)
+        {
+            int step = Mathf.FloorToInt((Time.time - levelStartTime) / TutorialStepSeconds);
+            if (step < TutorialSteps.Length) return TutorialSteps[step];
+            tutorialDone = true;
+        }
+
         return LevelContext.BossEnabled
-            ? "Find the store. Something hunts you: crouch (Ctrl) inside hiding spots and don't run near it"
-            : "Something's off. Find the store hidden somewhere in this place";
+            ? "Reach the store. Something hunts you: if it sees you, break its line of sight and crouch in a hiding spot"
+            : "This is not your warehouse. Find the copy of your store somewhere in this place";
     }
 
-    TMP_Text CreateObjectiveLabel()
+    // Pequeña brújula hacia la tienda réplica, para no perderse
+    string StoreDirection()
     {
-        var label = CreateLabel("Objective", 0f, 0.6f);
+        if (LevelFlowManager.IsLoading || LevelFlowManager.CurrentLevel < 0 || replica == null || player == null) return "";
+        if (playerState != null && playerState.IsSafe) return "";
+        if (LevelFlowManager.CurrentLevel == 0 && !tutorialDone) return "";
+
+        Vector3 toStore = replica.transform.position - player.transform.position;
+        toStore.y = 0f;
+        float distance = toStore.magnitude;
+        if (distance < 4f) return "";
+
+        Vector3 forward = player.transform.forward;
+        forward.y = 0f;
+        float angle = Vector3.SignedAngle(forward, toStore, Vector3.up);
+        string where = Mathf.Abs(angle) < 35f ? "ahead of you"
+            : Mathf.Abs(angle) > 145f ? "behind you"
+            : angle > 0f ? "to your right" : "to your left";
+        return $"The store is about {Mathf.RoundToInt(distance)} m {where}";
+    }
+
+    // Si el jugador se cae del mapa, el espacio vuelve a empezar
+    void CheckFall()
+    {
+        if (fell || LevelFlowManager.CurrentLevel < 0 || LevelFlowManager.IsLoading) return;
+        if (player.transform.position.y > startHeight - FallDistance) return;
+
+        fell = true;
+        LevelFlowManager.RestartLevel(false);
+    }
+
+    TMP_Text CreateTopLabel(string labelName, float offsetY, float sizeFactor, Color color)
+    {
+        var label = CreateLabel(labelName, 0f, sizeFactor);
         if (label == null) return null;
 
         var rect = label.rectTransform;
         rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 1f);
         rect.pivot = new Vector2(0.5f, 1f);
-        rect.sizeDelta = new Vector2(1400f, 80f);
-        rect.anchoredPosition = new Vector2(0f, -30f);
-        label.color = new Color(1f, 1f, 1f, 0.85f);
+        rect.sizeDelta = new Vector2(1600f, 80f);
+        rect.anchoredPosition = new Vector2(0f, offsetY);
+        label.color = color;
+        label.outlineWidth = 0.2f;
+        label.outlineColor = new Color32(0, 0, 0, 220);
         return label;
     }
 

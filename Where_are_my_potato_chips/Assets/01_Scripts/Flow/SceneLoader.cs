@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -54,6 +55,36 @@ public class SceneLoader : MonoBehaviour
         centerText.text = "";
         IsBusy = false;
     }
+
+    /// <summary>Pantalla negra con la historia, línea por línea. Cualquier tecla o clic la salta.</summary>
+    public IEnumerator ShowStory(string[] lines, float secondsPerLine)
+    {
+        IsBusy = true;
+        yield return Fade(1f);
+
+        string shown = "";
+        foreach (var line in lines)
+        {
+            shown += line + "\n\n";
+            centerText.text = shown + "<size=55%><color=#8C8C8C>Press any key to skip</color></size>";
+
+            bool skipped = false;
+            for (float t = 0f; t < secondsPerLine; t += Time.unscaledDeltaTime)
+            {
+                if (SkipPressed()) { skipped = true; break; }
+                yield return null;
+            }
+            if (skipped) break;
+        }
+
+        centerText.text = "";
+        IsBusy = false;
+    }
+
+    static bool SkipPressed() =>
+        (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
+        || (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame);
 
     IEnumerator LoadRoutine(string scene, Reveal reveal, string ticketMessage, AudioClip sting)
     {
