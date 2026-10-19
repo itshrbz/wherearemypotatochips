@@ -33,8 +33,8 @@ public static class AmbienteTools
     }
 
     static readonly Preset ALMACEN   = new Preset { niebla = new Color(0.18f, 0.20f, 0.16f), densidad = 0.045f, ambiente = new Color(0.05f, 0.055f, 0.05f), sol = 0f,    vineta = 0.40f, grano = 0.45f, saturacion = -25f };
-    static readonly Preset PISCINAS  = new Preset { niebla = new Color(0.15f, 0.28f, 0.30f), densidad = 0.035f, ambiente = new Color(0.06f, 0.10f, 0.11f), sol = 0f,    vineta = 0.35f, grano = 0.35f, saturacion = -15f };
-    static readonly Preset PARQUE    = new Preset { niebla = new Color(0.22f, 0.22f, 0.28f), densidad = 0.020f, ambiente = new Color(0.08f, 0.08f, 0.12f), sol = 0.15f, vineta = 0.35f, grano = 0.40f, saturacion = -20f };
+    static readonly Preset PISCINAS  = new Preset { niebla = new Color(0.50f, 0.66f, 0.68f), densidad = 0.020f, ambiente = new Color(0.30f, 0.38f, 0.40f), sol = 0f,    vineta = 0.25f, grano = 0.35f, saturacion = -15f };
+    static readonly Preset PARQUE    = new Preset { niebla = new Color(0.08f, 0.08f, 0.12f), densidad = 0.032f, ambiente = new Color(0.035f, 0.035f, 0.06f), sol = 0.06f, vineta = 0.45f, grano = 0.40f, saturacion = -20f };
 
     // ================== ZONA 2: MENU ==================================
     [MenuItem("Tools/Kit/Ambiente/Aplicar a la escena abierta (segun su nombre)")]
