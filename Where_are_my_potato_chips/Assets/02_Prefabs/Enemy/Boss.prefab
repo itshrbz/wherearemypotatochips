@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 7827215340521742487}
   - component: {fileID: 7374652743802347196}
   - component: {fileID: 209494937051251611}
+  - component: {fileID: -7809341979610852229}
   - component: {fileID: 3417222665259029895}
   - component: {fileID: 7579929967085778563}
   - component: {fileID: 6490670634699807205}
@@ -467,6 +468,8 @@ MonoBehaviour:
   patrolSpeed: 2.85
   chaseSpeed: 4
   turnSpeed: 540
+  burstMultiplier: 1.2
+  burstRange: 6
   sightRange: 20
   fieldOfView: 110
   eyeHeight: 1.6
@@ -474,14 +477,22 @@ MonoBehaviour:
   sightMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  instantSightRange: 5
+  awarenessGain: 1.5
+  awarenessDecay: 0.3
+  investigateThreshold: 0.3
   catchDistance: 1.2
   landRecovery: 0.6
   memoryTime: 3
+  predictionTime: 0.8
   searchTime: 6
   searchRadius: 6
+  hidingSpotsToCheck: 2
   patrolPoints: []
   wanderRadius: 15
   waitAtPoint: 0.6
+  listenChance: 0.35
+  listenTime: 2.5
   huntChance: 0.6
   huntRadius: 10
 --- !u!114 &7374652743802347196
@@ -521,6 +532,37 @@ MonoBehaviour:
   - {fileID: 3448387490069155551}
   climbThreshold: 0.5
   turnTime: 0.2
+--- !u!114 &-7809341979610852229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207176457201093928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75cd3bd17a053f498d16d65b0fcc2f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossPosture
+  body: {fileID: 0}
+  spine:
+  - {fileID: 1374589448691066867}
+  - {fileID: 2254437137809008132}
+  - {fileID: 2300977144930750138}
+  neck: {fileID: 5212514440379856198}
+  head: {fileID: 9198667398677509301}
+  ai: {fileID: 0}
+  agent: {fileID: 0}
+  maxSpeed: 4.4
+  leanMax: 14
+  swayRoll: 4
+  swayTwist: 3
+  swayFreq: {x: 1.4, y: 3.6}
+  lookMaxAngle: 75
+  lookSpeed: 6
+  headTilt: 7
+  lookRange: 12
+  useLateUpdate: 0
 --- !u!114 &3417222665259029895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,12 +575,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13ebdec284cc1b4ea8dbb71bdda9b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossAudio
+  ai: {fileID: 0}
   legs:
   - {fileID: 238467522528347896}
   - {fileID: 502044112352610071}
   hands:
   - {fileID: 2911353200416404998}
   - {fileID: 3448387490069155551}
+  breathLoop: {fileID: 0}
+  breathPatrol: 0.25
+  breathChase: 0.7
 --- !u!114 &7579929967085778563
 MonoBehaviour:
   m_ObjectHideFlags: 0

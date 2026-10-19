@@ -22,7 +22,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 6404997259987417386, guid: 71f4835c1d651564f8a9d1c3b5e769fb, type: 3}
   hudPrefab: {fileID: 9109770933019832807, guid: 09015df04cf57314292d826269513125, type: 3}
   bossPrefab: {fileID: 2207176457201093928, guid: c27153d6c1badae44877461421c33559, type: 3}
-  buyerPrefab: {fileID: 0}
+  buyerPrefab: {fileID: 7412935828358744990, guid: 437bab76c12682e47a3731def7228256, type: 3}
   replicaStorePrefab: {fileID: 2266161346985808183, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
   replicaVariants:
   - {fileID: 11400000, guid: ae5be1a3bb984cd48e519ddf5024c624, type: 2}

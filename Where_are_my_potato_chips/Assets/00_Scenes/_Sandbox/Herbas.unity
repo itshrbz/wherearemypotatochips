@@ -3707,12 +3707,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c13ebdec284cc1b4ea8dbb71bdda9b42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossAudio
+  ai: {fileID: 0}
   legs:
   - {fileID: 1625600226}
   - {fileID: 1811691273}
   hands:
   - {fileID: 1833723418}
   - {fileID: 230624743}
+  breathLoop: {fileID: 0}
+  breathPatrol: 0.25
+  breathChase: 0.7
 --- !u!54 &8027887143338872429
 Rigidbody:
   m_ObjectHideFlags: 0

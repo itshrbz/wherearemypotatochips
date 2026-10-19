@@ -15,7 +15,7 @@ MonoBehaviour:
   buyerName: Old Man
   greetingLines:
   - Hi. Just this, please.
-  productPrefab: {fileID: 0}
+  productPrefab: {fileID: 919132149155446097, guid: 2c937e83f3bdb2d4a8e5d118ad15e6da, type: 3}
   productName: Gum
   afterSaleLines:
   - Thanks.
