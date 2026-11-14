@@ -44,7 +44,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | T4 | Playtest con 5 personas (Puerta 2) | Cristhian | 2–3 | E7, B5 | Pendiente | main | |
 | G1 | WebGL liviano | Rafael | 3 | Puerta 2 | Pendiente | polish/release | |
 | G2 | Build de Windows y script | Rafael | 3 | G1 | Pendiente | polish/release | |
-| G3 | Página de itch | Rafael | 3 | Puerta 2 | Pendiente | polish/release | |
+| G3 | Página de itch | Rafael | 3 | Puerta 2 | Para probar | polish/itch | Adelantada antes de la Puerta 2 (solo texto). Rama `polish/itch` en vez de `polish/release` para no mezclarla con G1/G2. Lo que depende de tareas pendientes está entre `[corchetes]` en `docs/itch/` |
 | G4 | Tráiler y clips | Rafael | 3 | G3 | Pendiente | polish/release | |
 | T5 | Prueba final (Puerta 3) | Cristhian | 3 | G2 | Pendiente | main | |
 | G5 | Versión 1.0 | Rafael | 3 | T5 | Pendiente | main | |
@@ -133,3 +133,16 @@ Preparar: abrir `docs/pulido/notas/A5_comparacion.md` con vista previa de Markdo
 - [ ] Revisar "Pendiente" → la build WebGL queda por hacer; probarla antes de cerrar la Puerta 1
 
 Riesgos: ninguno nuevo, es un documento.
+
+### Prueba de G3 — Página de itch
+Rama: polish/itch  ·  Build: ninguna (textos)
+
+Preparar: abrir `docs/itch/LEEME.md` con vista previa de Markdown.
+
+- [ ] Leer `pagina_es.md` y `page_en.md` → dicen lo mismo en los dos idiomas, sin errores de ortografía, y la historia coincide con la intro del juego
+- [ ] Comparar la tabla de controles con el juego → cada tecla hace lo que dice (las celdas del mando entre corchetes todavía no funcionan, es un bug conocido)
+- [ ] Leer `capturas_y_gifs.md` → cada captura dice escena y momento; probar a sacar la 1 (tienda con el primer cliente) y ver que se puede seguir la instrucción
+- [ ] Revisar los créditos con cada persona del equipo → el rol de cada uno es correcto
+- [ ] Revisar la lista "Antes de publicar, confirmar" de `LEEME.md` → no falta nada que el equipo sepa
+
+Riesgos: ninguno, no cambia el juego.
