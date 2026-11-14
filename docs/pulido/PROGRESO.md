@@ -11,7 +11,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | A1 | Auditoría visual | Rafael | 1 | S1 | Para probar | polish/look | Informe en `notas/A1_auditoria_visual.md`. Propuesta aplicada sin esperar aprobación (pedido de Rafael): revisar sección 3 |
 | A2 | Look de cámara vieja | Rafael | 1 | A1 | Para probar | polish/look | `Look_Global` + `RetroLook`. Falta medir fluidez en build WebGL |
 | A3 | Color de cada espacio | Rafael | 1 | A2 | Para probar | polish/look | Presets nuevos en `AmbienteTools` (archivo de Grover, tocado por pedido de A3). Solo RenderSettings y Volumes en sus escenas |
-| A4 | Luces y rendimiento | Rafael | 1 | A3 | Pendiente | polish/look | |
+| A4 | Luces y rendimiento | Rafael | 1 | A3 | Para probar | polish/look | Sombras en tiempo real: de 5 luces a 1. **Pendiente:** build WebGL y prueba en la laptop más débil (no se hizo: cambiar a WebGL reimporta todo y toca ProjectSettings con cambios locales de Rafael) |
 | A5 | Capturas de después | Rafael | 1 | A4 | Pendiente | polish/look | |
 | C1 | Auditoría del jefe | Grover | 1 | S2 | Pendiente | polish/jefe | |
 | C2 | Dificultad por espacio en datos | Grover | 1 | C1 | Pendiente | polish/jefe | |
@@ -58,6 +58,8 @@ Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota a
 | C3 (Grover) | D1 (Alan) | Sonido `boss_warn` en el `SfxBank` | Pendiente |
 | D6 (Alan) | B2–B4 (Grover) | Etiqueta o capa de cada tipo de suelo | Pendiente |
 | D2 (Alan) | E2 (Rafael) | API `AudioMix` para el menú de opciones | Pendiente |
+| A4 (Rafael) | B4 (Grover) | Postes de farol en el parque bajo las luces `Luces_Faroles/LuzFarol_*` (hoy la luz no tiene modelo) | Pendiente |
+| A4 (Rafael) | G1 (Rafael) | Nivel de calidad para WebGL: 1 cascada, sombra dura 1024, sin sombras de luces extra, escala 0.85 (no se tocó `PC_RPAsset` por los cambios locales) | Pendiente |
 | A3/A4 (Rafael) | Grover | Aviso: en `polish/look` cambié niebla, luz ambiente, Volumes y luces de 10/11/12 (nada de geometría) y `AmbienteTools.cs`. Hacer merge de `main` antes de tocar esas escenas en `polish/niveles` | Pendiente |
 
 ## Checklists de prueba
@@ -104,3 +106,18 @@ Preparar: abrir `00_Boot` y dar Play. F2 salta al siguiente espacio.
 - [ ] Poner las capturas de los tres espacios lado a lado → se distinguen a primera vista y se ven del mismo juego
 
 Riesgos: la niebla del almacén y del parque es menos densa que antes; mirar si el jefe se ve demasiado de lejos.
+
+### Prueba de A4 — Luces y rendimiento
+Rama: polish/look  ·  Build: editor y WebGL
+
+Preparar: abrir `00_Boot` y dar Play. F2 salta de espacio.
+
+- [ ] Almacén: caminar 1 minuto mirando el techo → la mayoría de los tubos está fija, varios tiemblan apenas, algunos parpadean en ráfagas cada tanto y unos pocos están casi siempre apagados y se prenden a ratos
+- [ ] Almacén → la luz general es amarilla y pareja, no hay pasillos negros
+- [ ] Piscinas → las paredes junto al agua tienen un brillo cian que sube desde la piscina, y no se ve ningún foco ni punto brillante sobre el agua
+- [ ] Parque → el sol no se ve pero ilumina de costado en ámbar con sombras largas; en el camino hay manchas de luz cálida de farol y una de ellas se apaga y prende sola
+- [ ] Tienda → luz cálida pareja; una de las fluorescentes parpadea de vez en cuando
+- [ ] Build WebGL en la laptop más débil del equipo: recorrer el almacén (el espacio con más luces) 2 minutos → no hay tirones ni caídas fuertes de fluidez; anotar FPS aproximados si se puede
+- [ ] No hay errores en la consola
+
+Riesgos: la luz del almacén ahora sale casi toda del ambiente; si el jefe se ve demasiado de lejos o demasiado poco, avisar.
