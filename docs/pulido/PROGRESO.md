@@ -26,10 +26,10 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | D5 | Ambiente por capas y reverb | Alan | 1 | D3 | Pendiente | polish/audio | |
 | D6 | Pasos según el suelo | Alan | 1 | D3 | Pendiente | polish/audio | |
 | T3 | Puerta 1 | Cristhian | 1 | A5, C6, D6 | Pendiente | main | |
-| E1 | Menú principal | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | |
+| E1 | Menú principal | Rafael | 2 | Puerta 1 | En curso | polish/inicio | Adelantada antes de la Puerta 1. Código escrito (`MainMenu`, `MenuCameraDrift`) **sin compilar ni probar**: el editor quedó bloqueado al recompilar. Falta armar el pasillo de fondo en `01_Menu` y probar |
 | E2 | Opciones completas | Rafael | 2 | A2, D2 | Pendiente | polish/inicio | |
-| E3 | Intro, tienda y primer susto | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | |
-| E4 | Juice de ventas y feedback | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | |
+| E3 | Intro, tienda y primer susto | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | Adelantada antes de la Puerta 1; **bloqueada**: necesita el editor de Unity, que dejó de responder |
+| E4 | Juice de ventas y feedback | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | Adelantada antes de la Puerta 1; **bloqueada**: necesita el editor de Unity, que dejó de responder |
 | E5 | Subtítulos | Rafael | 2 | E2 | Pendiente | polish/inicio | |
 | E6 | Español e inglés | Rafael | 2 | E2, E3, E5 | Pendiente | polish/inicio | |
 | E7 | Final y créditos | Rafael | 2 | E6 | Pendiente | polish/inicio | |
