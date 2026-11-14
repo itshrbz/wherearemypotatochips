@@ -33,7 +33,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | E5 | Subtítulos | Rafael | 2 | E2 | Pendiente | polish/inicio | |
 | E6 | Español e inglés | Rafael | 2 | E2, E3, E5 | Pendiente | polish/inicio | |
 | E7 | Final y créditos | Rafael | 2 | E6 | Pendiente | polish/inicio | |
-| B1 | Kit de materiales | Grover | 2 | Puerta 1 | Pendiente | polish/niveles | |
+| B1 | Kit de materiales | Rafael | 2 | Puerta 1 | En curso | polish/materiales | Lo tomó Rafael para adelantarle trabajo a Grover. 14 materiales y 11 calcomanías elegidos y preparados (`notas/B1_kit_materiales.md`); **falta importar y crear los materiales**: el editor de Unity dejó de responder |
 | B2 | Vestir el almacén | Grover | 2 | B1 | Pendiente | polish/niveles | Etiquetas de suelo de D6 |
 | B3 | Vestir las piscinas | Grover | 2 | B1 | Pendiente | polish/niveles | |
 | B4 | Vestir el parque | Grover | 2 | B1 | Pendiente | polish/niveles | |
