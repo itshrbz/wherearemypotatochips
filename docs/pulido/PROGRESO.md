@@ -12,7 +12,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | A2 | Look de cámara vieja | Rafael | 1 | A1 | Para probar | polish/look | `Look_Global` + `RetroLook`. Falta medir fluidez en build WebGL |
 | A3 | Color de cada espacio | Rafael | 1 | A2 | Para probar | polish/look | Presets nuevos en `AmbienteTools` (archivo de Grover, tocado por pedido de A3). Solo RenderSettings y Volumes en sus escenas |
 | A4 | Luces y rendimiento | Rafael | 1 | A3 | Para probar | polish/look | Sombras en tiempo real: de 5 luces a 1. **Pendiente:** build WebGL y prueba en la laptop más débil (no se hizo: cambiar a WebGL reimporta todo y toca ProjectSettings con cambios locales de Rafael) |
-| A5 | Capturas de después | Rafael | 1 | A4 | Pendiente | polish/look | |
+| A5 | Capturas de después | Rafael | 1 | A4 | Para probar | polish/look | Comparación y valores finales en `notas/A5_comparacion.md`; decisiones tomadas sin aprobación en su sección final |
 | C1 | Auditoría del jefe | Grover | 1 | S2 | Pendiente | polish/jefe | |
 | C2 | Dificultad por espacio en datos | Grover | 1 | C1 | Pendiente | polish/jefe | |
 | C3 | Avisos antes del ataque | Grover | 1 | C2 | Pendiente | polish/jefe | Necesita `boss_warn` de D1 |
@@ -121,3 +121,15 @@ Preparar: abrir `00_Boot` y dar Play. F2 salta de espacio.
 - [ ] No hay errores en la consola
 
 Riesgos: la luz del almacén ahora sale casi toda del ambiente; si el jefe se ve demasiado de lejos o demasiado poco, avisar.
+
+### Prueba de A5 — Antes y después
+Rama: polish/look  ·  Build: ninguna (documento) + editor para comparar
+
+Preparar: abrir `docs/pulido/notas/A5_comparacion.md` con vista previa de Markdown.
+
+- [ ] Ver la tabla de comparación → cada espacio de "después" se distingue de los otros a primera vista (cálido, amarillo, cian, violeta)
+- [ ] Jugar desde `00_Boot` hasta un espacio → lo que se ve en juego coincide con las capturas de "después"
+- [ ] Leer "Decisiones tomadas sin aprobación" → Rafael y el equipo marcan cuáles aprueban; lo que no, se anota en BUGS.md como cambio pedido para el bloque A
+- [ ] Revisar "Pendiente" → la build WebGL queda por hacer; probarla antes de cerrar la Puerta 1
+
+Riesgos: ninguno nuevo, es un documento.
