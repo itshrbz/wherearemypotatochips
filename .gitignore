@@ -153,3 +153,5 @@ ehthumbs.db
 *.orig
 *.rej
 *.bak
+# Claude Code: ajustes personales de cada uno
+.claude/settings.local.json
