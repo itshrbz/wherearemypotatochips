@@ -15,12 +15,12 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.18, g: 0.2, b: 0.16, a: 1}
+  m_FogColor: {r: 0.44, g: 0.41, b: 0.24, a: 1}
   m_FogMode: 2
-  m_FogDensity: 0.045
+  m_FogDensity: 0.032
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.05, g: 0.055, b: 0.05, a: 1}
+  m_AmbientSkyColor: {r: 0.4, g: 0.36, b: 0.19, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -445,6 +445,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30
@@ -492,6 +508,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2076513}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2076514}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &2076511 stripped
 Transform:
@@ -532,6 +551,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &2076514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 2
+  minWait: 1.5
+  maxWait: 5
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &6119410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,6 +1586,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26
@@ -1593,13 +1645,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 27443092}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &27443090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 27443089}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &27443091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 27443089}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &27443092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27443091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &28284672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2779,6 +2856,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14
@@ -2826,6 +2919,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 43727330}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 43727331}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &43727328 stripped
 Transform:
@@ -2866,6 +2962,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &43727331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43727329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 2
+  minWait: 1.5
+  maxWait: 5
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &46017894
 GameObject:
   m_ObjectHideFlags: 0
@@ -4054,6 +4167,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -4101,6 +4230,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 75144899}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 75144900}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &75144897 stripped
 Transform:
@@ -4141,6 +4273,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &75144900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75144898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &80270708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4768,6 +4917,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7086,6 +7251,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30
@@ -7133,6 +7314,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 153055596}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 153055597}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &153055594 stripped
 Transform:
@@ -7173,6 +7357,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &153055597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153055595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 2
+  minWait: 1.5
+  maxWait: 5
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &155347844
 GameObject:
   m_ObjectHideFlags: 0
@@ -7700,6 +7901,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1338595967}
     m_Modifications:
+    - target: {fileID: 2064031564200215723, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064031564200215723, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064031564200215723, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064031564200215723, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2209928122217239740, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 2209928122217239740, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 2209928122217239740, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2209928122217239740, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2266161346985808183, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
       propertyPath: m_Name
       value: ReplicaStore
@@ -7744,6 +7977,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5641189823417150068, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641189823417150068, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641189823417150068, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641189823417150068, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966047811120750213, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966047811120750213, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966047811120750213, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966047811120750213, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7751,15 +8016,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 22544147481299685, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
       insertIndex: -1
       addedObject: {fileID: 164926007}
+    - targetCorrespondingSourceObject: {fileID: 22544147481299685, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 164926010}
     - targetCorrespondingSourceObject: {fileID: 5638320719204143307, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
       insertIndex: -1
       addedObject: {fileID: 164926006}
+    - targetCorrespondingSourceObject: {fileID: 5638320719204143307, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 164926009}
     - targetCorrespondingSourceObject: {fileID: 2076783221750218260, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
       insertIndex: -1
       addedObject: {fileID: 164926005}
     - targetCorrespondingSourceObject: {fileID: 5490031967550161116, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
       insertIndex: -1
       addedObject: {fileID: 164926004}
+    - targetCorrespondingSourceObject: {fileID: 5490031967550161116, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 164926008}
   m_SourcePrefab: {fileID: 100100000, guid: 2ac687bfa5b770a40b68808dd8cf12de, type: 3}
 --- !u!4 &164925999 stripped
 Transform:
@@ -7902,6 +8176,57 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &164926008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164926000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 2
+  minWait: 1.5
+  maxWait: 5
+  humAmount: 0.06
+  offLevel: 0.1
+--- !u!114 &164926009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164926002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 1
+  minWait: 3.5587177
+  maxWait: 11.499192
+  humAmount: 0.06
+  offLevel: 0.1
+--- !u!114 &164926010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164926003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &165852355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8682,6 +9007,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30
@@ -8729,6 +9070,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 179272990}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 179272991}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &179272988 stripped
 Transform:
@@ -8769,6 +9113,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &179272991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179272989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &179445402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9058,6 +9419,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9824,6 +10201,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -10166,6 +10559,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10560,6 +10969,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -10607,6 +11032,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 223954336}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 223954337}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &223954334 stripped
 Transform:
@@ -10647,6 +11075,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &223954337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223954335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 1
+  minWait: 3.3495817
+  maxWait: 11.547293
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &229676925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14598,6 +15043,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26
@@ -14645,6 +15106,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 318120675}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 318120676}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &318120673 stripped
 Transform:
@@ -14685,6 +15149,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &318120676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318120674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &319118240
 GameObject:
   m_ObjectHideFlags: 0
@@ -18866,7 +19347,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -18876,7 +19357,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -20391,6 +20872,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30
@@ -20434,13 +20931,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 440851452}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &440851450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 440851449}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &440851451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 440851449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &440851452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440851451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 1
+  minWait: 4.2357817
+  maxWait: 10.077647
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &441937248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20584,6 +21106,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21732,6 +22270,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18
@@ -21775,13 +22329,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 483631797}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &483631795 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 483631794}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &483631796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 483631794}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &483631797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483631796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &484908689
 GameObject:
   m_ObjectHideFlags: 0
@@ -22935,6 +23514,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24313,6 +24908,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -24486,6 +25097,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25143,6 +25770,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -25186,13 +25829,50 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 579397375}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &579397373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 579397372}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &579397374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 579397372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &579397375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579397374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &580391687
 GameObject:
   m_ObjectHideFlags: 0
@@ -25718,6 +26398,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26410,6 +27106,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -26453,13 +27165,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 607314580}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &607314578 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 607314577}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &607314579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 607314577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &607314580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607314579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &611090458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28117,6 +28854,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30709,6 +31462,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14
@@ -30807,6 +31576,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30972,6 +31757,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32738,6 +33539,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -33267,6 +34084,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -33784,6 +34617,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30
@@ -33827,13 +34676,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 798404109}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &798404107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 798404106}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &798404108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 798404106}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &798404109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798404108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &803553318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33915,6 +34789,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35628,6 +36518,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18
@@ -35671,13 +36577,70 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 845602025}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 845602026}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &845602023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 845602022}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &845602024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 845602022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &845602025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845602024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
+--- !u!114 &845602026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845602024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &846436652
 GameObject:
   m_ObjectHideFlags: 0
@@ -36995,6 +37958,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26
@@ -37681,6 +38660,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38882,6 +39877,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -38929,6 +39940,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 940233704}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 940233705}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &940233702 stripped
 Transform:
@@ -38969,6 +39983,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &940233705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940233703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &940840368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39043,6 +40074,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -39090,6 +40137,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 941967887}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 941967888}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &941967885 stripped
 Transform:
@@ -39130,6 +40180,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &941967888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941967886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 1
+  minWait: 5.1009483
+  maxWait: 10.577681
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &944639081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39344,6 +40411,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -39387,13 +40470,50 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 955837237}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &955837235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 955837234}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &955837236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 955837234}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &955837237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955837236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1 &956029296
 GameObject:
   m_ObjectHideFlags: 0
@@ -40154,6 +41274,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -26
@@ -40201,6 +41337,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 971461502}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 971461503}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &971461500 stripped
 Transform:
@@ -40241,6 +41380,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &971461503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971461501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &974166047
 GameObject:
   m_ObjectHideFlags: 0
@@ -40365,6 +41521,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18
@@ -40412,6 +41584,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 975883453}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 975883454}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &975883451 stripped
 Transform:
@@ -40452,6 +41627,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &975883454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975883452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &976086182
 GameObject:
   m_ObjectHideFlags: 0
@@ -42380,6 +43572,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18
@@ -42423,13 +43631,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1018358492}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1018358490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 1018358489}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1018358491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 1018358489}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1018358492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018358491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &1019258083
 GameObject:
   m_ObjectHideFlags: 0
@@ -43807,6 +45040,7 @@ GameObject:
   - component: {fileID: 1052198472}
   - component: {fileID: 1052198473}
   - component: {fileID: 1052198474}
+  - component: {fileID: 1052198475}
   m_Layer: 0
   m_Name: Luz_Parkour_O
   m_TagString: Untagged
@@ -43839,7 +45073,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 0.93, g: 1, b: 0.9, a: 1}
+  m_Color: {r: 1, g: 0.93, b: 0.68, a: 1}
   m_Intensity: 3
   m_Range: 12
   m_SpotAngle: 30
@@ -43923,6 +45157,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1052198475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052198471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &1053599699
 GameObject:
   m_ObjectHideFlags: 0
@@ -44298,6 +45549,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44683,6 +45950,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46223,6 +47506,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -46270,6 +47569,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1113518564}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1113518565}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1113518562 stripped
 Transform:
@@ -46310,6 +47612,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1113518565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113518563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &1113993658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46321,6 +47640,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46452,7 +47787,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 0.93, g: 1, b: 0.9, a: 1}
+  m_Color: {r: 1, g: 0.93, b: 0.68, a: 1}
   m_Intensity: 3
   m_Range: 12
   m_SpotAngle: 30
@@ -47097,6 +48432,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49033,6 +50384,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -50226,6 +51593,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -51780,6 +53163,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -51827,6 +53226,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1241676068}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1241676069}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1241676066 stripped
 Transform:
@@ -51867,6 +53269,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1241676069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241676067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &1243914102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52575,6 +53994,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6
@@ -52618,13 +54053,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1259320163}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1259320161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 1259320160}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1259320162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 1259320160}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1259320163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259320162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 1
+  minWait: 6.039751
+  maxWait: 15.127496
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &1259597566
 GameObject:
   m_ObjectHideFlags: 0
@@ -52972,6 +54432,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55405,6 +56881,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -55570,6 +57062,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -55617,6 +57125,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1319192728}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1319192729}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1319192726 stripped
 Transform:
@@ -55657,6 +57168,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1319192729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319192727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &1320806295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56268,6 +57796,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57255,7 +58799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
   m_IsGlobal: 1
-  priority: 0
+  priority: 1
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: b6036193d9da0674ba4e849796c1664c, type: 2}
@@ -58413,6 +59957,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59581,6 +61141,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30
@@ -59624,13 +61200,70 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1417364935}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1417364936}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1417364933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 1417364932}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1417364934 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 1417364932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1417364935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417364934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
+--- !u!114 &1417364936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417364934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &1417448094
 GameObject:
   m_ObjectHideFlags: 0
@@ -61299,6 +62932,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -63058,6 +64707,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -63105,6 +64770,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1478382075}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1478382076}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1478382073 stripped
 Transform:
@@ -63145,6 +64813,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1478382076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478382074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 1
+  minWait: 4.620366
+  maxWait: 10.435661
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &1479813420
 GameObject:
   m_ObjectHideFlags: 0
@@ -66191,6 +67876,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14
@@ -66234,13 +67935,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1542202280}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1542202278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 1542202277}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1542202279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 1542202277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1542202280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542202279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &1544047540
 GameObject:
   m_ObjectHideFlags: 0
@@ -66547,6 +68273,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -22
@@ -66646,6 +68388,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22
@@ -66689,13 +68447,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1553654901}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1553654899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 1553654898}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1553654900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 1553654898}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1553654901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1553654900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 2
+  minWait: 1.5
+  maxWait: 5
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &1557560079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66777,6 +68560,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67079,6 +68878,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -67122,13 +68937,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1561208731}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1561208729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 1561208728}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1561208730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 1561208728}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1561208731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561208730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &1562592957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67877,6 +69717,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30
@@ -67920,13 +69776,50 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1589903406}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1589903404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
   m_PrefabInstance: {fileID: 1589903403}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1589903405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+  m_PrefabInstance: {fileID: 1589903403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1589903406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589903405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1001 &1590370391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71218,6 +73111,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -72741,6 +74650,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -72788,6 +74713,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1697249751}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1697249752}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1697249749 stripped
 Transform:
@@ -72828,6 +74756,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1697249752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697249750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &1712611551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74036,6 +75981,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6
@@ -74083,6 +76044,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1735424581}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1735424582}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1735424579 stripped
 Transform:
@@ -74123,6 +76087,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1735424582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735424580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &1735925569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76550,6 +78531,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2
@@ -78441,6 +80438,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -79449,6 +81462,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -80679,6 +82708,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18
@@ -80726,6 +82771,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1879923867}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1879923868}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &1879923865 stripped
 Transform:
@@ -80766,6 +82814,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1879923868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879923866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &1880782468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80955,6 +83020,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -81972,6 +84053,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -83470,6 +85567,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -83781,6 +85894,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -84338,6 +86467,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -87062,6 +89207,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18
@@ -87109,6 +89270,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2020564494}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2020564495}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &2020564492 stripped
 Transform:
@@ -87149,6 +89313,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &2020564495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020564493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 2
+  minWait: 1.5
+  maxWait: 5
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &2020667373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87160,6 +89341,22 @@ PrefabInstance:
     - target: {fileID: 2704298513478742547, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_Name
       value: Kit_Techo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -88622,6 +90819,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -88721,6 +90934,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -88768,6 +90997,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2051375250}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2051375251}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &2051375248 stripped
 Transform:
@@ -88808,6 +91040,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &2051375251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051375249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 1
+  minWait: 5.716778
+  maxWait: 11.753075
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1001 &2051647099
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89797,6 +92046,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kit_Techo
       objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415655542922491116, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      propertyPath: m_Intensity
+      value: 2.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8266566990344887554, guid: a535630c0656113459c4768d907a16bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14
@@ -89844,6 +92109,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2074226821}
+    - targetCorrespondingSourceObject: {fileID: 1852097729321197708, guid: a535630c0656113459c4768d907a16bc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2074226822}
   m_SourcePrefab: {fileID: 100100000, guid: a535630c0656113459c4768d907a16bc, type: 3}
 --- !u!4 &2074226819 stripped
 Transform:
@@ -89884,6 +92152,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &2074226822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074226820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 2
+  minWait: 1.5
+  maxWait: 5
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &2074749058
 GameObject:
   m_ObjectHideFlags: 0

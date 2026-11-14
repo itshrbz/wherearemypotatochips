@@ -31,6 +31,12 @@ public class GameFlowSettings : ScriptableObject
     };
     [TextArea(4, 10)] public string credits = "WHERE ARE MY POTATO CHIPS?";
 
+    [Header("Look")]
+    [Tooltip("Perfil de cámara vieja (grano, aberración, viñeta). Su peso lo controla la opción RetroLook.")]
+    public UnityEngine.Rendering.VolumeProfile retroLookProfile;
+    [Tooltip("En WebGL se apaga la aberración cromática para ahorrar en GPUs débiles.")]
+    public bool lighterLookOnWeb = true;
+
     [Header("Audio")]
     public AudioClip tensionMusic;
     public AudioClip printerClip;

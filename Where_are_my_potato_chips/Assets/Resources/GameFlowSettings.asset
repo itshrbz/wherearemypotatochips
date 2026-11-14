@@ -57,6 +57,8 @@ MonoBehaviour:
 
 
     Thanks for playing! :)'
+  retroLookProfile: {fileID: 11400000, guid: 1d72f5dccf71ecd45ac14316bdd7405d, type: 2}
+  lighterLookOnWeb: 1
   tensionMusic: {fileID: 8300000, guid: 30e3d645ab6318b47b6bfac5e5be48b2, type: 3}
   printerClip: {fileID: 8300000, guid: 2beed03e9699be24d9ffcf067e6ac95e, type: 3}
   caughtClip: {fileID: 8300000, guid: 615ee02b129063843aadf624b7d6b5b3, type: 3}
