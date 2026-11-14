@@ -10,7 +10,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | T1 | Playtest base y BUGS.md inicial | Cristhian | 0 | T0 | Pendiente | main | |
 | A1 | Auditoría visual | Rafael | 1 | S1 | Para probar | polish/look | Informe en `notas/A1_auditoria_visual.md`. Propuesta aplicada sin esperar aprobación (pedido de Rafael): revisar sección 3 |
 | A2 | Look de cámara vieja | Rafael | 1 | A1 | Para probar | polish/look | `Look_Global` + `RetroLook`. Falta medir fluidez en build WebGL |
-| A3 | Color de cada espacio | Rafael | 1 | A2 | Pendiente | polish/look | |
+| A3 | Color de cada espacio | Rafael | 1 | A2 | Para probar | polish/look | Presets nuevos en `AmbienteTools` (archivo de Grover, tocado por pedido de A3). Solo RenderSettings y Volumes en sus escenas |
 | A4 | Luces y rendimiento | Rafael | 1 | A3 | Pendiente | polish/look | |
 | A5 | Capturas de después | Rafael | 1 | A4 | Pendiente | polish/look | |
 | C1 | Auditoría del jefe | Grover | 1 | S2 | Pendiente | polish/jefe | |
@@ -58,6 +58,7 @@ Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota a
 | C3 (Grover) | D1 (Alan) | Sonido `boss_warn` en el `SfxBank` | Pendiente |
 | D6 (Alan) | B2–B4 (Grover) | Etiqueta o capa de cada tipo de suelo | Pendiente |
 | D2 (Alan) | E2 (Rafael) | API `AudioMix` para el menú de opciones | Pendiente |
+| A3/A4 (Rafael) | Grover | Aviso: en `polish/look` cambié niebla, luz ambiente, Volumes y luces de 10/11/12 (nada de geometría) y `AmbienteTools.cs`. Hacer merge de `main` antes de tocar esas escenas en `polish/niveles` | Pendiente |
 
 ## Checklists de prueba
 
@@ -88,3 +89,18 @@ Preparar: abrir `00_Boot` y dar Play. F2 salta de espacio, F3 reinicia, **F4 cam
 - [ ] No hay errores en la consola (los de "Pipeline" o "editor status" vienen del plugin de Unity, no del juego)
 
 Riesgos: ahora el post-proceso está encendido en la cámara del jugador, así que los perfiles `Ambiente_*` de cada espacio empiezan a verse (antes no se veían). Si algo se ve muy distinto en un espacio, es eso; se ajusta en A3.
+
+### Prueba de A3 — Color de cada espacio
+Rama: polish/look  ·  Build: editor
+
+Preparar: abrir `00_Boot` y dar Play. F2 salta al siguiente espacio.
+
+- [ ] En la tienda → la luz se ve cálida, tirando a naranja de foco; se siente un lugar seguro
+- [ ] Almacén → todo tira a amarillo verdoso enfermo, con niebla amarillenta al fondo de los pasillos
+- [ ] Piscinas → cian frío y claro, con niebla celeste
+- [ ] Parque → cielo de atardecer apagado (violeta arriba, ámbar en el horizonte, sin sol visible) y todo en violeta y gris; ya no se ve el cielo azul de día
+- [ ] Entrar a la tienda réplica al final de cualquier espacio → el color cambia suave a uno casi neutro y un poco frío, distinto del espacio de afuera
+- [ ] Con F4 en 0 → cada espacio sigue teniendo su color (solo se va el grano, la viñeta y la curvatura)
+- [ ] Poner las capturas de los tres espacios lado a lado → se distinguen a primera vista y se ven del mismo juego
+
+Riesgos: la niebla del almacén y del parque es menos densa que antes; mirar si el jefe se ve demasiado de lejos.
