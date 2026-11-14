@@ -7791,8 +7791,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 1
   minWait: 2
   maxWait: 7
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!108 &138016844
 Light:
   m_ObjectHideFlags: 0
@@ -7803,7 +7806,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 0.92, g: 1, b: 0.94, a: 1}
+  m_Color: {r: 1, g: 0.89, b: 0.72, a: 1}
   m_Intensity: 1.6
   m_Range: 7.5
   m_SpotAngle: 30
@@ -10750,6 +10753,7 @@ GameObject:
   - component: {fileID: 208205205}
   - component: {fileID: 208205206}
   - component: {fileID: 208205207}
+  - component: {fileID: 208205208}
   m_Layer: 0
   m_Name: Luz
   m_TagString: Untagged
@@ -10782,7 +10786,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 0.92, g: 1, b: 0.94, a: 1}
+  m_Color: {r: 1, g: 0.89, b: 0.72, a: 1}
   m_Intensity: 1.6
   m_Range: 7.5
   m_SpotAngle: 30
@@ -10866,6 +10870,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &208205208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208205204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &208792813
 GameObject:
   m_ObjectHideFlags: 0
@@ -22148,7 +22169,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -39934,6 +39955,7 @@ GameObject:
   - component: {fileID: 789764537}
   - component: {fileID: 789764538}
   - component: {fileID: 789764539}
+  - component: {fileID: 789764540}
   m_Layer: 0
   m_Name: Luz
   m_TagString: Untagged
@@ -39966,7 +39988,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 0.92, g: 1, b: 0.94, a: 1}
+  m_Color: {r: 1, g: 0.89, b: 0.72, a: 1}
   m_Intensity: 1.6
   m_Range: 7.5
   m_SpotAngle: 30
@@ -40050,6 +40072,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &789764540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789764536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &790029259
 GameObject:
   m_ObjectHideFlags: 0
@@ -70961,6 +71000,7 @@ GameObject:
   - component: {fileID: 1414039730}
   - component: {fileID: 1414039731}
   - component: {fileID: 1414039732}
+  - component: {fileID: 1414039733}
   m_Layer: 0
   m_Name: Luz
   m_TagString: Untagged
@@ -70993,7 +71033,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 0.92, g: 1, b: 0.94, a: 1}
+  m_Color: {r: 1, g: 0.89, b: 0.72, a: 1}
   m_Intensity: 1.6
   m_Range: 7.5
   m_SpotAngle: 30
@@ -71077,6 +71117,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1414039733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414039729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &1415094058
 GameObject:
   m_ObjectHideFlags: 0
@@ -83449,6 +83506,7 @@ GameObject:
   - component: {fileID: 1669049133}
   - component: {fileID: 1669049134}
   - component: {fileID: 1669049135}
+  - component: {fileID: 1669049136}
   m_Layer: 0
   m_Name: Luz
   m_TagString: Untagged
@@ -83481,14 +83539,14 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 0.92, g: 1, b: 0.94, a: 1}
+  m_Color: {r: 1, g: 0.89, b: 0.72, a: 1}
   m_Intensity: 1.6
   m_Range: 7.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -83565,6 +83623,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &1669049136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669049132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &1672553988
 GameObject:
   m_ObjectHideFlags: 0
@@ -102638,6 +102713,7 @@ GameObject:
   - component: {fileID: 2027981355}
   - component: {fileID: 2027981356}
   - component: {fileID: 2027981357}
+  - component: {fileID: 2027981358}
   m_Layer: 0
   m_Name: Luz
   m_TagString: Untagged
@@ -102670,7 +102746,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 2
-  m_Color: {r: 0.92, g: 1, b: 0.94, a: 1}
+  m_Color: {r: 1, g: 0.89, b: 0.72, a: 1}
   m_Intensity: 1.6
   m_Range: 7.5
   m_SpotAngle: 30
@@ -102754,6 +102830,23 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &2027981358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027981354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e0c0c2e45423a49a296e478f41637d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFlicker
+  mode: 0
+  minWait: 1
+  maxWait: 1
+  humAmount: 0.06
+  offLevel: 0.1
 --- !u!1 &2028183504
 GameObject:
   m_ObjectHideFlags: 0
