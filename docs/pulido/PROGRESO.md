@@ -8,7 +8,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | S2 | Instalar Claude Code / Codex y plugins | Grover, Alan | 0 | S1 | Pendiente | — | |
 | T0 | Instalar y practicar ramas | Cristhian | 0 | S1 | Pendiente | — | |
 | T1 | Playtest base y BUGS.md inicial | Cristhian | 0 | T0 | Pendiente | main | |
-| A1 | Auditoría visual | Rafael | 1 | S1 | Pendiente | polish/look | |
+| A1 | Auditoría visual | Rafael | 1 | S1 | Para probar | polish/look | Informe en `notas/A1_auditoria_visual.md`. Propuesta aplicada sin esperar aprobación (pedido de Rafael): revisar sección 3 |
 | A2 | Look de cámara vieja | Rafael | 1 | A1 | Pendiente | polish/look | |
 | A3 | Color de cada espacio | Rafael | 1 | A2 | Pendiente | polish/look | |
 | A4 | Luces y rendimiento | Rafael | 1 | A3 | Pendiente | polish/look | |
@@ -62,3 +62,14 @@ Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota a
 ## Checklists de prueba
 
 <!-- Las IAs agregan aquí la checklist de cada tarea al dejarla "Para probar" (skill potato-playtest). -->
+
+### Prueba de A1 — Auditoría visual
+Rama: polish/look  ·  Build: ninguna (es un informe)
+
+Preparar: abrir `docs/pulido/notas/A1_auditoria_visual.md` en GitHub o VS Code (vista previa de Markdown).
+
+- [ ] Abrir el informe → debería mostrar seis capturas de "antes" (menú, tienda, almacén, piscinas, parque, final) que se ven completas, no negras
+- [ ] Jugar la tienda y un espacio en el editor → debería coincidir con lo que dicen las capturas (sin grano ni viñeta en juego, el parque con cielo azul de día)
+- [ ] Leer la sección 3 (propuesta) → cada espacio tiene un color, niebla y luces descritos; anotar en BUGS.md o hablar con Rafael si algo no convence
+
+Riesgos: ninguno, no cambia el juego.
