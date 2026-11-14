@@ -9,7 +9,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | T0 | Instalar y practicar ramas | Cristhian | 0 | S1 | Pendiente | — | |
 | T1 | Playtest base y BUGS.md inicial | Cristhian | 0 | T0 | Pendiente | main | |
 | A1 | Auditoría visual | Rafael | 1 | S1 | Para probar | polish/look | Informe en `notas/A1_auditoria_visual.md`. Propuesta aplicada sin esperar aprobación (pedido de Rafael): revisar sección 3 |
-| A2 | Look de cámara vieja | Rafael | 1 | A1 | Pendiente | polish/look | |
+| A2 | Look de cámara vieja | Rafael | 1 | A1 | Para probar | polish/look | `Look_Global` + `RetroLook`. Falta medir fluidez en build WebGL |
 | A3 | Color de cada espacio | Rafael | 1 | A2 | Pendiente | polish/look | |
 | A4 | Luces y rendimiento | Rafael | 1 | A3 | Pendiente | polish/look | |
 | A5 | Capturas de después | Rafael | 1 | A4 | Pendiente | polish/look | |
@@ -73,3 +73,18 @@ Preparar: abrir `docs/pulido/notas/A1_auditoria_visual.md` en GitHub o VS Code (
 - [ ] Leer la sección 3 (propuesta) → cada espacio tiene un color, niebla y luces descritos; anotar en BUGS.md o hablar con Rafael si algo no convence
 
 Riesgos: ninguno, no cambia el juego.
+
+### Prueba de A2 — Look de cámara vieja
+Rama: polish/look  ·  Build: editor (y WebGL cuando se haga la build)
+
+Preparar: abrir `00_Boot` y dar Play. F2 salta de espacio, F3 reinicia, **F4 cambia la intensidad del look (1 → 0.5 → 0)** (solo en editor y builds de desarrollo, hasta que E2 agregue el control en opciones).
+
+- [ ] Jugar hasta la tienda → debería verse grano fino, bordes un poco más oscuros, una leve curvatura en los bordes y un poco de color separado en las esquinas, como video casero
+- [ ] Pasar a un espacio con F2 → el mismo look sigue activo (no desaparece al cambiar de escena)
+- [ ] Apretar F4 dos veces (look en 0) → la imagen queda limpia: sin grano, sin curvatura, sin viñeta del look. En la consola aparece "RetroLook = 0"
+- [ ] Apretar F4 otra vez → vuelve el look completo al instante
+- [ ] Hacer que el jefe te persiga → la viñeta roja de persecución se sigue viendo encima del look
+- [ ] Build WebGL: recorrer un espacio 1 minuto → no hay tirones nuevos comparado con la build anterior
+- [ ] No hay errores en la consola (los de "Pipeline" o "editor status" vienen del plugin de Unity, no del juego)
+
+Riesgos: ahora el post-proceso está encendido en la cámara del jugador, así que los perfiles `Ambiente_*` de cada espacio empiezan a verse (antes no se veían). Si algo se ve muy distinto en un espacio, es eso; se ajusta en A3.

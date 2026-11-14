@@ -65,6 +65,17 @@ public class RetroLook : MonoBehaviour
 
     void LateUpdate()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        // Atajo de prueba hasta que exista el control en opciones (E2): F4 recorre 1 -> 0.5 -> 0
+        var keyboard = UnityEngine.InputSystem.Keyboard.current;
+        if (keyboard != null && keyboard.f4Key.wasPressedThisFrame)
+        {
+            float current = GameSettings.RetroLook;
+            GameSettings.RetroLook = current > 0.75f ? 0.5f : current > 0.25f ? 0f : 1f;
+            Debug.Log("RetroLook = " + GameSettings.RetroLook);
+        }
+#endif
+
         // La cámara del jugador no tiene la etiqueta MainCamera, así que se revisan las cámaras activas
         // cada medio segundo en vez de usar Camera.main
         if (Time.unscaledTime < nextCameraCheck) return;
