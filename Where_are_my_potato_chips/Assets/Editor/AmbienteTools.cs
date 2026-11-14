@@ -61,10 +61,11 @@ public static class AmbienteTools
         sombras = new Color(0.46f, 0.49f, 0.52f), luces = new Color(0.55f, 0.52f, 0.48f),
     };
 
-    // Almacen (backrooms): amarillo enfermo
+    // Almacen (backrooms): amarillo enfermo y parejo. El generador deja prendida 1 de cada 3 luces,
+    // asi que la luz pareja sale del ambiente (gratis) y las fluorescentes solo suman manchas y parpadeos.
     static readonly Preset ALMACEN = new Preset
     {
-        niebla = new Color(0.30f, 0.28f, 0.16f), densidad = 0.03f, ambiente = new Color(0.17f, 0.15f, 0.08f), sol = 0f,
+        niebla = new Color(0.44f, 0.41f, 0.24f), densidad = 0.032f, ambiente = new Color(0.40f, 0.36f, 0.19f), sol = 0f,
         temperatura = 28f, tinte = -10f, filtro = new Color(1f, 0.94f, 0.72f), exposicion = 0.1f,
         sombras = new Color(0.45f, 0.52f, 0.40f), luces = new Color(0.64f, 0.58f, 0.36f),
     };
