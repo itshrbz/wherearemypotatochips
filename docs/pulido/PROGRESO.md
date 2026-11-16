@@ -13,11 +13,11 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | A3 | Color de cada espacio | Rafael | 1 | A2 | Para probar | polish/look | Presets nuevos en `AmbienteTools` (archivo de Grover, tocado por pedido de A3). Solo RenderSettings y Volumes en sus escenas |
 | A4 | Luces y rendimiento | Rafael | 1 | A3 | Para probar | polish/look | Sombras en tiempo real: de 5 luces a 1. **Pendiente:** build WebGL y prueba en la laptop más débil (no se hizo: cambiar a WebGL reimporta todo y toca ProjectSettings con cambios locales de Rafael) |
 | A5 | Capturas de después | Rafael | 1 | A4 | Para probar | polish/look | Comparación y valores finales en `notas/A5_comparacion.md`; decisiones tomadas sin aprobación en su sección final |
-| C1 | Auditoría del jefe | Grover | 1 | S2 | Pendiente | polish/jefe | |
-| C2 | Dificultad por espacio en datos | Grover | 1 | C1 | Pendiente | polish/jefe | |
-| C3 | Avisos antes del ataque | Grover | 1 | C2 | Pendiente | polish/jefe | Necesita `boss_warn` de D1 |
-| C4 | Escondites justos | Grover | 1 | C1 | Pendiente | polish/jefe | |
-| C5 | Muerte y reinicio rápido | Grover | 1 | C1 | Pendiente | polish/jefe | |
+| C1 | Auditoría del jefe | Grover | 1 | S2 | Para probar | polish/jefe | Informe en `notas/C1_jefe.md` (hecho leyendo código, sin jugar). Grover aprobó el orden C2 → C6. Curva elegida: por posición en la partida (opción B) |
+| C2 | Dificultad por espacio en datos | Grover | 1 | C1 | En curso | polish/jefe | Código listo (`BossTuning`, `BossAI`, `LevelContext`), sin compilar. Falta en el editor: crear los 3 assets y asignarlos al prefab (ver checklist de C2) |
+| C3 | Avisos antes del ataque | Grover | 1 | C2 | En curso | polish/jefe | Código listo, sin compilar: pausa de 0.6 s al descubrirte, sonido 2D y destello rojo, luces cercanas que fallan (`BossLightDisturbance`). Falta `boss_warn` de D1 (mientras tanto usa `boss_alert`, que tampoco existe todavía) |
+| C4 | Escondites justos | Grover | 1 | C1 | En curso | polish/jefe | Código listo, sin compilar: oír ya no equivale a verlo (solo lo hace ir a mirar) y detrás de paredes oye a la mitad; aviso cuando te ve esconderte; escondites solapados; cajas de los escondites generados con colisión. El HUD ya mostraba "HIDDEN" / "Crouch to hide". Falta respiración al estar escondido (pedido a Alan) |
+| C5 | Muerte y reinicio rápido | Grover | 1 | C1 | En curso | polish/jefe | Código listo, sin compilar: después del susto, fundido corto con una frase de reintento al azar (o "It saw you hide." si te sacó de un escondite) en vez del despertar largo. Toca `SceneLoader` y `LevelFlowManager` de Rafael (aviso en `detallesfaltantes/RAFAEL.md`) |
 | C6 | Navegación y atascos | Grover | 1 | C1 | Pendiente | polish/jefe | |
 | D1 | Lista de sonidos que faltan | Alan | 1 | S2 | Pendiente | polish/audio | |
 | D2 | Mixer y volumen por grupo | Alan | 1 | D1 | Pendiente | polish/audio | |
@@ -51,16 +51,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 
 ## Pedidos entre bloques
 
-Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota aquí.
-
-| De | Para | Qué | Estado |
-| --- | --- | --- | --- |
-| C3 (Grover) | D1 (Alan) | Sonido `boss_warn` en el `SfxBank` | Pendiente |
-| D6 (Alan) | B2–B4 (Grover) | Etiqueta o capa de cada tipo de suelo | Pendiente |
-| D2 (Alan) | E2 (Rafael) | API `AudioMix` para el menú de opciones | Pendiente |
-| A4 (Rafael) | B4 (Grover) | Postes de farol en el parque bajo las luces `Luces_Faroles/LuzFarol_*` (hoy la luz no tiene modelo) | Pendiente |
-| A4 (Rafael) | G1 (Rafael) | Nivel de calidad para WebGL: 1 cascada, sombra dura 1024, sin sombras de luces extra, escala 0.85 (no se tocó `PC_RPAsset` por los cambios locales) | Pendiente |
-| A3/A4 (Rafael) | Grover | Aviso: en `polish/look` cambié niebla, luz ambiente, Volumes y luces de 10/11/12 (nada de geometría) y `AmbienteTools.cs`. Hacer merge de `main` antes de tocar esas escenas en `polish/niveles` | Pendiente |
+Están separados por persona en [detallesfaltantes/](detallesfaltantes/): [ALAN.md](detallesfaltantes/ALAN.md), [RAFAEL.md](detallesfaltantes/RAFAEL.md) y [GROVER.md](detallesfaltantes/GROVER.md). Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota en el archivo de esa persona.
 
 ## Checklists de prueba
 
@@ -133,3 +124,100 @@ Preparar: abrir `docs/pulido/notas/A5_comparacion.md` con vista previa de Markdo
 - [ ] Revisar "Pendiente" → la build WebGL queda por hacer; probarla antes de cerrar la Puerta 1
 
 Riesgos: ninguno nuevo, es un documento.
+
+### Prueba de C1 — Auditoría del jefe
+Rama: polish/jefe  ·  Build: ninguna (es un informe) + editor para confirmar lo "probable"
+
+Preparar: abrir `docs/pulido/notas/C1_jefe.md` con vista previa de Markdown. Para confirmar, abrir `00_Boot`, dar Play y usar F2 para llegar a un espacio con jefe.
+
+- [ ] Dejar que el jefe te vea → **no suena ningún aviso** y en la consola aparece "Sfx: el id 'boss_alert' no existe" (P1)
+- [ ] Acercarte al jefe sin que te vea → no se oye respiración, solo pasos (P2)
+- [ ] Que te persiga y correr en línea recta → aunque cortes la vista, sigue detrás mientras corras cerca (P4)
+- [ ] Jugar el tercer espacio de la partida y que te persiga → no se puede escapar corriendo (P3)
+- [ ] Dejar que te atrape y cronometrar desde el susto hasta poder moverte → unos 4 s (P11)
+- [ ] Almacén: subirte a un bloque alto mientras te persigue → el jefe se queda abajo (P9)
+- [ ] Anotar en el informe o en BUGS.md lo que no coincida
+
+Riesgos: ninguno, no cambia el juego.
+
+### Prueba de C2 — Dificultad del jefe en datos
+Rama: polish/jefe  ·  Build: editor
+
+Preparar (una sola vez, en el editor):
+1. Abrir Unity y esperar a que compile. La consola no debe tener errores.
+2. Crear la carpeta `Assets/07_data/Boss/`. Dentro, clic derecho → Create → Potato Chips → Boss Tuning, tres veces: `Boss_1_Ensena`, `Boss_2_Presiona`, `Boss_3_Aprieta`.
+3. Poner estos valores (el jugador camina a 2.5 y corre a 4.5):
+
+| Campo | Boss_1_Ensena | Boss_2_Presiona | Boss_3_Aprieta |
+| --- | --- | --- | --- |
+| Patrol Speed | 2.3 | 2.6 | 2.85 |
+| Chase Speed | 3.6 | 3.9 | 4.1 |
+| Burst Multiplier | 1.1 | 1.1 | 1.08 |
+| Sight Range | 16 | 18 | 20 |
+| Instant Sight Range | 3.5 | 4.5 | 5 |
+| Hearing Range | 6 | 8 | 9 |
+| Awareness Gain | 1.0 | 1.3 | 1.5 |
+| Search Time | 5 | 6 | 7 |
+| Hunt Chance | 0.3 | 0.45 | 0.6 |
+| Chase Cooldown | 6 | 4 | 2 |
+
+4. Abrir `02_Prefabs/Enemy/Boss.prefab`, en `BossAI` → `Tuning By Level` poner tamaño 3 y arrastrar los tres assets en ese orden. Guardar el prefab.
+
+Hoy el primer espacio de la partida no tiene jefe (`LevelContext.BossEnabled`), así que `Boss_1_Ensena` solo se usa si eso cambia.
+
+- [ ] Play desde `00_Boot`, F2 dos veces (segundo espacio) → seleccionar el jefe en la jerarquía: `Patrol Speed` vale 2.6 y `Chase Speed` 3.9
+- [ ] F2 otra vez (tercer espacio) → `Patrol Speed` 2.85 y `Chase Speed` 4.1
+- [ ] Que te persiga en el segundo espacio y correr en línea recta → el jefe no te alcanza mientras tengas energía
+- [ ] Escapar (esconderte o cortar la vista 3 s) y volver a aparecer frente a él a más de 5 m → durante unos 4 s solo camina hacia ti (investiga), no corre; después sí persigue
+- [ ] Cambiar un valor de un asset con el juego parado y volver a jugar → el cambio se nota (todo se ajusta desde el Inspector)
+- [ ] Quitar los assets del prefab (tamaño 0) → el jefe usa los valores del prefab y no hay errores
+- [ ] No hay errores nuevos en la consola
+
+Riesgos: sin los assets asignados, el tercer espacio pierde el ×1.25 de antes y queda igual de difícil que el segundo.
+
+### Prueba de C3 — Avisos antes del ataque
+Rama: polish/jefe  ·  Build: editor
+
+Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con jefe. Hasta que Alan agregue `boss_warn` o `boss_alert` al `SfxBank`, el sonido de aviso no suena (solo sale un warning en la consola).
+
+- [ ] Acercarte al jefe sin que te vea, en el almacén o en la tienda réplica → las luces a unos 9 m de él empiezan a fallar, más cuanto más cerca está; al alejarse vuelven a la normalidad
+- [ ] Dejar que te descubra → se frena, gira hacia ti, la pantalla da un destello rojo corto y (con el sonido ya puesto) suena el aviso; recién después corre
+- [ ] Que te descubra a menos de 2 m → igual tienes medio segundo antes de que te pueda atrapar
+- [ ] Correr cerca de él detrás de una pared → también hay destello y sonido de aviso
+- [ ] Parque (las luces de farol) y piscinas → las luces que fallan no dejan el lugar a oscuras ni parpadean como estroboscopio
+- [ ] No hay errores nuevos en la consola
+
+Riesgos: luces apagándose rápido cerca del jefe; si molesta a alguien sensible a los destellos, subir `Min Interval` en `BossLightDisturbance` o bajar `Max Off Chance`.
+
+### Prueba de C4 — Escondites justos
+Rama: polish/jefe  ·  Build: editor
+
+Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con jefe.
+
+- [ ] Correr cerca del jefe sin que te vea → va a mirar hacia donde estabas (camina, no corre) y suena su alerta, pero no te persigue
+- [ ] Correr a unos 6–8 m del jefe con una pared en medio → no te oye; a menos de 4 m sí
+- [ ] Que te persiga, cortarle la vista y seguir corriendo → a los 3 s deja de perseguirte y te busca (antes seguía detrás mientras corrieras)
+- [ ] Esconderte (agachado en un escondite) sin que te vea → el jefe puede pasar cerca o revisar el escondite, pero no te saca
+- [ ] Esconderte mientras te está viendo → suena su alerta en ese momento, va directo al escondite y te saca
+- [ ] Parque (51 escondites): caminar por varios escondites seguidos agachado → el texto "HIDDEN" no parpadea ni desaparece al pasar de uno a otro
+- [ ] Piscinas: los escondites generados (cajas de cartón) → las cajas ya no se atraviesan, y igual cabes agachado delante de ellas
+- [ ] Piscinas: recorrer el espacio → hay escondites en lugares útiles (rincones cerca de los caminos, no todos juntos ni en callejones sin salida)
+- [ ] No hay errores nuevos en la consola
+
+Riesgos: el jefe es más fácil de esquivar corriendo que antes; si queda demasiado fácil, subir `Hearing Range` en los `BossTuning`.
+
+### Prueba de C5 — Muerte y reinicio rápido
+Rama: polish/jefe  ·  Build: editor
+
+Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con jefe.
+
+- [ ] Dejar que te atrape → el susto (la cámara gira hacia su cara, zoom y temblor) se ve igual que antes
+- [ ] Cronometrar desde que termina el susto hasta poder moverte de nuevo → menos de 3 s, con pantalla negra, una frase corta en el centro y fundido (sin párpados)
+- [ ] Morir 4 o 5 veces → las frases cambian y no sale la misma dos veces seguidas
+- [ ] Esconderte mientras te está viendo y dejar que te saque → la frase es "It saw you hide."
+- [ ] F3 (reiniciar en el editor) y pasar de espacio con F2 → siguen con el despertar de párpados de siempre
+- [ ] Las frases se pueden cambiar en `Boss.prefab` → `BossAI` → `Retry Lines`
+- [ ] No hay errores nuevos en la consola
+
+Riesgos: las frases están en inglés como el resto del juego; E6 (idiomas) tendrá que traducirlas.
+

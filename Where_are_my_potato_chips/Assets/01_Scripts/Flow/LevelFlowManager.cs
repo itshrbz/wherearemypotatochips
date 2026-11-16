@@ -36,6 +36,8 @@ public class LevelFlowManager : MonoBehaviour
     public static void StartRun() => Instance.BeginRun();
     public static void GoToNextLevel() => Instance.Advance();
     public static void RestartLevel(bool playSting = true) => Instance.Restart(playSting);
+    /// <summary>Reinicio rápido tras ser atrapado: fundido corto con una frase, sin el despertar largo.</summary>
+    public static void RetryAfterCatch(string line) => Instance.Retry(line);
     public static void BackToMenu() => Instance.LoadMenu();
     public static void FinishGame() => Instance.StartCoroutine(Instance.CreditsRoutine());
 
@@ -176,6 +178,12 @@ public class LevelFlowManager : MonoBehaviour
     {
         if (loader.IsBusy) return;
         loader.Load(SceneManager.GetActiveScene().name, SceneLoader.Reveal.WakeUp, null, playSting ? settings.caughtClip : null);
+    }
+
+    void Retry(string line)
+    {
+        if (loader.IsBusy) return;
+        loader.Load(SceneManager.GetActiveScene().name, SceneLoader.Reveal.Fade, null, null, line);
     }
 
     IEnumerator CreditsRoutine()

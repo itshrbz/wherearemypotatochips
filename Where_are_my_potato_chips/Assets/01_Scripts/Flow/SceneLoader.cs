@@ -39,10 +39,11 @@ public class SceneLoader : MonoBehaviour
         BuildOverlay();
     }
 
-    public void Load(string scene, Reveal reveal, string ticketMessage = null, AudioClip sting = null)
+    /// <param name="centerLine">Frase corta en el centro de la pantalla negra mientras carga (por ejemplo, al reintentar).</param>
+    public void Load(string scene, Reveal reveal, string ticketMessage = null, AudioClip sting = null, string centerLine = null)
     {
         if (IsBusy) return;
-        StartCoroutine(LoadRoutine(scene, reveal, ticketMessage, sting));
+        StartCoroutine(LoadRoutine(scene, reveal, ticketMessage, sting, centerLine));
     }
 
     public IEnumerator ShowCredits(string text, float seconds, AudioClip sting)
@@ -86,12 +87,15 @@ public class SceneLoader : MonoBehaviour
         || (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame);
 
-    IEnumerator LoadRoutine(string scene, Reveal reveal, string ticketMessage, AudioClip sting)
+    IEnumerator LoadRoutine(string scene, Reveal reveal, string ticketMessage, AudioClip sting, string centerLine)
     {
         IsBusy = true;
         SetPlayerLocked(true);
         if (sting != null) sfx.PlayOneShot(sting);
         yield return Fade(1f);
+
+        float lineShownAt = Time.unscaledTime;
+        if (!string.IsNullOrEmpty(centerLine)) centerText.text = centerLine;
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         operation.allowSceneActivation = false;
@@ -102,6 +106,10 @@ public class SceneLoader : MonoBehaviour
         while (operation.progress < 0.9f) yield return null;
         operation.allowSceneActivation = true;
         while (!operation.isDone) yield return null;
+
+        // Que la frase alcance a leerse aunque la carga sea instantánea
+        if (!string.IsNullOrEmpty(centerLine))
+            while (Time.unscaledTime - lineShownAt < 0.8f) yield return null;
 
         centerText.text = "";
         ticket.gameObject.SetActive(false);
