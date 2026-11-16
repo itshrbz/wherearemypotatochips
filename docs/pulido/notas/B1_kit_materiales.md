@@ -1,6 +1,6 @@
 # B1 · Kit de materiales
 
-Tarea de Grover que tomó Rafael para adelantarle trabajo. Estado: **texturas elegidas, descargadas y preparadas; falta importarlas y crear los materiales**, porque el editor de Unity dejó de responder.
+Tarea de Grover que tomó Rafael para adelantarle trabajo. Estado: **importado**. 14 materiales en `Assets/03_Materials/Kit/`, 11 calcomanías en `Assets/03_Materials/Kit/Calcomanias/` con un prefab de quad cada una en `Assets/02_Prefabs/Calcomanias/`. Créditos en `CREDITS.md`.
 
 ## Materiales (14)
 
@@ -23,7 +23,7 @@ Todas CC0. Color y normal a 1024 en JPG. Sin mapas de rugosidad, AO ni desplazam
 | `Kit_MaderaPintada` | Bancas, casitas del parque | ambientCG `PaintedWood007B` | Lennart Demes (ambientCG) | CC0 1.0 | https://ambientcg.com/view?id=PaintedWood007B |
 | `Kit_Tierra` | Areneros y zonas sin pasto del parque | ambientCG `Ground109` | Lennart Demes (ambientCG) | CC0 1.0 | https://ambientcg.com/view?id=Ground109 |
 
-> El autor de Poly Haven por textura se confirma en su página antes de pasarlo a `CREDITS.md`.
+> Autora de `withered_grass` en Poly Haven: Charlotte Baglioni (confirmado en su API).
 
 ## Calcomanías (11)
 
@@ -42,12 +42,17 @@ Materiales URP Lit transparentes para poner en un quad pegado a la pared (`Asset
 ## Cómo rehacer las texturas
 
 1. Descargar de ambientCG los zip `<ID>_1K-PNG` de la tabla (`https://ambientcg.com/get?file=<ID>_1K-PNG.zip`) y descomprimir cada uno en una carpeta con su ID. De Poly Haven, `withered_grass_diff_1k.png` y `withered_grass_nor_gl_1k.png` en una carpeta `withered_grass`.
-2. `python -I B1_preparar_texturas.py <carpeta_descargas> <carpeta_salida>` (necesita Pillow). Deja `Kit/<Material>/Kit_<Material>_Color.jpg` y `_Normal.jpg`, y `Kit/Calcomanias/*.png`.
+2. `python -I B1_preparar_texturas.py <carpeta_descargas> <carpeta_salida>` (necesita Pillow y numpy). Deja `Kit/<Material>/Kit_<Material>_Color.jpg` y `_Normal.jpg`, y `Kit/Calcomanias/*.png`.
 
-## Pasos que faltan (con el editor funcionando)
+## Cómo quedó
 
-1. Copiar la salida a `Assets/05_Textures/Kit/` y dejar que Unity la importe.
-2. Importación: tamaño máximo 1024, compresión por defecto, mipmaps activados; las `_Normal` como Normal map; las calcomanías con alfa transparente y Wrap Mode en Clamp.
-3. Crear los materiales URP Lit en `Assets/03_Materials/Kit/` (color + normal, suavidad fija entre 0.1 y 0.5 según el material) y los de calcomanías como Transparent.
-4. Escena de prueba en `_Sandbox` con un cubo por material para revisarlos con el look del juego.
-5. Pasar la tabla de arriba a `CREDITS.md`.
+- Importación: máximo 1024, compresión por defecto, mipmaps, aniso 4; `_Normal` como Normal map; calcomanías con alfa y Wrap en Clamp.
+- Materiales URP Lit con color + normal y suavidad fija: azulejos 0.5, piso de tienda 0.45, metales 0.35, madera 0.25, concreto 0.2, el resto 0.1–0.15. GPU instancing activado.
+- Calcomanías: URP Lit Transparent (alfa), sin sombras ni pase de profundidad. El prefab es un quad con el tamaño real del cartel en metros (manchas 1.2 m de ancho, carteles 0.4–0.6 m). El frente mira hacia −Z: se pega a la pared con el eje azul apuntando a la pared y se separa 1 cm para que no parpadee.
+- Manchas de humedad: el alfa sale de lo oscuro del color y del desplazamiento, con una máscara que la desvanece a los lados y hacia abajo. `Calco_Humedad2` (Leaking013A) queda como salpicadura fina, más sutil que las otras dos.
+- Los carteles achican el texto si no entra en el borde.
+- No se hizo la escena de prueba en `_Sandbox` (pedido: no tocar escenas). Se revisó con las miniaturas del inspector de cada material.
+
+## Para usar en B2–B4 (Grover)
+
+Arrastrar los materiales sobre la geometría de cada espacio y los prefabs de `02_Prefabs/Calcomanias/` sobre las paredes. Con ProBuilder, ajustar el tiling en las UV de la cara (1 repetición ≈ 2 m para azulejo y alfombra).

@@ -33,7 +33,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | E5 | Subtítulos | Rafael | 2 | E2 | Pendiente | polish/inicio | |
 | E6 | Español e inglés | Rafael | 2 | E2, E3, E5 | Pendiente | polish/inicio | |
 | E7 | Final y créditos | Rafael | 2 | E6 | Pendiente | polish/inicio | |
-| B1 | Kit de materiales | Rafael | 2 | Puerta 1 | En curso | polish/materiales | Lo tomó Rafael para adelantarle trabajo a Grover. 14 materiales y 11 calcomanías elegidos y preparados (`notas/B1_kit_materiales.md`); **falta importar y crear los materiales**: el editor de Unity dejó de responder |
+| B1 | Kit de materiales | Rafael | 2 | Puerta 1 | Para probar | polish/materiales | Lo tomó Rafael para adelantarle trabajo a Grover. 14 materiales en `03_Materials/Kit/`, 11 calcomanías con prefab en `02_Prefabs/Calcomanias/`, créditos en `CREDITS.md`. Decisiones en `notas/B1_kit_materiales.md` (sección "Cómo quedó"). Sin escena de prueba: no se tocaron escenas |
 | B2 | Vestir el almacén | Grover | 2 | B1 | Pendiente | polish/niveles | Etiquetas de suelo de D6 |
 | B3 | Vestir las piscinas | Grover | 2 | B1 | Pendiente | polish/niveles | |
 | B4 | Vestir el parque | Grover | 2 | B1 | Pendiente | polish/niveles | |
@@ -60,6 +60,7 @@ Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota a
 | D2 (Alan) | E2 (Rafael) | API `AudioMix` para el menú de opciones | Pendiente |
 | A4 (Rafael) | B4 (Grover) | Postes de farol en el parque bajo las luces `Luces_Faroles/LuzFarol_*` (hoy la luz no tiene modelo) | Pendiente |
 | A4 (Rafael) | G1 (Rafael) | Nivel de calidad para WebGL: 1 cascada, sombra dura 1024, sin sombras de luces extra, escala 0.85 (no se tocó `PC_RPAsset` por los cambios locales) | Pendiente |
+| B1 (Rafael) | B2–B4 (Grover) | Usar el kit: materiales de `03_Materials/Kit/` y calcomanías de `02_Prefabs/Calcomanias/` en las escenas de cada espacio (B1 no tocó escenas) | Pendiente |
 | A3/A4 (Rafael) | Grover | Aviso: en `polish/look` cambié niebla, luz ambiente, Volumes y luces de 10/11/12 (nada de geometría) y `AmbienteTools.cs`. Hacer merge de `main` antes de tocar esas escenas en `polish/niveles` | Pendiente |
 
 ## Checklists de prueba
@@ -133,3 +134,18 @@ Preparar: abrir `docs/pulido/notas/A5_comparacion.md` con vista previa de Markdo
 - [ ] Revisar "Pendiente" → la build WebGL queda por hacer; probarla antes de cerrar la Puerta 1
 
 Riesgos: ninguno nuevo, es un documento.
+
+### Prueba de B1 — Kit de materiales
+Rama: polish/materiales  ·  Build: editor
+
+Preparar: abrir `_Sandbox` (o cualquier escena) **sin guardar** al salir. En el Project, ir a `Assets/03_Materials/Kit/`.
+
+- [ ] Ver la carpeta `Kit` en modo miniatura → hay 14 materiales con textura real (azulejo blanco, azulejo de piscina, alfombra, papel tapiz, techo de placas, concreto, pasto seco, metal verde, metal amarillo, piso de tienda, yeso, asfalto, madera pintada, tierra), ninguno rosado ni gris liso
+- [ ] Crear un cubo y arrastrarle `Kit_AzulejoBlanco` → se ven las juntas del azulejo con relieve al mover la luz o la cámara
+- [ ] Arrastrar `Assets/02_Prefabs/Calcomanias/Calco_Salida` delante de una pared → se ve el cartel verde EXIT con fondo transparente alrededor de las esquinas redondeadas, sin cuadro negro
+- [ ] Arrastrar `Calco_Humedad1` sobre una pared clara → mancha marrón que gotea desde arriba y se desvanece hacia abajo y a los lados, sin borde cuadrado
+- [ ] Revisar `Calco_NoCorrer`, `Calco_SoloEmpleados` y `Calco_PisoMojado` → todo el texto cabe dentro del cartel
+- [ ] Abrir `CREDITS.md` → hay una tabla "Texturas del kit de materiales" con cada textura, su autor y licencia CC0
+- [ ] No hay errores en la consola
+
+Riesgos: ninguno en juego (no se tocó ninguna escena). Las texturas suman unos 15 MB al proyecto; en la build solo entran las que Grover use.
