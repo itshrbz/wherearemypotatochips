@@ -115,7 +115,8 @@ public class MainMenu : MonoBehaviour
     // Rótulo de videocámara vieja en las esquinas, a juego con el look de A2
     void BuildCamcorderOverlay(Transform canvas)
     {
-        recLabel = UiBuilder.CreateLabel(canvas, "PLAY ▶", 40f, Vector2.zero);
+        // Sin "▶": la fuente por defecto de TMP no trae ese glifo
+        recLabel = UiBuilder.CreateLabel(canvas, "PLAY", 40f, Vector2.zero);
         Corner(recLabel, new Vector2(0f, 1f), new Vector2(70f, -60f), TextAlignmentOptions.TopLeft);
 
         clockLabel = UiBuilder.CreateLabel(canvas, "", 40f, Vector2.zero);
