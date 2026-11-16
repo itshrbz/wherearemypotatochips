@@ -42,13 +42,19 @@ for name, (folder, color, normal) in MATERIALS.items():
     fit(Image.open(os.path.join(src, normal)).convert("RGB")).save(os.path.join(d, f"Kit_{name}_Normal.jpg"), quality=95)
     print("ok", name)
 
-# Manchas de humedad: la forma está en el mapa de desplazamiento de ambientCG (el color es casi blanco)
-for i, folder in enumerate(["Leaking012A", "Leaking013A", "Leaking017B"], 1):
-    disp = Image.open(os.path.join(DL, folder, f"{folder}_1K-PNG_Displacement.png"))
-    top = max(1, disp.getextrema()[1])
-    alpha = disp.point(lambda v: v * (255.0 * 1.6 / top), "F").convert("L")
-    alpha = alpha.point(lambda v: min(255, v))
-    stain = Image.new("RGBA", alpha.size, (78, 66, 42, 255))
+# Manchas de humedad: el color de ambientCG es casi blanco, así que el alfa sale de lo oscuro del color
+# y del desplazamiento, con una máscara que la desvanece a los lados y hacia abajo (filtración desde arriba)
+import numpy as np
+for i, (folder, gain) in enumerate([("Leaking012A", 1.25), ("Leaking013A", 3.0), ("Leaking017B", 1.25)], 1):
+    c = np.asarray(Image.open(os.path.join(DL, folder, f"{folder}_1K-PNG_Color.png")).convert("L"), dtype=np.float32)
+    d = np.asarray(Image.open(os.path.join(DL, folder, f"{folder}_1K-PNG_Displacement.png")), dtype=np.float32)
+    a = np.maximum(np.clip((255 - c) / max(1, 255 - c.min()), 0, 1), np.clip(d / max(1, np.percentile(d, 99.5)), 0, 1)) ** 0.6
+    h, w = a.shape
+    y, x = np.mgrid[0:h, 0:w]
+    u, v = x / (w - 1), y / (h - 1)
+    mask = np.sin(np.pi * u) ** 1.5 * np.clip(1.15 - v, 0, 1) ** 1.3 * np.clip(v / 0.04, 0, 1)
+    alpha = Image.fromarray((np.clip(a * mask * gain, 0, 1) * 255).astype(np.uint8))
+    stain = Image.new("RGBA", alpha.size, (70, 58, 36, 255))
     stain.putalpha(alpha)
     stain.resize((512, 512), Image.LANCZOS).save(os.path.join(DEC, f"Calco_Humedad{i}.png"))
     print("ok humedad", i)
@@ -61,8 +67,13 @@ def font(size, bold=True):
             pass
     return ImageFont.load_default()
 
-def centered(draw, box, text, f, fill):
+def centered(draw, box, text, f, fill, size=None):
+    # Si el texto no cabe en el cartel, se achica la fuente hasta que entre
     l, t, r, b = draw.textbbox((0, 0), text, font=f)
+    while size and size > 12 and (r - l > box[2] - box[0] or b - t > box[3] - box[1]):
+        size -= 4
+        f = font(size)
+        l, t, r, b = draw.textbbox((0, 0), text, font=f)
     x = box[0] + (box[2] - box[0] - (r - l)) / 2 - l
     y = box[1] + (box[3] - box[1] - (b - t)) / 2 - t
     draw.text((x, y), text, font=f, fill=fill)
@@ -84,7 +95,8 @@ def sign(name, size, bg, fg, lines, border=None, radius=24):
     n = len(lines)
     for k, (text, fsize) in enumerate(lines):
         top = 20 + (size[1] - 40) * k / n
-        centered(d, (20, top, size[0] - 20, top + (size[1] - 40) / n), text, font(fsize), fg)
+        pad = 40 if border else 24
+        centered(d, (pad, top, size[0] - pad, top + (size[1] - 40) / n), text, font(fsize), fg, fsize)
     aged(im).save(os.path.join(DEC, f"Calco_{name}.png"))
     print("ok", name)
 
