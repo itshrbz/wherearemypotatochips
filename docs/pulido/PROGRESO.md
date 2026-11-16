@@ -26,7 +26,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | D5 | Ambiente por capas y reverb | Alan | 1 | D3 | Pendiente | polish/audio | |
 | D6 | Pasos según el suelo | Alan | 1 | D3 | Pendiente | polish/audio | |
 | T3 | Puerta 1 | Cristhian | 1 | A5, C6, D6 | Pendiente | main | |
-| E1 | Menú principal | Rafael | 2 | Puerta 1 | En curso | polish/inicio | Adelantada antes de la Puerta 1. Código escrito (`MainMenu`, `MenuCameraDrift`) **sin compilar ni probar**: el editor quedó bloqueado al recompilar. Falta armar el pasillo de fondo en `01_Menu` y probar |
+| E1 | Menú principal | Rafael | 2 | Puerta 1 | Para probar | polish/inicio | Adelantada antes de la Puerta 1. Fondo: pasillo del almacén en bucle de 8 m hecho con el kit modular (`Fondo_Menu`), 9 luces sin sombra, niebla amarilla y perfil `Ambiente_10_Warehouse`. Botones en inglés como el resto de la UI (la traducción va en E6). Probado con teclado y mando simulados; el mouse simulado falla en la parte baja de la vista del editor (Back, Quit), con clic directo funcionan: **probar con mouse real** |
 | E2 | Opciones completas | Rafael | 2 | A2, D2 | Pendiente | polish/inicio | |
 | E3 | Intro, tienda y primer susto | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | Adelantada antes de la Puerta 1; **bloqueada**: necesita el editor de Unity, que dejó de responder |
 | E4 | Juice de ventas y feedback | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | Adelantada antes de la Puerta 1; **bloqueada**: necesita el editor de Unity, que dejó de responder |
@@ -133,3 +133,20 @@ Preparar: abrir `docs/pulido/notas/A5_comparacion.md` con vista previa de Markdo
 - [ ] Revisar "Pendiente" → la build WebGL queda por hacer; probarla antes de cerrar la Puerta 1
 
 Riesgos: ninguno nuevo, es un documento.
+
+### Prueba de E1 — Menú principal
+Rama: polish/inicio  ·  Build: editor (y WebGL cuando se haga)
+
+Preparar: abrir `00_Boot` y dar Play.
+
+- [ ] Esperar en el menú 20 segundos → la cámara avanza despacio por un pasillo amarillo sin fin, con un leve balanceo; nunca se ve un salto ni el final del pasillo
+- [ ] Mirar las esquinas → arriba a la izquierda "PLAY" parpadea; abajo a la derecha corre un reloj desde AM 3:07 con la fecha NOV. 14 1997
+- [ ] Esperar unos segundos mirando el título → de vez en cuando parpadea como un letrero viejo
+- [ ] Con el **mouse**, entrar a Settings, Controls y Credits y volver con su botón Back → cada pantalla abre y vuelve al menú; probar también Quit (en el editor detiene el Play)
+- [ ] Con el **teclado**: flechas o W/S para moverse, Enter para entrar, Esc para volver → siempre hay un botón resaltado y Esc vuelve al menú desde cualquier pantalla
+- [ ] Con un **mando**: cruceta o stick para moverse, A para entrar, B para volver → funciona igual que el teclado
+- [ ] En Settings, apagar "Camera effects" y volver → el pasillo sigue avanzando pero sin balanceo
+- [ ] Apretar Play → aparece la historia y luego la tienda. En la build WebGL el botón Quit no aparece
+- [ ] No hay errores en la consola (los de "editor status" o "api/exec" son del plugin de Unity)
+
+Riesgos: la escena `01_Menu` ahora tiene 117 piezas del kit y 9 luces; si el menú va lento en la laptop más débil, avisar.
