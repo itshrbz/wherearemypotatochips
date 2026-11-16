@@ -148,4 +148,4 @@ Preparar: abrir `_Sandbox` (o cualquier escena) **sin guardar** al salir. En el 
 - [ ] Abrir `CREDITS.md` → hay una tabla "Texturas del kit de materiales" con cada textura, su autor y licencia CC0
 - [ ] No hay errores en la consola
 
-Riesgos: ninguno en juego (no se tocó ninguna escena). Las texturas suman unos 15 MB al proyecto; en la build solo entran las que Grover use.
+Riesgos: ninguno en juego (no se tocó ninguna escena). Las texturas suman unos 12 MB al proyecto; en la build solo entran las que Grover use.
