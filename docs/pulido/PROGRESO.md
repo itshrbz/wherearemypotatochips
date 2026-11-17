@@ -88,6 +88,19 @@ Preparar: iniciar desde `00_Boot` y mirar la puerta de almacén desde el mostrad
 
 Riesgos: se editó solo el dintel generado y los materiales de esa instancia de puerta.
 
+### Prueba de B-005 — Tiendas réplica
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: iniciar desde `00_Boot`; F2 permite avanzar entre espacios en el editor.
+
+- [ ] Entrar en la réplica de cada mapa y caminar detrás de la caja sin agacharse → se puede pasar, escanear y cobrar.
+- [ ] Rodear el mostrador y mirar al comprador durante la venta → permanece fuera del mueble y sus brazos no se hunden en él.
+- [ ] Recorrer el interior → hay estantes surtidos, heladera, baldosas, reloj y carteles, con pasillos libres y la misma superficie de tienda.
+- [ ] Completar una venta en cada réplica → la zona sigue siendo segura y el ticket lleva al siguiente espacio.
+
+Riesgos: revisar a mano la animación del comprador al mirarlo desde todos los lados; la prueba automatizada comprobó una pose y el paso del jugador en los tres mapas.
+
 ## Pedidos entre bloques
 
 Están separados por persona en [detallesfaltantes/](detallesfaltantes/): [ALAN.md](detallesfaltantes/ALAN.md), [RAFAEL.md](detallesfaltantes/RAFAEL.md) y [GROVER.md](detallesfaltantes/GROVER.md). Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota en el archivo de esa persona.

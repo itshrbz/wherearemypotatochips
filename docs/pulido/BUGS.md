@@ -11,6 +11,7 @@ Gravedad: **Bloqueante** (no se puede terminar o se cuelga) · **Alta** (rompe l
 
 | B-003 | Baja | Tienda y réplicas | Compradora llamada Old Man; chocolate como Gum, caramelo y cupcake como Soda | Atender intro y tres réplicas | E | Para probar (polish/correcciones-tiendas-mapas) |
 | B-004 | Media | 02_Store | Dinteles superpuestos que parpadean sobre la puerta de almacén | Mirar la puerta moviéndose frente al marco | E | Para probar (polish/correcciones-tiendas-mapas) |
+| B-005 | Alta | Réplicas | Comprador dentro del mostrador, paso posterior estrecho y mobiliario básico | Entrar a una réplica e intentar llegar a la caja de pie | B/E | Para probar (polish/correcciones-tiendas-mapas) |
 
 ## Comentarios de playtest
 
