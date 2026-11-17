@@ -128,6 +128,7 @@ public static class AlmacenBuilder
         CrearTienda(raiz.transform);
         Vacio("PlayerSpawn", raiz.transform, POS_SPAWN);
         CrearBossYPatrulla(raiz.transform);
+        AlmacenDecorBuilder.Build();   // B2: decoración aparte, antes de hornear para que los estantes cuenten
         CrearNavMesh(raiz.transform);
 
         EditorSceneManager.MarkSceneDirty(escena);
