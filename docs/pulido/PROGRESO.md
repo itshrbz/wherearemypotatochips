@@ -33,7 +33,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | E5 | Subtítulos | Rafael | 2 | E2 | Pendiente | polish/inicio | |
 | E6 | Español e inglés | Rafael | 2 | E2, E3, E5 | Pendiente | polish/inicio | |
 | E7 | Final y créditos | Rafael | 2 | E6 | Pendiente | polish/inicio | |
-| B1 | Kit de materiales | Grover | 2 | Puerta 1 | Pendiente | polish/niveles | |
+| B1 | Kit de materiales | Grover | 2 | Puerta 1 | Para probar | polish/niveles | 14 materiales `Kit_*` (URP Lit) y 9 `Kit_Decal_*` (Unlit transparente, para quads) en `03_Materials/Kit/`. Texturas puestas en los materiales grises de los 3 espacios y en los prefabs `Kit_*`. Falta `Bloque_Pintado` (se usó yeso). Sin usar todavía: alfombra, palet, madera pintada, goma, inox (para B2–B4). Capturas `capturas/despues/B1_*.png` |
 | B2 | Vestir el almacén | Grover | 2 | B1 | Pendiente | polish/niveles | Etiquetas de suelo de D6 |
 | B3 | Vestir las piscinas | Grover | 2 | B1 | Pendiente | polish/niveles | |
 | B4 | Vestir el parque | Grover | 2 | B1 | Pendiente | polish/niveles | |
@@ -133,3 +133,19 @@ Preparar: abrir `docs/pulido/notas/A5_comparacion.md` con vista previa de Markdo
 - [ ] Revisar "Pendiente" → la build WebGL queda por hacer; probarla antes de cerrar la Puerta 1
 
 Riesgos: ninguno nuevo, es un documento.
+
+### Prueba de B1 — Kit de materiales
+Rama: polish/niveles  ·  Build: editor (y WebGL para el último punto)
+
+Preparar: abrir `00_Boot`, dar Play y apretar F2 para entrar al primer espacio; F2 de nuevo pasa al siguiente. Comparar con `capturas/despues/B1_almacen.png`, `B1_piscinas.png` y `B1_parque.png`.
+
+- [ ] Almacén: mirar piso, paredes y techo → el piso es concreto con piedritas, las paredes y el laberinto son de yeso amarillento con manchas; no queda ninguna superficie gris lisa
+- [ ] Almacén: acercarse a una góndola, el mostrador y las cajas de cartón → la góndola y el mostrador son de metal pintado gastado, las cajas tienen textura de cartón
+- [ ] Piscinas: mirar paredes, piso y el fondo del agua → paredes y columnas de azulejo celeste chico, piso de losas beige, techo claro
+- [ ] Parque: mirar el suelo, el camino de la entrada y la cerca → el suelo tiene textura de pasto seco, el camino es de tierra y la cerca es de metal
+- [ ] En los tres espacios, caminar pegado a una pared larga → la textura mantiene el mismo tamaño, sin estirarse ni cortarse en franjas
+- [ ] Tienda réplica al final de cada espacio → ahora también tiene piso de concreto y góndolas de metal; anotar si se ve demasiado distinta de la tienda real
+- [ ] Build WebGL: entrar a cada espacio → carga sin trabarse más que antes y las texturas no se ven borrosas ni con cuadros
+- [ ] No hay errores en la consola (solo en el editor)
+
+Riesgos: los prefabs `Kit_*` también se usan en `_Sandbox/Bullain` y `_Sandbox/Cristhian`, que van a cambiar igual. Los bloques del laberinto pasaron de marrón oscuro a amarillo: el almacén se ve más claro que antes. El pasto del parque tiene un tinte cálido; si con la luz de A3 se ve muy oscuro, subir el color de `Kit_Pasto_Seco`.
