@@ -126,6 +126,18 @@ Preparar: visitar Warehouse y Pools desde `00_Boot` o directamente en Play.
 
 Riesgos: seis mallas curvas nuevas, con sus `.meta` generados por Unity. Comprobar también transparencias en navegador WebGL.
 
+### Prueba de B-008 — Texturas de tienda
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: iniciar desde `00_Boot`; comparar la tienda original con las réplicas.
+
+- [ ] Mirar paredes, techo y madera del mostrador → tienen textura y conservan los colores y la distribución del juego.
+- [ ] Acercarse y alejarse de paredes y muebles → las texturas mantienen una escala razonable, sin estirarse con los cubos.
+- [ ] Repetir en WebGL durante dos minutos → no aparecen materiales rosados, transparencias rotas ni una caída apreciable de fluidez.
+
+Riesgos: solo se reutilizaron texturas ya importadas y acreditadas; no se descargó contenido adicional. Los productos decorativos conservan el estilo sencillo del juego.
+
 ## Pedidos entre bloques
 
 Están separados por persona en [detallesfaltantes/](detallesfaltantes/): [ALAN.md](detallesfaltantes/ALAN.md), [RAFAEL.md](detallesfaltantes/RAFAEL.md) y [GROVER.md](detallesfaltantes/GROVER.md). Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota en el archivo de esa persona.
