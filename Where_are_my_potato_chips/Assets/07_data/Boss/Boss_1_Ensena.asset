@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a555962c00d87a94bb94c2bf16fad38b, type: 3}
-  m_Name: BossTuning_Parque
+  m_Name: Boss_1_Ensena
   m_EditorClassIdentifier: Assembly-CSharp::BossTuning
-  patrolSpeed: 3.1
-  chaseSpeed: 4.1
-  burstMultiplier: 1.08
-  sightRange: 22
-  instantSightRange: 5.5
-  hearingRange: 12
-  awarenessGain: 1.7
-  searchTime: 7
-  huntChance: 0.6
-  chaseCooldown: 2
+  patrolSpeed: 2.3
+  chaseSpeed: 3.6
+  burstMultiplier: 1.1
+  sightRange: 16
+  instantSightRange: 3.5
+  hearingRange: 6
+  awarenessGain: 1
+  searchTime: 5
+  huntChance: 0.3
+  chaseCooldown: 6

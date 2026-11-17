@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a555962c00d87a94bb94c2bf16fad38b, type: 3}
-  m_Name: BossTuning_Almacen
+  m_Name: Boss_3_Aprieta
   m_EditorClassIdentifier: Assembly-CSharp::BossTuning
-  patrolSpeed: 2.5
-  chaseSpeed: 3.6
-  burstMultiplier: 1.1
-  sightRange: 16
-  instantSightRange: 4
-  hearingRange: 7
-  awarenessGain: 1.1
-  searchTime: 5
-  huntChance: 0.35
-  chaseCooldown: 5
+  patrolSpeed: 2.85
+  chaseSpeed: 4.1
+  burstMultiplier: 1.08
+  sightRange: 20
+  instantSightRange: 5
+  hearingRange: 9
+  awarenessGain: 1.5
+  searchTime: 7
+  huntChance: 0.6
+  chaseCooldown: 2

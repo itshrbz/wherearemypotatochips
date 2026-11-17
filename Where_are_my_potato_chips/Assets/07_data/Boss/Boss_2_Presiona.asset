@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a555962c00d87a94bb94c2bf16fad38b, type: 3}
-  m_Name: BossTuning_Piscinas
+  m_Name: Boss_2_Presiona
   m_EditorClassIdentifier: Assembly-CSharp::BossTuning
-  patrolSpeed: 2.85
+  patrolSpeed: 2.6
   chaseSpeed: 3.9
   burstMultiplier: 1.1
-  sightRange: 20
-  instantSightRange: 5
-  hearingRange: 9
-  awarenessGain: 1.5
+  sightRange: 18
+  instantSightRange: 4.5
+  hearingRange: 8
+  awarenessGain: 1.3
   searchTime: 6
-  huntChance: 0.5
-  chaseCooldown: 3
+  huntChance: 0.45
+  chaseCooldown: 4
