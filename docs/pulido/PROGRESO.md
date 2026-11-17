@@ -34,7 +34,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | E6 | Español e inglés | Rafael | 2 | E2, E3, E5 | Pendiente | polish/inicio | |
 | E7 | Final y créditos | Rafael | 2 | E6 | Pendiente | polish/inicio | |
 | B1 | Kit de materiales | Rafael | 2 | Puerta 1 | Para probar | polish/materiales | Lo tomó Rafael para adelantarle trabajo a Grover. 14 materiales en `03_Materials/Kit/`, 11 calcomanías con prefab en `02_Prefabs/Calcomanias/`, créditos en `CREDITS.md`. Decisiones en `notas/B1_kit_materiales.md` (sección "Cómo quedó"). Sin escena de prueba: no se tocaron escenas |
-| B2 | Vestir el almacén | Grover | 2 | B1 | Para probar | polish/noche | Kit aplicado (papel tapiz, alfombra, techo de placas), 16 estantes, 12 pilas de cajas, extintores, ~50 calcomanías y 4 detalles mal. Suelo con tag `Suelo_Alfombra` |
+| B2 | Vestir el almacén | Grover | 2 | B1 | Para probar | polish/noche | Kit aplicado (paredes con `Kit_PapelAmarillo`, Yeso teñido de amarillo; alfombra, techo de placas), 16 estantes, 12 pilas de cajas, extintores, ~50 calcomanías y 4 detalles mal. Suelo con tag `Suelo_Alfombra` |
 | B3 | Vestir las piscinas | Grover | 2 | B1 | Para probar | polish/noche | Azulejo blanco y de piscina, yeso, 10 escaleras de piscina, bancos, silla de salvavidas, extintores, carteles y 4 detalles mal. Suelo con tag `Suelo_Azulejo` |
 | B4 | Vestir el parque | Grover | 2 | B1 | Para probar | polish/noche | Pasto seco, tierra en el camino, cerca de metal, postes bajo los 6 faroles, 10 bancos, 6 basureros, carteles y 5 detalles mal. Tags `Suelo_Pasto` y `Suelo_Tierra` |
 | B5 | Rendimiento de los niveles | Grover | 2 | B2, B3, B4 | Pendiente | polish/niveles | |
