@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a555962c00d87a94bb94c2bf16fad38b, type: 3}
+  m_Name: Boss_1_Ensena
+  m_EditorClassIdentifier: Assembly-CSharp::BossTuning
+  patrolSpeed: 2.3
+  chaseSpeed: 3.6
+  burstMultiplier: 1.1
+  sightRange: 16
+  instantSightRange: 3.5
+  hearingRange: 6
+  awarenessGain: 1
+  searchTime: 5
+  huntChance: 0.3
+  chaseCooldown: 6

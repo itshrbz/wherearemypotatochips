@@ -78,6 +78,8 @@ public class BossAI : MonoBehaviour
     [SerializeField] float stuckTime = 3f;
     [Tooltip("Lo recoloca a esta distancia del jugador como máximo, en un punto que el jugador no ve.")]
     [SerializeField] float relocateRadius = 20f;
+    [Tooltip("Segundos sabiendo dónde está el jugador sin poder llegar (arriba de algo alto) antes de recolocarlo.")]
+    [SerializeField] float unreachableTime = 4f;
 
     [Header("Dificultad")]
     [Tooltip("Un BossTuning por posición en la partida: [0] primer espacio, [1] segundo, [2] tercero. Vacío = los valores de arriba.")]
@@ -123,6 +125,9 @@ public class BossAI : MonoBehaviour
     float stuckTimer;
     Vector3 stuckFrom;
     NavMeshPath relocatePath;
+    float unreachableTimer;
+    float nextReachCheck;
+    bool playerUnreachable;
 
     void Awake()
     {
@@ -203,6 +208,7 @@ public class BossAI : MonoBehaviour
         }
 
         Sense();
+        if (CheckUnreachable()) return;
 
         bool paused = Time.time < pauseUntil;
         agent.isStopped = paused;
@@ -517,17 +523,65 @@ public class BossAI : MonoBehaviour
         return true;
     }
 
-    bool TryHiddenPoint(out Vector3 point)
+    // Con el jugador arriba de algo alto, el jefe se mueve un poco y pasa de perseguir a buscar,
+    // y CheckStuck vuelve a cero cada vez; esto mide aparte el tiempo sin ruta hasta el jugador
+    bool CheckUnreachable()
+    {
+        // También al patrullar cerca: el acecho lo vuelve a mandar al pie del jugador y se queda ahí
+        bool engaged = (Current != State.Patrol && Time.time - lastSeenTime < memoryTime + 3f)
+            || FlatDistance(transform.position, player.transform.position) < huntRadius;
+        if (!engaged || player.IsHidden || player.IsSafe)
+        {
+            unreachableTimer = 0f;
+            return false;
+        }
+
+        // CalculatePath es caro en WebGL: cuatro veces por segundo alcanza
+        if (Time.time >= nextReachCheck)
+        {
+            nextReachCheck = Time.time + 0.25f;
+            playerUnreachable = !CanReach(player.transform.position);
+        }
+        if (!playerUnreachable)
+        {
+            unreachableTimer = 0f;
+            return false;
+        }
+
+        unreachableTimer += Time.deltaTime;
+        if (unreachableTimer < unreachableTime) return false;
+
+        unreachableTimer = 0f;
+        // Desde arriba el jugador ve casi todo: si no hay un punto oculto, vale uno lejano
+        if (!TryHiddenPoint(out Vector3 point) && !TryHiddenPoint(out point, true)) return false;
+
+        agent.Warp(point);
+        stuckFrom = point;
+        EnterPatrol();
+        return true;
+    }
+
+    bool CanReach(Vector3 target)
+    {
+        if (!NavMesh.SamplePosition(target, out var hit, 1.5f, NavMesh.AllAreas)) return false;
+        if (relocatePath == null) relocatePath = new NavMeshPath();
+        return NavMesh.CalculatePath(transform.position, hit.position, NavMesh.AllAreas, relocatePath)
+            && relocatePath.status == NavMeshPathStatus.PathComplete;
+    }
+
+    bool TryHiddenPoint(out Vector3 point, bool allowVisible = false)
     {
         if (relocatePath == null) relocatePath = new NavMeshPath();
+        Vector3 playerEye = player.transform.position + Vector3.up * 1.5f;
+        // Se busca a la altura del jefe: si el jugador está arriba de algo, a su altura no hay suelo
         Vector3 center = player.transform.position;
-        Vector3 playerEye = center + Vector3.up * 1.5f;
+        center.y = transform.position.y;
 
         for (int i = 0; i < 20; i++)
         {
             if (!RandomPointNear(center, relocateRadius, out point)) continue;
             if (FlatDistance(point, center) < relocateRadius * 0.5f) continue;
-            if (ClearPath(playerEye, point + Vector3.up * 1.2f)) continue;
+            if (!allowVisible && ClearPath(playerEye, point + Vector3.up * 1.2f)) continue;
             // Mismo pedazo de NavMesh que el jefe: que no aparezca encima de un bloque sin salida
             if (NavMesh.CalculatePath(transform.position, point, NavMesh.AllAreas, relocatePath)
                 && relocatePath.status == NavMeshPathStatus.PathComplete)
