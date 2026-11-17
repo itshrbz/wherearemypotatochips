@@ -38,7 +38,10 @@ public class HidingSpot : MonoBehaviour
 
     void Update()
     {
-        if (inside != null) inside.IsHidden = inside.IsCrouching;
+        if (inside == null) return;
+        // Se reafirma cada frame: al salir de un escondite solapado con otro, el otro lo vuelve a marcar
+        inside.InHidingSpot = true;
+        inside.IsHidden = inside.IsCrouching;
     }
 
     void OnDisable()

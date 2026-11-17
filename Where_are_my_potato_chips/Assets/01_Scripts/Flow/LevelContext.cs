@@ -18,7 +18,6 @@ public class LevelContext : MonoBehaviour
     public static LevelContext Current { get; private set; }
 
     public static bool BossEnabled => LevelFlowManager.CurrentLevel >= 1;
-    public static float BossSpeedMultiplier => LevelFlowManager.CurrentLevel >= 2 ? 1.25f : 1f;
 
     public IReadOnlyList<Transform> PatrolPoints => patrolPoints;
 

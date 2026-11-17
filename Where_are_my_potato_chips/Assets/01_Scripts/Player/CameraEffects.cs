@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Efectos de cámara del jugador: balanceo y algo de FOV al correr, y el susto cuando el jefe lo atrapa.
 /// Corre antes que PlayerController para quitar el balanceo del frame anterior y lo vuelve a sumar en LateUpdate.
-/// Con "Camera effects: Off" en la configuración no hay balanceo ni sacudidas.
+/// Con "Camera effects: Off" en la configuración no hay balanceo ni sacudidas. <see cref="Shake"/> sirve para golpes cortos.
 /// </summary>
 [DefaultExecutionOrder(-100)]
 public class CameraEffects : MonoBehaviour
@@ -36,6 +36,24 @@ public class CameraEffects : MonoBehaviour
     float sprintBlend;
     float bobPhase;
     bool screaming;
+    float shakeTime;
+    float shakeDuration;
+    float shakeStrength;
+
+    static CameraEffects active;
+
+    /// <summary>
+    /// Sacudida corta de la cámara del jugador (un golpe de caja, un susto). Se apaga sola con
+    /// "Camera effects: Off". No hace nada si no hay jugador en la escena.
+    /// </summary>
+    public static void Shake(float degrees, float seconds)
+    {
+        if (active == null || !GameSettings.CameraEffects || seconds <= 0f) return;
+        // Una sacudida fuerte no la pisa una más suave que llega justo después
+        if (active.shakeTime > 0f && degrees < active.shakeStrength * (active.shakeTime / active.shakeDuration)) return;
+        active.shakeStrength = degrees;
+        active.shakeTime = active.shakeDuration = seconds;
+    }
 
     void Awake()
     {
@@ -43,6 +61,13 @@ public class CameraEffects : MonoBehaviour
         body = GetComponent<CharacterController>();
         view = GetComponentInChildren<Camera>();
         if (view != null) cam = view.transform;
+    }
+
+    void OnEnable() => active = this;
+
+    void OnDisable()
+    {
+        if (active == this) active = null;
     }
 
     void Update()
@@ -60,19 +85,35 @@ public class CameraEffects : MonoBehaviour
 
         float intensity = GameSettings.CameraEffects ? sprintBlend : 0f;
         view.fieldOfView = GameSettings.FieldOfView + sprintFovKick * intensity;
-        if (intensity <= 0f) return;
 
-        bobPhase += Time.deltaTime * bobFrequency * Mathf.PI * 2f;
-        float step = Mathf.Sin(bobPhase);
-        float bounce = (Mathf.Cos(bobPhase * 2f) - 1f) * 0.5f;
-        float noise = Time.time * 9f;
+        if (intensity > 0f)
+        {
+            bobPhase += Time.deltaTime * bobFrequency * Mathf.PI * 2f;
+            float step = Mathf.Sin(bobPhase);
+            float bounce = (Mathf.Cos(bobPhase * 2f) - 1f) * 0.5f;
+            float noise = Time.time * 9f;
 
-        appliedOffset = new Vector3(step * bobSway, bounce * bobHeight, 0f) * intensity;
-        appliedRotation = Quaternion.Euler(
-            (Mathf.PerlinNoise(noise, 0f) - 0.5f) * 2f * shakeAngle * intensity,
-            (Mathf.PerlinNoise(0f, noise) - 0.5f) * 2f * shakeAngle * intensity,
-            step * bobRoll * intensity);
+            appliedOffset = new Vector3(step * bobSway, bounce * bobHeight, 0f) * intensity;
+            appliedRotation = Quaternion.Euler(
+                (Mathf.PerlinNoise(noise, 0f) - 0.5f) * 2f * shakeAngle * intensity,
+                (Mathf.PerlinNoise(0f, noise) - 0.5f) * 2f * shakeAngle * intensity,
+                step * bobRoll * intensity);
+        }
 
+        if (shakeTime > 0f)
+        {
+            shakeTime -= Time.deltaTime;
+            // Decae rápido: el golpe se siente al principio y no marea
+            float k = Mathf.Clamp01(shakeTime / shakeDuration);
+            float amount = GameSettings.CameraEffects ? shakeStrength * k * k : 0f;
+            float t = Time.time * 35f;
+            appliedRotation *= Quaternion.Euler(
+                (Mathf.PerlinNoise(t, 3.1f) - 0.5f) * 2f * amount,
+                (Mathf.PerlinNoise(7.7f, t) - 0.5f) * 2f * amount,
+                (Mathf.PerlinNoise(t, t * 0.5f) - 0.5f) * amount);
+        }
+
+        if (appliedOffset == Vector3.zero && appliedRotation == Quaternion.identity) return;
         cam.localPosition += appliedOffset;
         cam.localRotation *= appliedRotation;
     }

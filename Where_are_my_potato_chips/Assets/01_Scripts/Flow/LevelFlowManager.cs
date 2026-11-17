@@ -36,6 +36,8 @@ public class LevelFlowManager : MonoBehaviour
     public static void StartRun() => Instance.BeginRun();
     public static void GoToNextLevel() => Instance.Advance();
     public static void RestartLevel(bool playSting = true) => Instance.Restart(playSting);
+    /// <summary>Reinicio rápido tras ser atrapado: fundido corto con una frase, sin el despertar largo.</summary>
+    public static void RetryAfterCatch(string line) => Instance.Retry(line);
     public static void BackToMenu() => Instance.LoadMenu();
     public static void FinishGame() => Instance.StartCoroutine(Instance.CreditsRoutine());
 
@@ -122,19 +124,19 @@ public class LevelFlowManager : MonoBehaviour
         loader.Load(settings.menuScene, SceneLoader.Reveal.Fade);
     }
 
+    // Corta a propósito: el jugador tiene que estar detrás del mostrador en unos 10 segundos.
+    // El pedido de papas no se adelanta: es la primera sorpresa de la noche.
     static readonly string[] IntroLines =
     {
         "Night shift at Potato Mart. Again.",
-        "Same humming lights. Same empty aisles. Customers who never really look at you.",
-        "Tonight, one of them asks for potato chips.",
-        "The shelf is empty, but there should be a box in the warehouse.",
-        "Just go to the back and get it. It will only take a minute.",
+        "Same humming lights. Customers who never really look at you.",
+        "Scan. Charge. Next. Until sunrise.",
     };
 
     IEnumerator NewGameRoutine()
     {
         if (loader.IsBusy) yield break;
-        yield return loader.ShowStory(IntroLines, 3.5f);
+        yield return loader.ShowStory(IntroLines, 3.2f);
         LoadStore(false);
     }
 
@@ -176,6 +178,12 @@ public class LevelFlowManager : MonoBehaviour
     {
         if (loader.IsBusy) return;
         loader.Load(SceneManager.GetActiveScene().name, SceneLoader.Reveal.WakeUp, null, playSting ? settings.caughtClip : null);
+    }
+
+    void Retry(string line)
+    {
+        if (loader.IsBusy) return;
+        loader.Load(SceneManager.GetActiveScene().name, SceneLoader.Reveal.Fade, null, null, line);
     }
 
     IEnumerator CreditsRoutine()
