@@ -5500,6 +5500,11 @@ MonoBehaviour:
     Potato Chips?'
   titleFont: {fileID: 11400000, guid: 199d6b060766b6d479e0a31653edbf0b, type: 2}
   camcorderDate: NOV. 14 1997
+  menuStyle: 1
+  chipButtonSprite: {fileID: 21300000, guid: 9389096db819dc742970d6389da1bdcd, type: 3}
+  chipsFont: {fileID: 11400000, guid: 9b3bc103c34b91444ba3fe8e33a7b993, type: 2}
+  chipCrunch: {fileID: 8300000, guid: b4231da0908ee7140b4239c0028b54e2, type: 3}
+  chipCrunchVolume: 0.45
 --- !u!1001 &1484401708
 PrefabInstance:
   m_ObjectHideFlags: 0
