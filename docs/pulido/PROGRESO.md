@@ -49,6 +49,33 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | T5 | Prueba final (Puerta 3) | Cristhian | 3 | G2 | Pendiente | main | |
 | G5 | Versión 1.0 | Rafael | 3 | T5 | Pendiente | main | |
 
+## Correcciones del playtest · 17 de noviembre de 2026
+
+Pedido directo que abarca B y E; autorizado trabajar de corrido sobre los problemas señalados. Rama: `polish/correcciones-tiendas-mapas`. Base de retorno: `5ad2da5`.
+
+| ID | Tarea | Estado | Verificación |
+| --- | --- | --- | --- |
+| B-003 | Nombres de productos, compradora y ortografía | Para probar | Ventas reales de intro y las tres réplicas en Play |
+| B-004 | Puerta de la tienda superpuesta con la pared | Para probar | Captura revisada y transición por la puerta en Play |
+| B-005 | Distribución, comprador y acceso a caja de réplicas | Para probar | CharacterController real en los tres mapas; comprador fuera del mostrador |
+| B-006 | Hueco de Pools, techos de Warehouse y superficies de réplica | Para probar | Perímetro muestreado, cápsulas de pie/agachado, navegación horneada |
+| B-007 | Humedad en paredes y pilares | Para probar | Transparencia corregida y seis mallas curvas generadas por Unity |
+| B-008 | Texturas existentes en la tienda | Para probar | Capturas revisadas; falta rendimiento en navegador WebGL |
+
+Solo Cristhian pasa estas tareas a **Hecha** después del playtest manual. Informe y capturas: [correcciones de tiendas y mapas](notas/Correcciones_tiendas_mapas_2026-11-17.md).
+
+### Prueba de B-003 — Nombres y diálogos
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: abrir `00_Boot`, iniciar partida y atender a los compradores.
+
+- [ ] Atender a la segunda compradora → aparece `Customer` y el chocolate se llama `Chocolate`, sin `Old Man` ni `Gum`.
+- [ ] Recorrer las tres réplicas → bastón de caramelo, cupcake y papas muestran `Candy Cane`, `Cupcake` y `Potato Chips` al escanear.
+- [ ] Escuchar/leer el pedido y completar las ventas → se conserva el significado de las frases y se avanza normalmente; `Potatoes` está bien escrito.
+
+Riesgos: se conservó el idioma inglés existente; esta tarea no añade localización.
+
 ## Pedidos entre bloques
 
 Están separados por persona en [detallesfaltantes/](detallesfaltantes/): [ALAN.md](detallesfaltantes/ALAN.md), [RAFAEL.md](detallesfaltantes/RAFAEL.md) y [GROVER.md](detallesfaltantes/GROVER.md). Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota en el archivo de esa persona.

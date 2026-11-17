@@ -9,6 +9,8 @@ Gravedad: **Bloqueante** (no se puede terminar o se cuelga) · **Alta** (rompe l
 | B-001 | | | | | | Abierto |
 | B-002 | Alta | Todo el juego | Con mando no se puede mover, mirar ni saltar: `PlayerInput.inputactions` solo tiene teclado y mouse para Move, Look y Jump (correr, agacharse, interactuar y pausa sí tienen botón) | 1. Conectar un mando 2. Jugar desde 00_Boot 3. Mover los sticks en la tienda | E | Para probar (polish/noche: stick izquierdo, stick derecho y botón sur en el asset; el stick derecho se escala por tiempo en PlayerController) |
 
+| B-003 | Baja | Tienda y réplicas | Compradora llamada Old Man; chocolate como Gum, caramelo y cupcake como Soda | Atender intro y tres réplicas | E | Para probar (polish/correcciones-tiendas-mapas) |
+
 ## Comentarios de playtest
 
 Lo que no es un bug pero importa: qué aburre, qué confunde, qué gusta.
