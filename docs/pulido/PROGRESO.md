@@ -76,6 +76,18 @@ Preparar: abrir `00_Boot`, iniciar partida y atender a los compradores.
 
 Riesgos: se conservó el idioma inglés existente; esta tarea no añade localización.
 
+### Prueba de B-004 — Puerta de la tienda
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor.
+
+Preparar: iniciar desde `00_Boot` y mirar la puerta de almacén desde el mostrador.
+
+- [ ] Acercarse y mirar el marco desde varios ángulos → no aparecen triángulos ni parpadeos entre dintel y pared.
+- [ ] Atender hasta el comprador raro → la puerta sigue bloqueada antes del pedido y se habilita después.
+- [ ] Usar la puerta → se conserva el apagón y se entra al primer espacio liminal.
+
+Riesgos: se editó solo el dintel generado y los materiales de esa instancia de puerta.
+
 ## Pedidos entre bloques
 
 Están separados por persona en [detallesfaltantes/](detallesfaltantes/): [ALAN.md](detallesfaltantes/ALAN.md), [RAFAEL.md](detallesfaltantes/RAFAEL.md) y [GROVER.md](detallesfaltantes/GROVER.md). Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota en el archivo de esa persona.
