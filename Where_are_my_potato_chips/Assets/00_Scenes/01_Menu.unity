@@ -5498,7 +5498,7 @@ MonoBehaviour:
   title: 'Where Are My
 
     Potato Chips?'
-  titleFont: {fileID: 11400000, guid: 199d6b060766b6d479e0a31653edbf0b, type: 2}
+  titleFont: {fileID: 11400000, guid: 34cea93f8121f1d418686bb0fc7cde7b, type: 2}
   camcorderDate: NOV. 14 1997
   menuStyle: 1
   chipButtonSprite: {fileID: 21300000, guid: 9389096db819dc742970d6389da1bdcd, type: 3}

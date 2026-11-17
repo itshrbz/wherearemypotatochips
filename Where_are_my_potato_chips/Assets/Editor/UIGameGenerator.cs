@@ -17,7 +17,8 @@ public static class UIGameGenerator
     [MenuItem("Tools/Kit/Generar UI A-04")]
     static void Generar()
     {
-        TMP_FontAsset fuente = BuscarFuente();
+        TMP_FontAsset fuente = BuscarFuente("VT323-Regular SDF");
+        TMP_FontAsset fuenteTexto = BuscarFuente("IBMPlexMono-SemiBold SDF");
 
         // 1. Canvas raiz (reutiliza UI_Game si ya existe)
         GameObject root = GameObject.Find("UI_Game");
@@ -123,10 +124,14 @@ public static class UIGameGenerator
         TextMeshProUGUI dt = texto.AddComponent<TextMeshProUGUI>();
         dt.text = "Where are my potato chips?";
         dt.fontSize = 48;
+        // Auto-size para que los diálogos largos no se salgan de la caja.
+        dt.enableAutoSizing = true;
+        dt.fontSizeMin = 28;
+        dt.fontSizeMax = 48;
         dt.alignment = TextAlignmentOptions.MidlineLeft;
         dt.color = Color.white;
         dt.raycastTarget = false;
-        if (fuente != null) dt.font = fuente;
+        if (fuenteTexto != null) dt.font = fuenteTexto;
 
         // 7. Guardar como prefab
         if (!AssetDatabase.IsValidFolder(CarpetaUI))
@@ -138,9 +143,9 @@ public static class UIGameGenerator
         Debug.Log("A-04: UI_Game generado y guardado en " + RutaPrefab);
     }
 
-    static TMP_FontAsset BuscarFuente()
+    static TMP_FontAsset BuscarFuente(string nombre)
     {
-        string[] guids = AssetDatabase.FindAssets("Creepster t:TMP_FontAsset");
+        string[] guids = AssetDatabase.FindAssets(nombre + " t:TMP_FontAsset");
         if (guids.Length == 0) return null;
         return AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(AssetDatabase.GUIDToAssetPath(guids[0]));
     }

@@ -307,8 +307,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Where are my potato chips?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 199d6b060766b6d479e0a31653edbf0b, type: 2}
-  m_sharedMaterial: {fileID: -2617116922992459330, guid: 199d6b060766b6d479e0a31653edbf0b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 34cea93f8121f1d418686bb0fc7cde7b, type: 2}
+  m_sharedMaterial: {fileID: -3783804046124525772, guid: 34cea93f8121f1d418686bb0fc7cde7b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -444,8 +444,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Where are my potato chips?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 199d6b060766b6d479e0a31653edbf0b, type: 2}
-  m_sharedMaterial: {fileID: -2617116922992459330, guid: 199d6b060766b6d479e0a31653edbf0b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2ae8d130b36733f40b81d67b0fd17c68, type: 2}
+  m_sharedMaterial: {fileID: 4330602564297515730, guid: 2ae8d130b36733f40b81d67b0fd17c68, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -472,9 +472,9 @@ MonoBehaviour:
   m_fontSize: 48
   m_fontSizeBase: 48
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 28
+  m_fontSizeMax: 48
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
