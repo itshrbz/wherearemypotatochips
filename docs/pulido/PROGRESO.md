@@ -13,12 +13,12 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | A3 | Color de cada espacio | Rafael | 1 | A2 | Para probar | polish/look | Presets nuevos en `AmbienteTools` (archivo de Grover, tocado por pedido de A3). Solo RenderSettings y Volumes en sus escenas |
 | A4 | Luces y rendimiento | Rafael | 1 | A3 | Para probar | polish/look | Sombras en tiempo real: de 5 luces a 1. **Pendiente:** build WebGL y prueba en la laptop más débil (no se hizo: cambiar a WebGL reimporta todo y toca ProjectSettings con cambios locales de Rafael) |
 | A5 | Capturas de después | Rafael | 1 | A4 | Para probar | polish/look | Comparación y valores finales en `notas/A5_comparacion.md`; decisiones tomadas sin aprobación en su sección final |
-| C1 | Auditoría del jefe | Grover | 1 | S2 | Para probar | polish/jefe | Informe en `notas/C1_jefe.md` (hecho leyendo código, sin jugar). Grover aprobó el orden C2 → C6. Curva elegida: por posición en la partida (opción B) |
-| C2 | Dificultad por espacio en datos | Grover | 1 | C1 | En curso | polish/jefe | Código listo (`BossTuning`, `BossAI`, `LevelContext`), sin compilar. Falta en el editor: crear los 3 assets y asignarlos al prefab (ver checklist de C2) |
-| C3 | Avisos antes del ataque | Grover | 1 | C2 | En curso | polish/jefe | Código listo, sin compilar: pausa de 0.6 s al descubrirte, sonido 2D y destello rojo, luces cercanas que fallan (`BossLightDisturbance`). Falta `boss_warn` de D1 (mientras tanto usa `boss_alert`, que tampoco existe todavía) |
-| C4 | Escondites justos | Grover | 1 | C1 | En curso | polish/jefe | Código listo, sin compilar: oír ya no equivale a verlo (solo lo hace ir a mirar) y detrás de paredes oye a la mitad; aviso cuando te ve esconderte; escondites solapados; cajas de los escondites generados con colisión. El HUD ya mostraba "HIDDEN" / "Crouch to hide". Falta respiración al estar escondido (pedido a Alan) |
-| C5 | Muerte y reinicio rápido | Grover | 1 | C1 | En curso | polish/jefe | Código listo, sin compilar: después del susto, fundido corto con una frase de reintento al azar (o "It saw you hide." si te sacó de un escondite) en vez del despertar largo. Toca `SceneLoader` y `LevelFlowManager` de Rafael (aviso en `detallesfaltantes/RAFAEL.md`) |
-| C6 | Navegación y atascos | Grover | 1 | C1 | Pendiente | polish/jefe | |
+| C1 | Auditoría del jefe | Grover | 1 | S2 | Para probar | polish/boss | Informe en `notas/C1_jefe.md` (hecho leyendo código, sin jugar). Grover aprobó el orden C2 → C6. Curva elegida: por posición en la partida (opción B) |
+| C2 | Dificultad por espacio en datos | Grover | 1 | C1 | En curso | polish/boss | Código listo (`BossTuning`, `BossAI`, `LevelContext`), sin compilar. Falta en el editor: crear los 3 assets y asignarlos al prefab (ver checklist de C2) |
+| C3 | Avisos antes del ataque | Grover | 1 | C2 | En curso | polish/boss | Código listo, sin compilar: pausa de 0.6 s al descubrirte, sonido 2D y destello rojo, luces cercanas que fallan (`BossLightDisturbance`). Falta `boss_warn` de D1 (mientras tanto usa `boss_alert`, que tampoco existe todavía) |
+| C4 | Escondites justos | Grover | 1 | C1 | En curso | polish/boss | Código listo, sin compilar: oír ya no equivale a verlo (solo lo hace ir a mirar) y detrás de paredes oye a la mitad; aviso cuando te ve esconderte; escondites solapados; cajas de los escondites generados con colisión. El HUD ya mostraba "HIDDEN" / "Crouch to hide". Falta respiración al estar escondido (pedido a Alan) |
+| C5 | Muerte y reinicio rápido | Grover | 1 | C1 | En curso | polish/boss | Código listo, sin compilar: después del susto, fundido corto con una frase de reintento al azar (o "It saw you hide." si te sacó de un escondite) en vez del despertar largo. Toca `SceneLoader` y `LevelFlowManager` de Rafael (aviso en `detallesfaltantes/RAFAEL.md`) |
+| C6 | Navegación y atascos | Grover | 1 | C1 | En curso | polish/boss | Código listo: detector de atascos (3 s sin avanzar, o persiguiendo a alguien inalcanzable → lo recoloca donde el jugador no lo ve), no atrapa a través de paredes, ruta cada 0.2 s. Falta la prueba de 10 min por espacio. Pendiente: franja baja de las piscinas (x 39–69, z ≈ 85) donde el jefe no llega y el detector no lo nota |
 | D1 | Lista de sonidos que faltan | Alan | 1 | S2 | Pendiente | polish/audio | |
 | D2 | Mixer y volumen por grupo | Alan | 1 | D1 | Pendiente | polish/audio | |
 | D3 | Todo pasa por el mixer | Alan | 1 | D2 | Pendiente | polish/audio | |
@@ -126,7 +126,7 @@ Preparar: abrir `docs/pulido/notas/A5_comparacion.md` con vista previa de Markdo
 Riesgos: ninguno nuevo, es un documento.
 
 ### Prueba de C1 — Auditoría del jefe
-Rama: polish/jefe  ·  Build: ninguna (es un informe) + editor para confirmar lo "probable"
+Rama: polish/boss  ·  Build: ninguna (es un informe) + editor para confirmar lo "probable"
 
 Preparar: abrir `docs/pulido/notas/C1_jefe.md` con vista previa de Markdown. Para confirmar, abrir `00_Boot`, dar Play y usar F2 para llegar a un espacio con jefe.
 
@@ -141,7 +141,7 @@ Preparar: abrir `docs/pulido/notas/C1_jefe.md` con vista previa de Markdown. Par
 Riesgos: ninguno, no cambia el juego.
 
 ### Prueba de C2 — Dificultad del jefe en datos
-Rama: polish/jefe  ·  Build: editor
+Rama: polish/boss  ·  Build: editor
 
 Preparar (una sola vez, en el editor):
 1. Abrir Unity y esperar a que compile. La consola no debe tener errores.
@@ -176,21 +176,21 @@ Hoy el primer espacio de la partida no tiene jefe (`LevelContext.BossEnabled`), 
 Riesgos: sin los assets asignados, el tercer espacio pierde el ×1.25 de antes y queda igual de difícil que el segundo.
 
 ### Prueba de C3 — Avisos antes del ataque
-Rama: polish/jefe  ·  Build: editor
+Rama: polish/boss  ·  Build: editor
 
 Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con jefe. Hasta que Alan agregue `boss_warn` o `boss_alert` al `SfxBank`, el sonido de aviso no suena (solo sale un warning en la consola).
 
 - [ ] Acercarte al jefe sin que te vea, en el almacén o en la tienda réplica → las luces a unos 9 m de él empiezan a fallar, más cuanto más cerca está; al alejarse vuelven a la normalidad
 - [ ] Dejar que te descubra → se frena, gira hacia ti, la pantalla da un destello rojo corto y (con el sonido ya puesto) suena el aviso; recién después corre
 - [ ] Que te descubra a menos de 2 m → igual tienes medio segundo antes de que te pueda atrapar
-- [ ] Correr cerca de él detrás de una pared → también hay destello y sonido de aviso
+- [ ] Correr cerca de él con una pared en medio → no hay destello: desde C4 oírte solo lo hace ir a mirar (suena su alerta, en 3D)
 - [ ] Parque (las luces de farol) y piscinas → las luces que fallan no dejan el lugar a oscuras ni parpadean como estroboscopio
 - [ ] No hay errores nuevos en la consola
 
 Riesgos: luces apagándose rápido cerca del jefe; si molesta a alguien sensible a los destellos, subir `Min Interval` en `BossLightDisturbance` o bajar `Max Off Chance`.
 
 ### Prueba de C4 — Escondites justos
-Rama: polish/jefe  ·  Build: editor
+Rama: polish/boss  ·  Build: editor
 
 Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con jefe.
 
@@ -207,7 +207,7 @@ Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con 
 Riesgos: el jefe es más fácil de esquivar corriendo que antes; si queda demasiado fácil, subir `Hearing Range` en los `BossTuning`.
 
 ### Prueba de C5 — Muerte y reinicio rápido
-Rama: polish/jefe  ·  Build: editor
+Rama: polish/boss  ·  Build: editor
 
 Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con jefe.
 
@@ -220,4 +220,19 @@ Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con 
 - [ ] No hay errores nuevos en la consola
 
 Riesgos: las frases están en inglés como el resto del juego; E6 (idiomas) tendrá que traducirlas.
+
+### Prueba de C6 — Navegación y atascos
+Rama: polish/boss  ·  Build: editor
+
+Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con jefe. El almacén ya tiene 4 saltos hechos a mano en la plataforma central; no hace falta generar más.
+
+- [ ] Almacén: subirte a la plataforma central mientras te persigue → el jefe trepa y te alcanza
+- [ ] Ponerte en un lugar al que el jefe no puede llegar (por ejemplo, encima de un obstáculo alto) → a los ~3 s desaparece y vuelve a aparecer lejos, en un lugar que no estás mirando
+- [ ] Piscinas: bajar a la canaleta baja junto a la pared (cerca de z 85) y dejar que te persiga → anotar qué hace el jefe (problema conocido: hoy se queda quieto en el borde)
+- [ ] Ponerte pegado a una pared fina con el jefe del otro lado → no te atrapa a través de la pared
+- [ ] Jugar 10 minutos en cada espacio (almacén, piscinas, parque) dejando que te persiga y te busque → el jefe no se queda trabado contra paredes ni esquinas, y no atraviesa paredes
+- [ ] Si se recoloca, nunca aparece delante de ti ni encima de un bloque sin salida
+- [ ] No hay errores nuevos en la consola (el warning "Failed to create agent because it is not close enough to the NavMesh" en piscinas ya existía antes)
+
+Riesgos: si te subes a un lugar inalcanzable, el jefe se va y vuelve; es a propósito, pero puede sentirse raro si pasa seguido. Avisar dónde pasa para agregar un salto ahí.
 
