@@ -7,8 +7,9 @@ using UnityEngine;
 /// Por qué hace falta lo del piso: el prefab del comprador tiene el modelo desplazado dentro de la raíz
 /// (Model en y = -1.2 con escala 0.57), así que la raíz "espera" estar ~0,68 m sobre el piso.
 /// La tienda coloca la raíz en y = 1,0 (flota) y la réplica en zone.min.y + 1 (se hunde ~0,2 m).
-/// En vez de depender de esos números, cada frame se mide el punto MÁS BAJO del modelo ya animado
-/// y se sube/baja el modelo hasta que ese punto toque el piso real (raycast hacia abajo).
+/// Al aparecer se mide una sola vez cuánto hay entre el modelo y su punto más bajo (pose de reposo);
+/// después solo se sigue la altura del piso real (raycast hacia abajo). Medir el pie más bajo en cada frame
+/// hacía que el cuerpo subiera y bajara al caminar, porque los pies se alternan.
 /// </summary>
 public class BuyerAnimator : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class BuyerAnimator : MonoBehaviour
     public float floorRayStartHeight = 0.6f;
     public float floorRayLength = 6f;
     public LayerMask floorMask = ~0;
+    [Tooltip("Cambios de piso mayores a esto se ignoran (por ejemplo, el rayo tocando el mostrador).")]
+    public float maxFloorStep = 0.35f;
 
     static readonly int SpeedHash = Animator.StringToHash("Speed");
     static readonly int MultHash = Animator.StringToHash("WalkMult");
@@ -37,6 +40,11 @@ public class BuyerAnimator : MonoBehaviour
     Renderer[] renderers;
     Mesh bakeMesh;
     readonly List<Vector3> vertices = new List<Vector3>(2048);
+
+    bool hasFloor;
+    bool measured;
+    float floorY;
+    float footOffset;
 
     void Awake()
     {
@@ -57,6 +65,8 @@ public class BuyerAnimator : MonoBehaviour
     {
         last = transform.position;      // evita un salto de velocidad al aparecer en la entrada
         speed = 0f;
+        hasFloor = false;
+        measured = false;
     }
 
     void OnDestroy()
@@ -85,13 +95,26 @@ public class BuyerAnimator : MonoBehaviour
     void LateUpdate()
     {
         if (!alignToFloor || visual == null) return;
-        if (!TryGetFloorY(out float floorY)) return;
 
-        float lowest = GetLowestPointY();
-        if (float.IsInfinity(lowest)) return;
+        if (TryGetFloorY(out float hitY))
+        {
+            if (!hasFloor) floorY = hitY;
+            else if (Mathf.Abs(hitY - floorY) < maxFloorStep) floorY = Mathf.MoveTowards(floorY, hitY, 2f * Time.deltaTime);
+            hasFloor = true;
+        }
+        if (!hasFloor) return;
 
-        float delta = floorY - lowest;
-        if (Mathf.Abs(delta) > 0.0005f) visual.position += Vector3.up * delta;
+        if (!measured)
+        {
+            float lowest = GetLowestPointY();
+            if (float.IsInfinity(lowest)) return;
+            footOffset = visual.position.y - lowest;
+            measured = true;
+        }
+
+        Vector3 position = visual.position;
+        position.y = floorY + footOffset;
+        visual.position = position;
     }
 
     // Superficie más alta que haya debajo del comprador (ignora triggers, al propio comprador y al jugador).

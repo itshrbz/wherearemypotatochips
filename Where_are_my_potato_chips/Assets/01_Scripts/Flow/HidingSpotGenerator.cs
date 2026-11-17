@@ -125,6 +125,5 @@ public static class HidingSpotGenerator
         box.transform.localPosition = localPosition;
         box.transform.localScale = size;
         box.GetComponent<Renderer>().material.color = color;
-        Object.Destroy(box.GetComponent<Collider>());
     }
 }

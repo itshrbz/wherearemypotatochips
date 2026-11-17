@@ -74,6 +74,9 @@ public class SaleSequence : MonoBehaviour
     {
         if (CurrentStep != Step.WaitingCharge) return;
         Play(chargeClip, "cash_register");
+        // El golpe del cajón y el ticket hacen que cobrar se sienta físico
+        CameraEffects.Shake(0.5f, 0.12f);
+        if (register != null) ReceiptTicket.Print(register.transform);
         if (product != null) Destroy(product);
 
         var finished = CurrentVariant;

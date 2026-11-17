@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Interactable
+  - Suelo_Alfombra
+  - Suelo_Azulejo
+  - Suelo_Pasto
+  - Suelo_Tierra
+  - Suelo_Concreto
   layers:
   - Default
   - TransparentFX

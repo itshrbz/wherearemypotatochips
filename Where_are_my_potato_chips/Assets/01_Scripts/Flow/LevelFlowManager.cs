@@ -32,10 +32,12 @@ public class LevelFlowManager : MonoBehaviour
     public static GameFlowSettings Settings => Instance.settings;
     public static bool IsLoading => Instance.loader.IsBusy;
 
-    public static void StartNewGame() => Instance.LoadStore(false);
+    public static void StartNewGame() => Instance.StartCoroutine(Instance.NewGameRoutine());
     public static void StartRun() => Instance.BeginRun();
     public static void GoToNextLevel() => Instance.Advance();
     public static void RestartLevel(bool playSting = true) => Instance.Restart(playSting);
+    /// <summary>Reinicio rápido tras ser atrapado: fundido corto con una frase, sin el despertar largo.</summary>
+    public static void RetryAfterCatch(string line) => Instance.Retry(line);
     public static void BackToMenu() => Instance.LoadMenu();
     public static void FinishGame() => Instance.StartCoroutine(Instance.CreditsRoutine());
 
@@ -89,6 +91,7 @@ public class LevelFlowManager : MonoBehaviour
 
         if (liminal) context.EnsureReplica(settings.replicaStorePrefab);
         context.EnsurePlayer(settings.playerPrefab);
+        if (liminal) SurfaceTiling.Apply();
         if (liminal) HidingSpotGenerator.EnsureSpots();
         if (liminal) context.SetupBoss(settings.bossPrefab);
 
@@ -119,6 +122,22 @@ public class LevelFlowManager : MonoBehaviour
         levelIndex = -1;
         ending = false;
         loader.Load(settings.menuScene, SceneLoader.Reveal.Fade);
+    }
+
+    // Corta a propósito: el jugador tiene que estar detrás del mostrador en unos 10 segundos.
+    // El pedido de papas no se adelanta: es la primera sorpresa de la noche.
+    static readonly string[] IntroLines =
+    {
+        "Night shift at Potato Mart. Again.",
+        "Same humming lights. Customers who never really look at you.",
+        "Scan. Charge. Next. Until sunrise.",
+    };
+
+    IEnumerator NewGameRoutine()
+    {
+        if (loader.IsBusy) yield break;
+        yield return loader.ShowStory(IntroLines, 3.2f);
+        LoadStore(false);
     }
 
     void LoadStore(bool asEnding)
@@ -159,6 +178,12 @@ public class LevelFlowManager : MonoBehaviour
     {
         if (loader.IsBusy) return;
         loader.Load(SceneManager.GetActiveScene().name, SceneLoader.Reveal.WakeUp, null, playSting ? settings.caughtClip : null);
+    }
+
+    void Retry(string line)
+    {
+        if (loader.IsBusy) return;
+        loader.Load(SceneManager.GetActiveScene().name, SceneLoader.Reveal.Fade, null, null, line);
     }
 
     IEnumerator CreditsRoutine()

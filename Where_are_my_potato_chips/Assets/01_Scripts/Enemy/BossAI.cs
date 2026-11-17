@@ -44,6 +44,12 @@ public class BossAI : MonoBehaviour
 
     [Header("Persecución")]
     [SerializeField] float catchDistance = 1.2f;
+    [Tooltip("Segundos que se queda mirando al jugador al descubrirlo antes de perseguir: el momento para reaccionar.")]
+    [SerializeField] float spotReaction = 0.6f;
+    [Tooltip("Frases cortas al reintentar después de ser atrapado. Se elige una al azar, sin repetir la anterior.")]
+    [SerializeField] string[] retryLines = { "Again.", "It was right behind you.", "Not this aisle.", "Keep moving.", "Quieter next time.", "It knows these halls." };
+    [Tooltip("Frase cuando te saca de un escondite porque te vio entrar.")]
+    [SerializeField] string seenHidingLine = "It saw you hide.";
     [Tooltip("Pausa después de saltar o trepar antes de poder atrapar: evita que llegue y mate de golpe.")]
     [SerializeField] float landRecovery = 0.6f;
     [SerializeField] float memoryTime = 3f;
@@ -66,6 +72,20 @@ public class BossAI : MonoBehaviour
     [Tooltip("Probabilidad de que el siguiente destino de patrulla sea cerca del jugador.")]
     [SerializeField, Range(0f, 1f)] float huntChance = 0.6f;
     [SerializeField] float huntRadius = 10f;
+
+    [Header("Atascos")]
+    [Tooltip("Segundos queriendo moverse sin avanzar antes de recolocarlo.")]
+    [SerializeField] float stuckTime = 3f;
+    [Tooltip("Lo recoloca a esta distancia del jugador como máximo, en un punto que el jugador no ve.")]
+    [SerializeField] float relocateRadius = 20f;
+    [Tooltip("Segundos sabiendo dónde está el jugador sin poder llegar (arriba de algo alto) antes de recolocarlo.")]
+    [SerializeField] float unreachableTime = 4f;
+
+    [Header("Dificultad")]
+    [Tooltip("Un BossTuning por posición en la partida: [0] primer espacio, [1] segundo, [2] tercero. Vacío = los valores de arriba.")]
+    [SerializeField] BossTuning[] tuningByLevel;
+    [Tooltip("Segundos después de perderlo en los que no vuelve a perseguirlo, salvo que lo tenga muy cerca.")]
+    [SerializeField] float chaseCooldown = 0f;
 
     public State Current { get; private set; } = State.Patrol;
     public bool IsChasing => Current == State.Chase;
@@ -93,12 +113,21 @@ public class BossAI : MonoBehaviour
     float lookYaw;
     int patrolIndex;
     bool caught;
+    static int lastRetryLine = -1;
     bool jumping;
     bool wasTraversing;
     bool wasHidden;
     bool sawPlayerHide;
     Vector3 hideSpot;
     float recoverUntil;
+    float chaseBlockedUntil;
+    float nextRepath;
+    float stuckTimer;
+    Vector3 stuckFrom;
+    NavMeshPath relocatePath;
+    float unreachableTimer;
+    float nextReachCheck;
+    bool playerUnreachable;
 
     void Awake()
     {
@@ -111,6 +140,9 @@ public class BossAI : MonoBehaviour
         agent.autoBraking = true;
         agent.autoTraverseOffMeshLink = false;
 
+        // Se agrega por código para no tener que tocar el prefab en cada escena
+        if (GetComponent<BossLightDisturbance>() == null) gameObject.AddComponent<BossLightDisturbance>();
+
         // El prototipo anterior movía al jefe con física; con NavMesh eso lo hace patinar de lado.
         var oldBrain = GetComponent<EnemyStateMachine>();
         if (oldBrain != null) oldBrain.enabled = false;
@@ -120,6 +152,8 @@ public class BossAI : MonoBehaviour
 
     void Start()
     {
+        ApplyTuning();
+
         if (!agent.isOnNavMesh && NavMesh.SamplePosition(transform.position, out var hit, 10f, NavMesh.AllAreas))
             agent.Warp(hit.position);
 
@@ -174,6 +208,7 @@ public class BossAI : MonoBehaviour
         }
 
         Sense();
+        if (CheckUnreachable()) return;
 
         bool paused = Time.time < pauseUntil;
         agent.isStopped = paused;
@@ -183,14 +218,33 @@ public class BossAI : MonoBehaviour
             return;
         }
 
-        float multiplier = LevelContext.BossSpeedMultiplier;
+        if (CheckStuck()) return;
+
         switch (Current)
         {
-            case State.Patrol: UpdatePatrol(multiplier); break;
-            case State.Investigate: UpdateInvestigate(multiplier); break;
-            case State.Chase: UpdateChase(multiplier); break;
-            case State.Search: UpdateSearch(multiplier); break;
+            case State.Patrol: UpdatePatrol(); break;
+            case State.Investigate: UpdateInvestigate(); break;
+            case State.Chase: UpdateChase(); break;
+            case State.Search: UpdateSearch(); break;
         }
+    }
+
+    void ApplyTuning()
+    {
+        int level = LevelFlowManager.CurrentLevel;
+        if (tuningByLevel == null || level < 0 || level >= tuningByLevel.Length || tuningByLevel[level] == null) return;
+
+        BossTuning t = tuningByLevel[level];
+        patrolSpeed = t.patrolSpeed;
+        chaseSpeed = t.chaseSpeed;
+        burstMultiplier = t.burstMultiplier;
+        sightRange = t.sightRange;
+        instantSightRange = t.instantSightRange;
+        hearingRange = t.hearingRange;
+        awarenessGain = t.awarenessGain;
+        searchTime = t.searchTime;
+        huntChance = t.huntChance;
+        chaseCooldown = t.chaseCooldown;
     }
 
     void Sense()
@@ -203,6 +257,7 @@ public class BossAI : MonoBehaviour
         {
             sawPlayerHide = true;
             hideSpot = player.transform.position;
+            Sfx.Play("boss_alert", transform.position); // que el jugador sepa que lo vio meterse
         }
         wasHidden = player.IsHidden;
 
@@ -223,13 +278,16 @@ public class BossAI : MonoBehaviour
             awareness = Mathf.Max(0f, awareness - awarenessDecay * Time.deltaTime);
         }
 
-        if (CanHearPlayer(out float noiseDistance))
+        // Oír le da la zona pero no cuenta como verlo: va a mirar, y no renueva la memoria de persecución
+        if (CanHearPlayer())
         {
-            Remember();
-            awareness = Mathf.Max(awareness, noiseDistance < hearingRange * 0.5f ? 1f : 0.6f);
+            lastKnownPosition = player.transform.position;
+            if (Current == State.Patrol || Current == State.Search) EnterInvestigate();
         }
 
-        if (awareness >= 1f && Current != State.Chase) EnterChase();
+        // Recién escapado, no lo vuelve a perseguir enseguida: le da un respiro al jugador
+        bool canChase = Time.time >= chaseBlockedUntil || distance <= instantSightRange;
+        if (awareness >= 1f && Current != State.Chase && canChase) EnterChase();
         else if (awareness >= investigateThreshold && Time.time - lastSeenTime < 0.1f
                  && (Current == State.Patrol || Current == State.Search))
             EnterInvestigate();
@@ -247,9 +305,9 @@ public class BossAI : MonoBehaviour
         lastSeenTime = Time.time;
     }
 
-    void UpdatePatrol(float multiplier)
+    void UpdatePatrol()
     {
-        agent.speed = patrolSpeed * multiplier;
+        agent.speed = patrolSpeed;
         if (!agent.pathPending && agent.pathStatus != NavMeshPathStatus.PathComplete)
         {
             GoToNextPatrolPoint();
@@ -262,49 +320,51 @@ public class BossAI : MonoBehaviour
     }
 
     // Camina despacio hacia lo que vio u oyó; si al llegar no hay nada, busca por la zona
-    void UpdateInvestigate(float multiplier)
+    void UpdateInvestigate()
     {
-        agent.speed = patrolSpeed * 1.15f * multiplier;
-        agent.SetDestination(lastKnownPosition);
+        agent.speed = patrolSpeed * 1.15f;
+        Repath(lastKnownPosition);
         if (!Arrived()) return;
 
         Pause(1.2f);
         EnterSearch();
     }
 
-    void UpdateChase(float multiplier)
+    void UpdateChase()
     {
         bool seesPlayer = Time.time - lastSeenTime < 0.2f;
         float distance = FlatDistance(transform.position, player.transform.position);
 
         float speed = chaseSpeed;
         if (seesPlayer && distance < burstRange) speed *= burstMultiplier;
-        agent.speed = speed * multiplier;
+        agent.speed = speed;
 
         if (player.IsSafe || player.IsHidden || Time.time - lastSeenTime > memoryTime)
         {
+            chaseBlockedUntil = Time.time + chaseCooldown;
             EnterSearch();
             return;
         }
 
-        agent.SetDestination(seesPlayer ? PredictedPosition(distance) : lastKnownPosition);
+        Repath(seesPlayer ? PredictedPosition(distance) : lastKnownPosition);
 
         // Solo atrapa a la misma altura: si el jugador subió a un bloque, primero tiene que trepar
         float height = Mathf.Abs(player.transform.position.y - transform.position.y);
-        if (distance <= catchDistance && height < 1.3f)
+        // Y sin una pared en medio: no atrapa a través de tabiques finos
+        if (distance <= catchDistance && height < 1.3f && ClearPath(EyePosition, player.transform.position + Vector3.up))
             StartCoroutine(Catch());
     }
 
-    void UpdateSearch(float multiplier)
+    void UpdateSearch()
     {
-        agent.speed = patrolSpeed * 1.3f * multiplier;
+        agent.speed = patrolSpeed * 1.3f;
 
         if (sawPlayerHide && FlatDistance(transform.position, hideSpot) < 1.8f)
         {
             sawPlayerHide = false;
             if (player.IsHidden && FlatDistance(player.transform.position, hideSpot) < 2f)
             {
-                StartCoroutine(Catch());
+                StartCoroutine(Catch(seenHidingLine));
                 return;
             }
         }
@@ -343,10 +403,16 @@ public class BossAI : MonoBehaviour
 
     void EnterChase()
     {
-        if (Current != State.Investigate) Sfx.Play("boss_alert", transform.position);
         Current = State.Chase;
         awareness = 1f;
-        pauseUntil = 0f;
+
+        // Se frena y lo mira antes de correr: nadie es atrapado sin aviso
+        pauseUntil = Time.time + spotReaction;
+        Vector3 look = player.transform.position - transform.position;
+        lookYaw = look.sqrMagnitude > 0.01f ? Quaternion.LookRotation(new Vector3(look.x, 0f, look.z)).eulerAngles.y : transform.eulerAngles.y;
+
+        Sfx.Play(Sfx.Has("boss_warn") ? "boss_warn" : "boss_alert"); // 2D: se oye aunque esté detrás de una pared
+        ScreenEffects.Flash(new Color(0.35f, 0f, 0f, 0.35f), 0.35f);
     }
 
     // Orden de búsqueda: el escondite donde lo vio meterse, hacia donde corría, y luego los escondites cercanos
@@ -425,6 +491,106 @@ public class BossAI : MonoBehaviour
         return result;
     }
 
+    // Recalcular la ruta cada frame es caro en WebGL y no se nota la diferencia
+    void Repath(Vector3 target)
+    {
+        if (Time.time < nextRepath) return;
+        nextRepath = Time.time + 0.2f;
+        agent.SetDestination(target);
+    }
+
+    // Si quiere moverse y no avanza (o persigue a alguien que no puede alcanzar), lo recoloca donde el jugador no lo ve
+    bool CheckStuck()
+    {
+        bool unreachable = Current == State.Chase && !agent.pathPending && agent.pathStatus != NavMeshPathStatus.PathComplete;
+        bool wantsToMove = unreachable || (!agent.pathPending && agent.remainingDistance > agent.stoppingDistance + 1f);
+        if (!wantsToMove || (transform.position - stuckFrom).sqrMagnitude > 0.25f)
+        {
+            stuckTimer = 0f;
+            stuckFrom = transform.position;
+            return false;
+        }
+
+        stuckTimer += Time.deltaTime;
+        if (stuckTimer < stuckTime) return false;
+
+        stuckTimer = 0f;
+        if (!TryHiddenPoint(out Vector3 point)) return false;
+
+        agent.Warp(point);
+        stuckFrom = point;
+        EnterPatrol();
+        return true;
+    }
+
+    // Con el jugador arriba de algo alto, el jefe se mueve un poco y pasa de perseguir a buscar,
+    // y CheckStuck vuelve a cero cada vez; esto mide aparte el tiempo sin ruta hasta el jugador
+    bool CheckUnreachable()
+    {
+        // También al patrullar cerca: el acecho lo vuelve a mandar al pie del jugador y se queda ahí
+        bool engaged = (Current != State.Patrol && Time.time - lastSeenTime < memoryTime + 3f)
+            || FlatDistance(transform.position, player.transform.position) < huntRadius;
+        if (!engaged || player.IsHidden || player.IsSafe)
+        {
+            unreachableTimer = 0f;
+            return false;
+        }
+
+        // CalculatePath es caro en WebGL: cuatro veces por segundo alcanza
+        if (Time.time >= nextReachCheck)
+        {
+            nextReachCheck = Time.time + 0.25f;
+            playerUnreachable = !CanReach(player.transform.position);
+        }
+        if (!playerUnreachable)
+        {
+            unreachableTimer = 0f;
+            return false;
+        }
+
+        unreachableTimer += Time.deltaTime;
+        if (unreachableTimer < unreachableTime) return false;
+
+        unreachableTimer = 0f;
+        // Desde arriba el jugador ve casi todo: si no hay un punto oculto, vale uno lejano
+        if (!TryHiddenPoint(out Vector3 point) && !TryHiddenPoint(out point, true)) return false;
+
+        agent.Warp(point);
+        stuckFrom = point;
+        EnterPatrol();
+        return true;
+    }
+
+    bool CanReach(Vector3 target)
+    {
+        if (!NavMesh.SamplePosition(target, out var hit, 1.5f, NavMesh.AllAreas)) return false;
+        if (relocatePath == null) relocatePath = new NavMeshPath();
+        return NavMesh.CalculatePath(transform.position, hit.position, NavMesh.AllAreas, relocatePath)
+            && relocatePath.status == NavMeshPathStatus.PathComplete;
+    }
+
+    bool TryHiddenPoint(out Vector3 point, bool allowVisible = false)
+    {
+        if (relocatePath == null) relocatePath = new NavMeshPath();
+        Vector3 playerEye = player.transform.position + Vector3.up * 1.5f;
+        // Se busca a la altura del jefe: si el jugador está arriba de algo, a su altura no hay suelo
+        Vector3 center = player.transform.position;
+        center.y = transform.position.y;
+
+        for (int i = 0; i < 20; i++)
+        {
+            if (!RandomPointNear(center, relocateRadius, out point)) continue;
+            if (FlatDistance(point, center) < relocateRadius * 0.5f) continue;
+            if (!allowVisible && ClearPath(playerEye, point + Vector3.up * 1.2f)) continue;
+            // Mismo pedazo de NavMesh que el jefe: que no aparezca encima de un bloque sin salida
+            if (NavMesh.CalculatePath(transform.position, point, NavMesh.AllAreas, relocatePath)
+                && relocatePath.status == NavMeshPathStatus.PathComplete)
+                return true;
+        }
+        point = transform.position;
+        return false;
+    }
+
     void Pause(float seconds)
     {
         pauseUntil = Time.time + seconds;
@@ -451,7 +617,17 @@ public class BossAI : MonoBehaviour
         if (distance > sightRange) return false;
         if (Vector3.Angle(transform.forward, toTarget) > fieldOfView * 0.5f && distance > catchDistance * 2f) return false;
 
-        int count = Physics.RaycastNonAlloc(eye, toTarget / distance, hits, distance, sightMask, QueryTriggerInteraction.Ignore);
+        return ClearPath(eye, target);
+    }
+
+    // Nada entre los dos puntos salvo el propio jefe o el jugador
+    bool ClearPath(Vector3 from, Vector3 to)
+    {
+        Vector3 direction = to - from;
+        float distance = direction.magnitude;
+        if (distance < 0.05f) return true;
+
+        int count = Physics.RaycastNonAlloc(from, direction / distance, hits, distance, sightMask, QueryTriggerInteraction.Ignore);
         float nearest = float.MaxValue;
         Transform blocker = null;
         for (int i = 0; i < count; i++)
@@ -467,14 +643,17 @@ public class BossAI : MonoBehaviour
         return blocker == null || blocker.IsChildOf(player.transform);
     }
 
-    bool CanHearPlayer(out float distance)
+    bool CanHearPlayer()
     {
-        distance = Vector3.Distance(transform.position, player.transform.position);
-        if (player.IsHidden || player.IsSafe || playerController == null) return false;
-        return playerController.IsSprinting && distance <= hearingRange;
+        if (player.IsHidden || player.IsSafe || playerController == null || !playerController.IsSprinting) return false;
+
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        if (distance > hearingRange) return false;
+        // Detrás de una pared se oye a la mitad de distancia
+        return distance <= hearingRange * 0.5f || ClearPath(EyePosition, player.transform.position + Vector3.up);
     }
 
-    IEnumerator Catch()
+    IEnumerator Catch(string line = null)
     {
         caught = true;
         agent.isStopped = true;
@@ -486,13 +665,22 @@ public class BossAI : MonoBehaviour
         {
             StartCoroutine(Lunge());
             yield return screamer.Screamer(this);
-            LevelFlowManager.RestartLevel(false);
+            LevelFlowManager.RetryAfterCatch(line ?? RetryLine());
             yield break;
         }
 
         yield return FacePlayer(0.25f);
         yield return new WaitForSeconds(0.6f);
         LevelFlowManager.RestartLevel();
+    }
+
+    string RetryLine()
+    {
+        if (retryLines == null || retryLines.Length == 0) return null;
+        int index = UnityEngine.Random.Range(0, retryLines.Length);
+        if (index == lastRetryLine && retryLines.Length > 1) index = (index + 1) % retryLines.Length;
+        lastRetryLine = index;
+        return retryLines[index];
     }
 
     IEnumerator FacePlayer(float duration)

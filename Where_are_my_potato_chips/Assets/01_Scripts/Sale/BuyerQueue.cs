@@ -37,6 +37,9 @@ public class BuyerQueue : MonoBehaviour
 
     public int CurrentIndex { get; private set; } = -1;
 
+    /// <summary>Cuerpo del comprador que está en el mostrador (o null). Lo usa StoreScare.</summary>
+    public GameObject CurrentBody => CurrentIndex >= 0 && CurrentIndex < buyers.Count ? buyers[CurrentIndex].body : null;
+
     // Los compradores esperan ocultos. En Awake porque en el final este componente llega desactivado y Start no corre.
     void Awake()
     {

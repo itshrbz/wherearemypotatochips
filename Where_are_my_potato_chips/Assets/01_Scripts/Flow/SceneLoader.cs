@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -38,10 +39,11 @@ public class SceneLoader : MonoBehaviour
         BuildOverlay();
     }
 
-    public void Load(string scene, Reveal reveal, string ticketMessage = null, AudioClip sting = null)
+    /// <param name="centerLine">Frase corta en el centro de la pantalla negra mientras carga (por ejemplo, al reintentar).</param>
+    public void Load(string scene, Reveal reveal, string ticketMessage = null, AudioClip sting = null, string centerLine = null)
     {
         if (IsBusy) return;
-        StartCoroutine(LoadRoutine(scene, reveal, ticketMessage, sting));
+        StartCoroutine(LoadRoutine(scene, reveal, ticketMessage, sting, centerLine));
     }
 
     public IEnumerator ShowCredits(string text, float seconds, AudioClip sting)
@@ -55,12 +57,45 @@ public class SceneLoader : MonoBehaviour
         IsBusy = false;
     }
 
-    IEnumerator LoadRoutine(string scene, Reveal reveal, string ticketMessage, AudioClip sting)
+    /// <summary>Pantalla negra con la historia, línea por línea. Cualquier tecla o clic la salta.</summary>
+    public IEnumerator ShowStory(string[] lines, float secondsPerLine)
+    {
+        IsBusy = true;
+        yield return Fade(1f);
+
+        string shown = "";
+        foreach (var line in lines)
+        {
+            shown += line + "\n\n";
+            centerText.text = shown + "<size=55%><color=#8C8C8C>Press any key to skip</color></size>";
+
+            bool skipped = false;
+            for (float t = 0f; t < secondsPerLine; t += Time.unscaledDeltaTime)
+            {
+                if (SkipPressed()) { skipped = true; break; }
+                yield return null;
+            }
+            if (skipped) break;
+        }
+
+        centerText.text = "";
+        IsBusy = false;
+    }
+
+    static bool SkipPressed() =>
+        (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
+        || (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        || (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame);
+
+    IEnumerator LoadRoutine(string scene, Reveal reveal, string ticketMessage, AudioClip sting, string centerLine)
     {
         IsBusy = true;
         SetPlayerLocked(true);
         if (sting != null) sfx.PlayOneShot(sting);
         yield return Fade(1f);
+
+        float lineShownAt = Time.unscaledTime;
+        if (!string.IsNullOrEmpty(centerLine)) centerText.text = centerLine;
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         operation.allowSceneActivation = false;
@@ -71,6 +106,10 @@ public class SceneLoader : MonoBehaviour
         while (operation.progress < 0.9f) yield return null;
         operation.allowSceneActivation = true;
         while (!operation.isDone) yield return null;
+
+        // Que la frase alcance a leerse aunque la carga sea instantánea
+        if (!string.IsNullOrEmpty(centerLine))
+            while (Time.unscaledTime - lineShownAt < 0.8f) yield return null;
 
         centerText.text = "";
         ticket.gameObject.SetActive(false);

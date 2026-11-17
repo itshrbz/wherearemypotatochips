@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Cámara")]
     public float Sensibility = 0.5f;
+    [Tooltip("Con Sensibility 0.5, el stick derecho gira la mitad de esto por segundo.")]
+    [SerializeField] float stickDegreesPerSecond = 300f;
     public bool invertY;
     public float maxLimit = 80f;
     public float minLimit = -80f;
@@ -186,6 +188,9 @@ public class PlayerController : MonoBehaviour
     {
         if (cameraTransform == null) return;
         Vector2 mouse = look * Sensibility;
+        // El mouse llega en píxeles por cuadro; el stick llega de -1 a 1 y se mantiene: se pasa a grados por segundo
+        var control = inputAction.Player.Look.activeControl;
+        if (control != null && control.device is Gamepad) mouse *= stickDegreesPerSecond * Time.deltaTime;
         if (invertY) mouse.y = -mouse.y;
         vRotation = Mathf.Clamp(vRotation - mouse.y, minLimit, maxLimit);
         cameraTransform.localRotation = Quaternion.Euler(vRotation, 0, 0);

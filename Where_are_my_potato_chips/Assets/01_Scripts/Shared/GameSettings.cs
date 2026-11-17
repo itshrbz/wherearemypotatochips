@@ -8,6 +8,7 @@ public static class GameSettings
     const string FovKey = "FieldOfView";
     const string VolumeKey = "MasterVolume";
     const string CameraEffectsKey = "CameraEffects";
+    const string RetroLookKey = "RetroLook";
 
     public static float Sensitivity
     {
@@ -42,6 +43,17 @@ public static class GameSettings
     {
         get => PlayerPrefs.GetInt(CameraEffectsKey, 1) == 1;
         set => PlayerPrefs.SetInt(CameraEffectsKey, value ? 1 : 0);
+    }
+
+    /// <summary>Intensidad del look de cámara vieja (0 = imagen limpia, 1 = completo). Se aplica al instante.</summary>
+    public static float RetroLook
+    {
+        get => PlayerPrefs.GetFloat(RetroLookKey, 1f);
+        set
+        {
+            PlayerPrefs.SetFloat(RetroLookKey, Mathf.Clamp01(value));
+            global::RetroLook.Refresh();
+        }
     }
 
     public static void ApplyTo(PlayerController player)
