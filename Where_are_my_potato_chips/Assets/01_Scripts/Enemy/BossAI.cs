@@ -80,7 +80,7 @@ public class BossAI : MonoBehaviour
     [SerializeField] float relocateRadius = 20f;
 
     [Header("Dificultad")]
-    [Tooltip("Un BossTuning por posición en la partida: [0] primer espacio, [1] segundo, [2] tercero. Vacío = los valores de arriba.")]
+    [Tooltip("Un BossTuning por espacio, en el mismo orden que GameFlowSettings.liminalScenes: [0] almacén, [1] piscinas, [2] parque. Vacío = los valores de arriba.")]
     [SerializeField] BossTuning[] tuningByLevel;
     [Tooltip("Segundos después de perderlo en los que no vuelve a perseguirlo, salvo que lo tenga muy cerca.")]
     [SerializeField] float chaseCooldown = 0f;
@@ -225,7 +225,10 @@ public class BossAI : MonoBehaviour
 
     void ApplyTuning()
     {
-        int level = LevelFlowManager.CurrentLevel;
+        // Por espacio y no por posición: el orden de la partida es aleatorio y cada espacio tiene su propio carácter
+        string scene = gameObject.scene.name;
+        string[] scenes = LevelFlowManager.Settings != null ? LevelFlowManager.Settings.liminalScenes : null;
+        int level = scenes != null ? System.Array.IndexOf(scenes, scene) : -1;
         if (tuningByLevel == null || level < 0 || level >= tuningByLevel.Length || tuningByLevel[level] == null) return;
 
         BossTuning t = tuningByLevel[level];

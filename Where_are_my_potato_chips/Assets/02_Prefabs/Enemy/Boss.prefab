@@ -482,6 +482,15 @@ MonoBehaviour:
   awarenessDecay: 0.3
   investigateThreshold: 0.3
   catchDistance: 1.2
+  spotReaction: 0.6
+  retryLines:
+  - Again.
+  - It was right behind you.
+  - Not this aisle.
+  - Keep moving.
+  - Quieter next time.
+  - It knows these halls.
+  seenHidingLine: It saw you hide.
   landRecovery: 0.6
   memoryTime: 3
   predictionTime: 0.8
@@ -495,6 +504,13 @@ MonoBehaviour:
   listenTime: 2.5
   huntChance: 0.6
   huntRadius: 10
+  stuckTime: 3
+  relocateRadius: 20
+  tuningByLevel:
+  - {fileID: 11400000, guid: 7db53eb858267704e9c6b49954d6893c, type: 2}
+  - {fileID: 11400000, guid: 98ea3ba87f227bf4c979fd9480c8d074, type: 2}
+  - {fileID: 11400000, guid: edb3ec8e1051c0e419b1bce5a56221a4, type: 2}
+  chaseCooldown: 0
 --- !u!114 &7374652743802347196
 MonoBehaviour:
   m_ObjectHideFlags: 0

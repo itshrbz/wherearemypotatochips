@@ -1,8 +1,8 @@
 using UnityEngine;
 
 /// <summary>
-/// Dificultad del jefe para una posición de la partida (1.º, 2.º o 3.er espacio jugado).
-/// BossAI toma el asset que corresponde a LevelFlowManager.CurrentLevel; sin asset usa los valores del prefab.
+/// Carácter del jefe en un espacio: velocidad, sentidos y búsqueda.
+/// Un asset por espacio (almacén, piscinas, parque); BossAI lo elige por la escena. Sin asset usa los valores del prefab.
 /// </summary>
 [CreateAssetMenu(menuName = "Potato Chips/Boss Tuning", fileName = "BossTuning")]
 public class BossTuning : ScriptableObject
