@@ -13,12 +13,12 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | A3 | Color de cada espacio | Rafael | 1 | A2 | Para probar | polish/look | Presets nuevos en `AmbienteTools` (archivo de Grover, tocado por pedido de A3). Solo RenderSettings y Volumes en sus escenas |
 | A4 | Luces y rendimiento | Rafael | 1 | A3 | Para probar | polish/look | Sombras en tiempo real: de 5 luces a 1. **Pendiente:** build WebGL y prueba en la laptop más débil (no se hizo: cambiar a WebGL reimporta todo y toca ProjectSettings con cambios locales de Rafael) |
 | A5 | Capturas de después | Rafael | 1 | A4 | Para probar | polish/look | Comparación y valores finales en `notas/A5_comparacion.md`; decisiones tomadas sin aprobación en su sección final |
-| C1 | Auditoría del jefe | Grover | 1 | S2 | Para probar | polish/jefe | Informe en `notas/C1_jefe.md` (hecho leyendo código, sin jugar). Grover aprobó el orden C2 → C6. Curva elegida: por posición en la partida (opción B) |
-| C2 | Dificultad por espacio en datos | Grover | 1 | C1 | En curso | polish/jefe | Código listo (`BossTuning`, `BossAI`, `LevelContext`), sin compilar. Falta en el editor: crear los 3 assets y asignarlos al prefab (ver checklist de C2) |
-| C3 | Avisos antes del ataque | Grover | 1 | C2 | En curso | polish/jefe | Código listo, sin compilar: pausa de 0.6 s al descubrirte, sonido 2D y destello rojo, luces cercanas que fallan (`BossLightDisturbance`). Falta `boss_warn` de D1 (mientras tanto usa `boss_alert`, que tampoco existe todavía) |
-| C4 | Escondites justos | Grover | 1 | C1 | En curso | polish/jefe | Código listo, sin compilar: oír ya no equivale a verlo (solo lo hace ir a mirar) y detrás de paredes oye a la mitad; aviso cuando te ve esconderte; escondites solapados; cajas de los escondites generados con colisión. El HUD ya mostraba "HIDDEN" / "Crouch to hide". Falta respiración al estar escondido (pedido a Alan) |
-| C5 | Muerte y reinicio rápido | Grover | 1 | C1 | En curso | polish/jefe | Código listo, sin compilar: después del susto, fundido corto con una frase de reintento al azar (o "It saw you hide." si te sacó de un escondite) en vez del despertar largo. Toca `SceneLoader` y `LevelFlowManager` de Rafael (aviso en `detallesfaltantes/RAFAEL.md`) |
-| C6 | Navegación y atascos | Grover | 1 | C1 | Pendiente | polish/jefe | |
+| C1 | Auditoría del jefe | Grover | 1 | S2 | Para probar | polish/noche | Informe en `notas/C1_jefe.md`. En polish/noche se eligió dificultad **por espacio** (opción C), por pedido de Rafael |
+| C2 | Dificultad por espacio en datos | Grover | 1 | C1 | Para probar | polish/noche | Compila. Assets `07_data/Boss/BossTuning_Almacen`, `_Piscinas`, `_Parque` asignados en `Boss.prefab`; `BossAI` elige por escena (índice = `GameFlowSettings.liminalScenes`), no por posición. Probado: patrulla 2.5 / 2.85 / 3.1 y persecución 4.43 en el parque |
+| C3 | Avisos antes del ataque | Grover | 1 | C2 | Para probar | polish/noche | Compila en polish/noche. Sin probar a fondo. Sigue faltando `boss_warn` y `boss_alert` (pedido a Alan): la consola avisa que `boss_alert` no existe |
+| C4 | Escondites justos | Grover | 1 | C1 | Para probar | polish/noche | Compila en polish/noche. Sin probar a fondo. En piscinas se ocultaron 16 cubos grises `HidingSpot_*` sin componente ni colisión; los escondites reales son los generados |
+| C5 | Muerte y reinicio rápido | Grover | 1 | C1 | Para probar | polish/noche | Compila en polish/noche. Probado: al atraparte en el parque, reinicio con fundido y el jefe vuelve a su spawn |
+| C6 | Navegación y atascos | Grover | 1 | C1 | Para probar | polish/noche | Solo lo mínimo: NavMesh re-horneado y saltos regenerados en los tres espacios tras vestirlos. En la prueba el jefe no se atascó (parque, almacén, piscinas). Falta la revisión de atascos del plan |
 | D1 | Lista de sonidos que faltan | Alan | 1 | S2 | Pendiente | polish/audio | |
 | D2 | Mixer y volumen por grupo | Alan | 1 | D1 | Pendiente | polish/audio | |
 | D3 | Todo pasa por el mixer | Alan | 1 | D2 | Pendiente | polish/audio | |
@@ -26,17 +26,17 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | D5 | Ambiente por capas y reverb | Alan | 1 | D3 | Pendiente | polish/audio | |
 | D6 | Pasos según el suelo | Alan | 1 | D3 | Pendiente | polish/audio | |
 | T3 | Puerta 1 | Cristhian | 1 | A5, C6, D6 | Pendiente | main | |
-| E1 | Menú principal | Rafael | 2 | Puerta 1 | Para probar | polish/inicio | Adelantada antes de la Puerta 1. Fondo: pasillo del almacén en bucle de 8 m hecho con el kit modular (`Fondo_Menu`), 9 luces sin sombra, niebla amarilla y perfil `Ambiente_10_Warehouse`. Botones en inglés como el resto de la UI (la traducción va en E6). Probado con teclado y mando simulados; el mouse simulado falla en la parte baja de la vista del editor (Back, Quit), con clic directo funcionan: **probar con mouse real** |
+| E1 | Menú principal | Rafael | 2 | Puerta 1 | Para probar | polish/noche | Adelantada antes de la Puerta 1. Fondo: pasillo del almacén en bucle de 8 m hecho con el kit modular (`Fondo_Menu`), 9 luces sin sombra, niebla amarilla y perfil `Ambiente_10_Warehouse`. Botones en inglés como el resto de la UI (la traducción va en E6). Probado con teclado y mando simulados; el mouse simulado falla en la parte baja de la vista del editor (Back, Quit), con clic directo funcionan: **probar con mouse real** |
 | E2 | Opciones completas | Rafael | 2 | A2, D2 | Pendiente | polish/inicio | |
-| E3 | Intro, tienda y primer susto | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | Adelantada antes de la Puerta 1; **bloqueada**: necesita el editor de Unity, que dejó de responder |
-| E4 | Juice de ventas y feedback | Rafael | 2 | Puerta 1 | Pendiente | polish/inicio | Adelantada antes de la Puerta 1; **bloqueada**: necesita el editor de Unity, que dejó de responder |
+| E3 | Intro, tienda y primer susto | Rafael | 2 | Puerta 1 | Para probar | polish/noche | Intro, `StoreLife` y `StoreScare` (susto con la cola de compradores). La calle vista desde la tienda pasó a la 1.1. Faltan `scare_sting` y `car_pass` en el SfxBank (pedido a Alan) |
+| E4 | Juice de ventas y feedback | Rafael | 2 | Puerta 1 | Para probar | polish/noche | Versión corta: ticket que se imprime de la caja (`ReceiptTicket`), `CameraEffects.Shake` y `cash_register` del SfxBank al cobrar |
 | E5 | Subtítulos | Rafael | 2 | E2 | Pendiente | polish/inicio | |
 | E6 | Español e inglés | Rafael | 2 | E2, E3, E5 | Pendiente | polish/inicio | |
 | E7 | Final y créditos | Rafael | 2 | E6 | Pendiente | polish/inicio | |
 | B1 | Kit de materiales | Rafael | 2 | Puerta 1 | Para probar | polish/materiales | Lo tomó Rafael para adelantarle trabajo a Grover. 14 materiales en `03_Materials/Kit/`, 11 calcomanías con prefab en `02_Prefabs/Calcomanias/`, créditos en `CREDITS.md`. Decisiones en `notas/B1_kit_materiales.md` (sección "Cómo quedó"). Sin escena de prueba: no se tocaron escenas |
-| B2 | Vestir el almacén | Grover | 2 | B1 | Pendiente | polish/niveles | Etiquetas de suelo de D6 |
-| B3 | Vestir las piscinas | Grover | 2 | B1 | Pendiente | polish/niveles | |
-| B4 | Vestir el parque | Grover | 2 | B1 | Pendiente | polish/niveles | |
+| B2 | Vestir el almacén | Grover | 2 | B1 | Para probar | polish/noche | Kit aplicado (papel tapiz, alfombra, techo de placas), 16 estantes, 12 pilas de cajas, extintores, ~50 calcomanías y 4 detalles mal. Suelo con tag `Suelo_Alfombra` |
+| B3 | Vestir las piscinas | Grover | 2 | B1 | Para probar | polish/noche | Azulejo blanco y de piscina, yeso, 10 escaleras de piscina, bancos, silla de salvavidas, extintores, carteles y 4 detalles mal. Suelo con tag `Suelo_Azulejo` |
+| B4 | Vestir el parque | Grover | 2 | B1 | Para probar | polish/noche | Pasto seco, tierra en el camino, cerca de metal, postes bajo los 6 faroles, 10 bancos, 6 basureros, carteles y 5 detalles mal. Tags `Suelo_Pasto` y `Suelo_Tierra` |
 | B5 | Rendimiento de los niveles | Grover | 2 | B2, B3, B4 | Pendiente | polish/niveles | |
 | F1 | Sistema base de anomalías | Alan | 2 | Puerta 1 | Pendiente | polish/anomalias | Opcional |
 | F2 | Entre 6 y 8 anomalías | Alan | 2 | F1 | Pendiente | polish/anomalias | Opcional |
@@ -58,11 +58,11 @@ Pedidos anteriores a la separación por persona:
 | De | Para | Qué | Estado |
 | --- | --- | --- | --- |
 | C3 (Grover) | D1 (Alan) | Sonido `boss_warn` en el `SfxBank` | Pendiente |
-| D6 (Alan) | B2–B4 (Grover) | Etiqueta o capa de cada tipo de suelo | Pendiente |
+| D6 (Alan) | B2–B4 (Grover) | Etiqueta o capa de cada tipo de suelo | Hecho (polish/noche) |
 | D2 (Alan) | E2 (Rafael) | API `AudioMix` para el menú de opciones | Pendiente |
-| A4 (Rafael) | B4 (Grover) | Postes de farol en el parque bajo las luces `Luces_Faroles/LuzFarol_*` (hoy la luz no tiene modelo) | Pendiente |
+| A4 (Rafael) | B4 (Grover) | Postes de farol en el parque bajo las luces `Luces_Faroles/LuzFarol_*` (hoy la luz no tiene modelo) | Hecho (polish/noche) |
 | A4 (Rafael) | G1 (Rafael) | Nivel de calidad para WebGL: 1 cascada, sombra dura 1024, sin sombras de luces extra, escala 0.85 (no se tocó `PC_RPAsset` por los cambios locales) | Pendiente |
-| B1 (Rafael) | B2–B4 (Grover) | Usar el kit: materiales de `03_Materials/Kit/` y calcomanías de `02_Prefabs/Calcomanias/` en las escenas de cada espacio (B1 no tocó escenas) | Pendiente |
+| B1 (Rafael) | B2–B4 (Grover) | Usar el kit: materiales de `03_Materials/Kit/` y calcomanías de `02_Prefabs/Calcomanias/` en las escenas de cada espacio (B1 no tocó escenas) | Hecho (polish/noche) |
 | A3/A4 (Rafael) | Grover | Aviso: en `polish/look` cambié niebla, luz ambiente, Volumes y luces de 10/11/12 (nada de geometría) y `AmbienteTools.cs`. Hacer merge de `main` antes de tocar esas escenas en `polish/niveles` | Pendiente |
 
 ## Checklists de prueba
@@ -278,3 +278,26 @@ Preparar: abrir `docs/itch/LEEME.md` con vista previa de Markdown.
 - [ ] Revisar la lista "Antes de publicar, confirmar" de `LEEME.md` → no falta nada que el equipo sepa
 
 Riesgos: ninguno, no cambia el juego.
+
+## Prueba de la noche · polish/noche
+
+Una sola checklist para B1–B4, C1–C6, E1, E3, E4 y B-002. Rama: `polish/noche` · Build: editor.
+
+Preparar: hacer checkout de `polish/noche`, abrir `00_Boot` y dar Play. Tener un mando conectado para la parte del final. Capturas de referencia en `capturas/noche/` (almacén, piscinas, parque).
+
+- [ ] Menú: se ve el pasillo amarillo en bucle y PLAY funciona con mouse real (E1)
+- [ ] Intro y tienda: tres líneas de intro; en cada cobro se oye la caja, la cámara da un golpe corto y sale un ticket de papel de la caja que se arranca solo (E4)
+- [ ] Tienda: el tercer comprador pide papas y llega el susto; la puerta del almacén se abre (E3). En silencio en ese momento es normal: falta `scare_sting`
+- [ ] Primer espacio (el que toque): sin jefe, solo tutorial
+- [ ] En cada espacio: ninguna pared, suelo ni techo gris; hay estantes, bancos, escaleras, carteles y manchas (B2–B4)
+- [ ] Almacén: el cartel "pasillo 7" aparece dos veces seguidas, hay una puerta pegada a la pared, un estante boca abajo en el techo y tres afiches de papas en fila
+- [ ] Piscinas: una escalera que sube hasta el techo, un tobogán que entra a la pared, un banco dentro del agua y un cartel de "no correr" al revés
+- [ ] Parque: cada farol tiene poste; hay un banco gigante, uno mirando la cerca, un cartel EXIT en un árbol y un farol del tamaño de un niño
+- [ ] Ningún mueble nuevo bloquea un pasillo ni te deja atascado; no te caes del mapa
+- [ ] Jefe: en el almacén se siente lento y distraído, en el parque rápido y con buen oído; si te atrapa, reinicio corto con una frase (C2, C5)
+- [ ] Jefe: no se queda trabado en estantes, bancos ni escaleras nuevas (C6)
+- [ ] Con mando, en cualquier espacio: stick izquierdo mueve, stick derecho mira a una velocidad cómoda, A/Cruz salta, B/Círculo agacha, clic de stick corre (B-002)
+- [ ] Llegar a la tienda réplica de los tres espacios: se ve como la tienda real (pared, piso y techo de tienda), no gris
+- [ ] Final y vuelta al menú sin errores en la consola
+
+Riesgos: los muebles se colocaron por script; alguno puede quedar flotando o metido en una pared. Las texturas se ven estiradas en la vista de escena y bien en Play (el tiling se aplica al cargar). En la consola sigue el aviso de `boss_alert` (pedido a Alan).
