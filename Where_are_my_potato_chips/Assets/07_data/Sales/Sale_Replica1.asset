@@ -16,7 +16,7 @@ MonoBehaviour:
   greetingLines:
   - Hi. Just this, please.
   productPrefab: {fileID: 919132149155446097, guid: 128f8f2330d5ae541a70b72fa34883a9, type: 3}
-  productName: Soda
+  productName: Candy Cane
   afterSaleLines:
   - Thanks.
   - ...Have you seen any potato chips?

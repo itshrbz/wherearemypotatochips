@@ -49,6 +49,95 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | T5 | Prueba final (Puerta 3) | Cristhian | 3 | G2 | Pendiente | main | |
 | G5 | Versión 1.0 | Rafael | 3 | T5 | Pendiente | main | |
 
+## Correcciones del playtest · 17 de noviembre de 2026
+
+Pedido directo que abarca B y E; autorizado trabajar de corrido sobre los problemas señalados. Rama: `polish/correcciones-tiendas-mapas`. Base de retorno: `5ad2da5`.
+
+| ID | Tarea | Estado | Verificación |
+| --- | --- | --- | --- |
+| B-003 | Nombres de productos, compradora y ortografía | Para probar | Ventas reales de intro y las tres réplicas en Play |
+| B-004 | Puerta de la tienda superpuesta con la pared | Para probar | Captura revisada y transición por la puerta en Play |
+| B-005 | Distribución, comprador y acceso a caja de réplicas | Para probar | CharacterController real en los tres mapas; comprador fuera del mostrador |
+| B-006 | Hueco de Pools, techos de Warehouse y superficies de réplica | Para probar | Perímetro muestreado, cápsulas de pie/agachado, navegación horneada |
+| B-007 | Humedad en paredes y pilares | Para probar | Transparencia corregida y seis mallas curvas generadas por Unity |
+| B-008 | Texturas existentes en la tienda | Para probar | Capturas revisadas; falta rendimiento en navegador WebGL |
+
+Solo Cristhian pasa estas tareas a **Hecha** después del playtest manual. Informe y capturas: [correcciones de tiendas y mapas](notas/Correcciones_tiendas_mapas_2026-11-17.md).
+
+### Prueba de B-003 — Nombres y diálogos
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: abrir `00_Boot`, iniciar partida y atender a los compradores.
+
+- [ ] Atender a la segunda compradora → aparece `Customer` y el chocolate se llama `Chocolate`, sin `Old Man` ni `Gum`.
+- [ ] Recorrer las tres réplicas → bastón de caramelo, cupcake y papas muestran `Candy Cane`, `Cupcake` y `Potato Chips` al escanear.
+- [ ] Escuchar/leer el pedido y completar las ventas → se conserva el significado de las frases y se avanza normalmente; `Potatoes` está bien escrito.
+
+Riesgos: se conservó el idioma inglés existente; esta tarea no añade localización.
+
+### Prueba de B-004 — Puerta de la tienda
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor.
+
+Preparar: iniciar desde `00_Boot` y mirar la puerta de almacén desde el mostrador.
+
+- [ ] Acercarse y mirar el marco desde varios ángulos → no aparecen triángulos ni parpadeos entre dintel y pared.
+- [ ] Atender hasta el comprador raro → la puerta sigue bloqueada antes del pedido y se habilita después.
+- [ ] Usar la puerta → se conserva el apagón y se entra al primer espacio liminal.
+
+Riesgos: se editó solo el dintel generado y los materiales de esa instancia de puerta.
+
+### Prueba de B-005 — Tiendas réplica
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: iniciar desde `00_Boot`; F2 permite avanzar entre espacios en el editor.
+
+- [ ] Entrar en la réplica de cada mapa y caminar detrás de la caja sin agacharse → se puede pasar, escanear y cobrar.
+- [ ] Rodear el mostrador y mirar al comprador durante la venta → permanece fuera del mueble y sus brazos no se hunden en él.
+- [ ] Recorrer el interior → hay estantes surtidos, heladera, baldosas, reloj y carteles, con pasillos libres y la misma superficie de tienda.
+- [ ] Completar una venta en cada réplica → la zona sigue siendo segura y el ticket lleva al siguiente espacio.
+
+Riesgos: revisar a mano la animación del comprador al mirarlo desde todos los lados; la prueba automatizada comprobó una pose y el paso del jugador en los tres mapas.
+
+### Prueba de B-006 — Límites de los mapas y superficies
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: abrir `00_Boot`; usar F2 para recorrer Warehouse, Pools y Playground.
+
+- [ ] Warehouse: saltar desde cajas y plataformas hacia los bordes del techo → las barreras impiden subir, también agachado; el parkour interior sigue transitable.
+- [ ] Pools: recorrer la pared final a ambos lados de la réplica → no existe la abertura larga ni se cae al exterior; la entrada de la tienda sigue libre.
+- [ ] En los tres mapas: mirar y caminar sobre el piso de la réplica, y mirar su techo → las superficies no parpadean contra las del mapa y el jugador queda apoyado.
+- [ ] Escapar del jefe y llegar a las réplicas → la navegación y los enlaces de parkour siguen funcionando; revisar el aviso de creación de agente anotado en el informe.
+
+Riesgos: los NavMesh de los tres mapas se volvieron a hornear conservando los GUID y enlaces. El jefe no se modificó; falta un recorrido manual prolongado por mapa.
+
+### Prueba de B-007 — Humedad en paredes y pilares
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: visitar Warehouse y Pools desde `00_Boot` o directamente en Play.
+
+- [ ] Mirar las gotas de Warehouse desde cerca y de lado → no se ve el rectángulo claro de la calcomanía ni brillos en sus partes transparentes.
+- [ ] Rodear los pilares con humedad de Pools → las manchas siguen la curva del pilar y no flotan por sus lados ni atraviesan el techo.
+- [ ] Recorrer ambos espacios → las manchas y carteles restantes se conservan, sin materiales rosados ni errores nuevos en consola.
+
+Riesgos: seis mallas curvas nuevas, con sus `.meta` generados por Unity. Comprobar también transparencias en navegador WebGL.
+
+### Prueba de B-008 — Texturas de tienda
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: iniciar desde `00_Boot`; comparar la tienda original con las réplicas.
+
+- [ ] Mirar paredes, techo y madera del mostrador → tienen textura y conservan los colores y la distribución del juego.
+- [ ] Acercarse y alejarse de paredes y muebles → las texturas mantienen una escala razonable, sin estirarse con los cubos.
+- [ ] Repetir en WebGL durante dos minutos → no aparecen materiales rosados, transparencias rotas ni una caída apreciable de fluidez.
+
+Riesgos: solo se reutilizaron texturas ya importadas y acreditadas; no se descargó contenido adicional. Los productos decorativos conservan el estilo sencillo del juego.
+
 ## Pedidos entre bloques
 
 Están separados por persona en [detallesfaltantes/](detallesfaltantes/): [ALAN.md](detallesfaltantes/ALAN.md), [RAFAEL.md](detallesfaltantes/RAFAEL.md) y [GROVER.md](detallesfaltantes/GROVER.md). Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota en el archivo de esa persona.

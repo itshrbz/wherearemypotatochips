@@ -132,7 +132,7 @@ public class BuyerQueue : MonoBehaviour
 
         string line = weird.variant.potatoLines != null && weird.variant.potatoLines.Length > 0
             ? weird.variant.potatoLines[0]
-            : "Potatos.";
+            : "Potatoes.";
         yield return DialogueBox.SayAll(weird.variant.buyerName, new[] { line }, 3f);
     }
 

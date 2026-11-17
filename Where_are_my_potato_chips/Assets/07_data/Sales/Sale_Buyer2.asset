@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b910d718632f11b4c9badb379058393e, type: 3}
   m_Name: Sale_Buyer2
   m_EditorClassIdentifier: Assembly-CSharp::SaleVariant
-  buyerName: Old Man
+  buyerName: Customer
   greetingLines:
   - Hi. Just this, please.
   productPrefab: {fileID: 919132149155446097, guid: 2c937e83f3bdb2d4a8e5d118ad15e6da, type: 3}
-  productName: Gum
+  productName: Chocolate
   afterSaleLines:
   - Thanks.
   requestsPotatoes: 0
   potatoLines:
-  - Potatos.
+  - Potatoes.
   - ...You don't have them here.
   - They are in the back. In the warehouse.

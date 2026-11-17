@@ -81,8 +81,8 @@ public class ReplicaCheckout : MonoBehaviour
 
         var generic = ScriptableObject.CreateInstance<SaleVariant>();
         generic.buyerName = "???";
-        generic.greetingLines = new[] { "Potatos." };
-        generic.afterSaleLines = new[] { "These are not my potatos." };
+        generic.greetingLines = new[] { "Potatoes." };
+        generic.afterSaleLines = new[] { "These are not my potatoes." };
         return generic;
     }
 

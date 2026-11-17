@@ -10,7 +10,7 @@ public class StoreEnding : MonoBehaviour
 
         var queue = FindAnyObjectByType<BuyerQueue>(FindObjectsInactive.Include);
         if (queue != null) yield return queue.PlayEnding();
-        else yield return DialogueBox.SayAll("???", new[] { "Potatos." }, 3f);
+        else yield return DialogueBox.SayAll("???", new[] { "Potatoes." }, 3f);
 
         yield return new WaitForSeconds(1f);
         LevelFlowManager.FinishGame();

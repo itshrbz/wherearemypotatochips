@@ -17,7 +17,7 @@ MonoBehaviour:
   - Hi. Just this, please.
   - Just this. Please. Just this.
   productPrefab: {fileID: 919132149155446097, guid: e8c2336461eb2b442b0338c0ab0c458f, type: 3}
-  productName: Soda
+  productName: Cupcake
   afterSaleLines:
   - Thanks.
   - The chips are in the back.

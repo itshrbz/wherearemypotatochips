@@ -22,7 +22,7 @@ public class SaleVariant : ScriptableObject
     public bool requestsPotatoes;
     [TextArea] public string[] potatoLines =
     {
-        "Potatos.",
+        "Potatoes.",
         "...You don't have them here.",
         "They are in the back. In the warehouse."
     };
