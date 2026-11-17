@@ -101,6 +101,19 @@ Preparar: iniciar desde `00_Boot`; F2 permite avanzar entre espacios en el edito
 
 Riesgos: revisar a mano la animación del comprador al mirarlo desde todos los lados; la prueba automatizada comprobó una pose y el paso del jugador en los tres mapas.
 
+### Prueba de B-006 — Límites de los mapas y superficies
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: abrir `00_Boot`; usar F2 para recorrer Warehouse, Pools y Playground.
+
+- [ ] Warehouse: saltar desde cajas y plataformas hacia los bordes del techo → las barreras impiden subir, también agachado; el parkour interior sigue transitable.
+- [ ] Pools: recorrer la pared final a ambos lados de la réplica → no existe la abertura larga ni se cae al exterior; la entrada de la tienda sigue libre.
+- [ ] En los tres mapas: mirar y caminar sobre el piso de la réplica, y mirar su techo → las superficies no parpadean contra las del mapa y el jugador queda apoyado.
+- [ ] Escapar del jefe y llegar a las réplicas → la navegación y los enlaces de parkour siguen funcionando; revisar el aviso de creación de agente anotado en el informe.
+
+Riesgos: los NavMesh de los tres mapas se volvieron a hornear conservando los GUID y enlaces. El jefe no se modificó; falta un recorrido manual prolongado por mapa.
+
 ## Pedidos entre bloques
 
 Están separados por persona en [detallesfaltantes/](detallesfaltantes/): [ALAN.md](detallesfaltantes/ALAN.md), [RAFAEL.md](detallesfaltantes/RAFAEL.md) y [GROVER.md](detallesfaltantes/GROVER.md). Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota en el archivo de esa persona.

@@ -183,9 +183,8 @@ public class LevelContext : MonoBehaviour
         return true;
     }
 
-    // La réplica puesta por código puede quedar atravesada por columnas o paredes del nivel.
-    // Se apaga todo lo que ocupa su interior (sin tocar piso ni techo). Lo único que se
-    // respeta es una pieza que sea mucho más grande que la tienda, como un mesh de todo el nivel.
+    // Solo se ocultan piezas completamente interiores. Una pared que continúa fuera de
+    // la réplica debe recortarse en el editor; apagarla abría el perímetro de Pools.
     static void ClearSpaceFor(GameObject replica)
     {
         var renderers = replica.GetComponentsInChildren<Renderer>();
@@ -193,7 +192,6 @@ public class LevelContext : MonoBehaviour
 
         Bounds area = renderers[0].bounds;
         foreach (var r in renderers) area.Encapsulate(r.bounds);
-        float areaFootprint = area.size.x * area.size.z;
 
         Physics.SyncTransforms();
         foreach (var hit in Physics.OverlapBox(area.center, area.extents * 0.95f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore))
@@ -204,8 +202,9 @@ public class LevelContext : MonoBehaviour
             Bounds b = hit.bounds;
             bool isFloor = b.max.y <= area.min.y + 0.3f;
             bool isCeiling = b.min.y >= area.max.y - 0.3f;
-            bool hugeLevelMesh = b.size.x * b.size.z > areaFootprint * 4f;
-            if (isFloor || isCeiling || hugeLevelMesh) continue;
+            bool contained = b.min.x >= area.min.x + 0.15f && b.max.x <= area.max.x - 0.15f
+                && b.min.z >= area.min.z + 0.15f && b.max.z <= area.max.z - 0.15f;
+            if (isFloor || isCeiling || !contained) continue;
 
             hit.gameObject.SetActive(false);
         }
