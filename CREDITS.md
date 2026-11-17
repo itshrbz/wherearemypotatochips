@@ -31,6 +31,13 @@
 | Textura Ground103 ([enlace](https://ambientcg.com/view?id=Ground103)): camino de tierra | ambientCG | CC0 1.0 |
 | Textura Rubber004 ([enlace](https://ambientcg.com/view?id=Rubber004)): piso de goma | ambientCG | CC0 1.0 |
 | Textura Carpet012 ([enlace](https://ambientcg.com/view?id=Carpet012)): alfombra | ambientCG | CC0 1.0 |
+| Modelo Wet Floor Sign 01 ([enlace](https://polyhaven.com/a/WetFloorSign_01)): cartel de piso mojado | Poly Haven | CC0 1.0 |
+| Modelo Cardboard Box 01 ([enlace](https://polyhaven.com/a/cardboard_box_01)): caja de cartón | Poly Haven | CC0 1.0 |
+| Modelo Fire Alarm ([enlace](https://polyhaven.com/a/fire_alarm)): alarma de incendio (por ahora solo la textura) | Poly Haven | CC0 1.0 |
+| Modelo Plastic Crate 01 ([enlace](https://polyhaven.com/a/plastic_crate_01)): cajón de plástico (por ahora solo la textura) | Poly Haven | CC0 1.0 |
+| Modelo Plastic Monobloc Chair 01 ([enlace](https://polyhaven.com/a/plastic_monobloc_chair_01)): silla de plástico | Poly Haven | CC0 1.0 |
+| Modelo Power Box 01 ([enlace](https://polyhaven.com/a/power_box_01)): caja eléctrica | Poly Haven | CC0 1.0 |
+| Modelo Worn Metal Rack ([enlace](https://polyhaven.com/a/worn_metal_rack)): estante metálico (por ahora solo la textura) | Poly Haven | CC0 1.0 |
 
 ## Herramientas
 

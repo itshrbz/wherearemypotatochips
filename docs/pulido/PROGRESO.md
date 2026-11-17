@@ -34,7 +34,7 @@ Estados: **Pendiente** → **En curso** → **Para probar** → **Hecha**. Solo 
 | E6 | Español e inglés | Rafael | 2 | E2, E3, E5 | Pendiente | polish/inicio | |
 | E7 | Final y créditos | Rafael | 2 | E6 | Pendiente | polish/inicio | |
 | B1 | Kit de materiales | Grover | 2 | Puerta 1 | Para probar | polish/niveles | 14 materiales `Kit_*` (URP Lit) y 9 `Kit_Decal_*` (Unlit transparente, para quads) en `03_Materials/Kit/`. Texturas puestas en los materiales grises de los 3 espacios y en los prefabs `Kit_*`. Falta `Bloque_Pintado` (se usó yeso). Sin usar todavía: alfombra, palet, madera pintada, goma, inox (para B2–B4). Capturas `capturas/despues/B1_*.png` |
-| B2 | Vestir el almacén | Grover | 2 | B1 | Pendiente | polish/niveles | Etiquetas de suelo de D6 |
+| B2 | Vestir el almacén | Grover | 2 | B1 | Para probar | polish/niveles | Nuevo `Tools/Kit/Decorar almacén (B2)` (`AlmacenDecorBuilder.cs`): crea `Almacen_Decoracion` aparte, sin tocar las luces de A4. 7 modelos de Poly Haven en `04_Models/Almacen` (texturas a 1K, cajas reducidas a 1.5k y 3k triángulos). Estante, cajón y alarma son provisorios hasta tener su FBX. NavMesh re-horneada; el jefe patrulla, persigue y sube a la plataforma. Captura `capturas/despues/B2_almacen.png` |
 | B3 | Vestir las piscinas | Grover | 2 | B1 | Pendiente | polish/niveles | |
 | B4 | Vestir el parque | Grover | 2 | B1 | Pendiente | polish/niveles | |
 | B5 | Rendimiento de los niveles | Grover | 2 | B2, B3, B4 | Pendiente | polish/niveles | |
@@ -56,7 +56,7 @@ Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota a
 | De | Para | Qué | Estado |
 | --- | --- | --- | --- |
 | C3 (Grover) | D1 (Alan) | Sonido `boss_warn` en el `SfxBank` | Pendiente |
-| D6 (Alan) | B2–B4 (Grover) | Etiqueta o capa de cada tipo de suelo | Pendiente |
+| D6 (Alan) | B2–B4 (Grover) | Etiqueta o capa de cada tipo de suelo. **Respuesta B2:** no hace falta etiqueta, cada suelo tiene su material: en el almacén `Kit_Concreto_Piso` (en la tienda réplica también). `PlayerFootsteps` puede leer `sharedMaterial.name` del collider que pisa | Respondido (almacén) |
 | D2 (Alan) | E2 (Rafael) | API `AudioMix` para el menú de opciones | Pendiente |
 | A4 (Rafael) | B4 (Grover) | Postes de farol en el parque bajo las luces `Luces_Faroles/LuzFarol_*` (hoy la luz no tiene modelo) | Pendiente |
 | A4 (Rafael) | G1 (Rafael) | Nivel de calidad para WebGL: 1 cascada, sombra dura 1024, sin sombras de luces extra, escala 0.85 (no se tocó `PC_RPAsset` por los cambios locales) | Pendiente |
@@ -149,3 +149,19 @@ Preparar: abrir `00_Boot`, dar Play y apretar F2 para entrar al primer espacio; 
 - [ ] No hay errores en la consola (solo en el editor)
 
 Riesgos: los prefabs `Kit_*` también se usan en `_Sandbox/Bullain` y `_Sandbox/Cristhian`, que van a cambiar igual. Los bloques del laberinto pasaron de marrón oscuro a amarillo: el almacén se ve más claro que antes. El pasto del parque tiene un tinte cálido; si con la luz de A3 se ve muy oscuro, subir el color de `Kit_Pasto_Seco`.
+
+### Prueba de B2 — Vestir el almacén
+Rama: polish/niveles  ·  Build: editor (y WebGL para el último punto)
+
+Preparar: abrir `00_Boot`, dar Play y apretar F2 hasta llegar al almacén. Comparar con `capturas/despues/B2_almacen.png`.
+
+- [ ] Recorrer el almacén → en las paredes hay carteles de pasillo (AISLE 01 a 07), cajas eléctricas, alarmas rojas, carteles "Staff only", óxido y mugre al pie; en el techo, manchas de humedad
+- [ ] Buscar los detalles que están mal → hay dos carteles "AISLE 07", un cartel EXIT cuya flecha apunta a una pared, una puerta pegada a un bloque que no lleva a ningún lado y una silla de plástico mirando a la esquina en una curva
+- [ ] En los pasillos anchos y al fondo de algunos pasillos → estantes metálicos con cajas de cartón; debajo de algunas manchas del techo, un cartel de piso mojado (y el piso está seco)
+- [ ] Caminar y correr por todo el almacén → nada te traba ni te deja pasar a través de los estantes, la silla o los carteles de piso
+- [ ] Dejar que el jefe te persiga por pasillos con estantes y subirte a la plataforma central → te sigue sin trabarse y sube por los saltos
+- [ ] La tienda réplica y el spawn están despejados de decoración
+- [ ] Build WebGL: recorrer el almacén 2 minutos → sin tirones nuevos respecto a antes de B2
+- [ ] No hay errores en la consola (solo en el editor)
+
+Riesgos: el estante, el cajón de plástico y la alarma son provisorios (cubos con la textura real) hasta descargar su FBX; al volver a correr `Tools/Kit/Decorar almacén (B2)` se reemplazan solos. Si alguien corre `Construir almacen (N-02)`, también recrea la decoración, pero borra los cambios de luces de A4 dentro de `Almacen_Generado` (eso ya pasaba antes de B2).
