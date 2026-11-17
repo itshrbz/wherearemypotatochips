@@ -114,6 +114,18 @@ Preparar: abrir `00_Boot`; usar F2 para recorrer Warehouse, Pools y Playground.
 
 Riesgos: los NavMesh de los tres mapas se volvieron a hornear conservando los GUID y enlaces. El jefe no se modificó; falta un recorrido manual prolongado por mapa.
 
+### Prueba de B-007 — Humedad en paredes y pilares
+
+Rama: polish/correcciones-tiendas-mapas · Build: editor (WebGL pendiente).
+
+Preparar: visitar Warehouse y Pools desde `00_Boot` o directamente en Play.
+
+- [ ] Mirar las gotas de Warehouse desde cerca y de lado → no se ve el rectángulo claro de la calcomanía ni brillos en sus partes transparentes.
+- [ ] Rodear los pilares con humedad de Pools → las manchas siguen la curva del pilar y no flotan por sus lados ni atraviesan el techo.
+- [ ] Recorrer ambos espacios → las manchas y carteles restantes se conservan, sin materiales rosados ni errores nuevos en consola.
+
+Riesgos: seis mallas curvas nuevas, con sus `.meta` generados por Unity. Comprobar también transparencias en navegador WebGL.
+
 ## Pedidos entre bloques
 
 Están separados por persona en [detallesfaltantes/](detallesfaltantes/): [ALAN.md](detallesfaltantes/ALAN.md), [RAFAEL.md](detallesfaltantes/RAFAEL.md) y [GROVER.md](detallesfaltantes/GROVER.md). Cuando una tarea necesita algo en un archivo o escena de otro dueño, se anota en el archivo de esa persona.

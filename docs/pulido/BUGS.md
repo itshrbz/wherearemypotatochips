@@ -13,6 +13,7 @@ Gravedad: **Bloqueante** (no se puede terminar o se cuelga) · **Alta** (rompe l
 | B-004 | Media | 02_Store | Dinteles superpuestos que parpadean sobre la puerta de almacén | Mirar la puerta moviéndose frente al marco | E | Para probar (polish/correcciones-tiendas-mapas) |
 | B-005 | Alta | Réplicas | Comprador dentro del mostrador, paso posterior estrecho y mobiliario básico | Entrar a una réplica e intentar llegar a la caja de pie | B/E | Para probar (polish/correcciones-tiendas-mapas) |
 | B-006 | Alta | Pools / Warehouse | Pared norte desaparece al colocar réplica; se puede subir al techo; superficies de réplicas coincidentes | Recorrer pared final de Pools, saltar en parkour de Warehouse y revisar suelos de las tres tiendas | B/E | Para probar (polish/correcciones-tiendas-mapas) |
+| B-007 | Media | Warehouse / Pools | Rectángulos claros de humedad y calcomanías planas sobresaliendo de pilares | Mirar gotas de lado y rodear pilares con humedad | B | Para probar (polish/correcciones-tiendas-mapas) |
 
 ## Comentarios de playtest
 
