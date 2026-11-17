@@ -32,6 +32,13 @@ public static class Sfx
             Debug.Log("Sfx: SfxBank cargado con " + map.Count + " ids: " + string.Join(", ", map.Keys));
         }
 
+        EnsurePool();
+    }
+
+    static void EnsurePool()
+    {
+        if (pool != null && pool[0] != null) return;
+
         var root = new GameObject("SfxPool");
         Object.DontDestroyOnLoad(root);
         pool = new AudioSource[24];
@@ -57,6 +64,12 @@ public static class Sfx
     public static void Play(string id, float volumeScale) => Go(id, Vector3.zero, 0f, volumeScale);
     public static void Play(string id, Vector3 pos) => Go(id, pos, 1f, 1f);                     // 3D
     public static void Play(string id, Vector3 pos, float volumeScale) => Go(id, pos, 1f, volumeScale);
+
+    public static void PlayUi(AudioClip clip, float volume)
+    {
+        if (clip == null || volume <= 0f) return;
+        PlayClip(clip, Vector3.zero, 0f, volume, 1f, 30f);
+    }
 
     static void Go(string id, Vector3 pos, float spatial, float scale)
     {
@@ -99,14 +112,20 @@ public static class Sfx
         float p1 = e.pitch.y > 0f ? e.pitch.y : 1.05f;
         float maxD = e.maxDistance > 0f ? e.maxDistance : 30f;
 
+        PlayClip(clip, pos, spatial, vol * scale, Random.Range(p0, p1), maxD);
+    }
+
+    static void PlayClip(AudioClip clip, Vector3 pos, float spatial, float volume, float pitch, float maxDistance)
+    {
+        EnsurePool();
         var s = pool[next++ % pool.Length];
         s.Stop();
         s.transform.position = pos;
         s.spatialBlend = spatial;
         s.minDistance = 2f;
-        s.maxDistance = Mathf.Max(3f, maxD);
-        s.volume = Mathf.Clamp01(vol * scale);
-        s.pitch = Random.Range(p0, p1);
+        s.maxDistance = Mathf.Max(3f, maxDistance);
+        s.volume = Mathf.Clamp01(volume);
+        s.pitch = pitch;
         s.clip = clip;
         s.Play();
     }
