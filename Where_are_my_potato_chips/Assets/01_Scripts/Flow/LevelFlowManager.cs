@@ -124,19 +124,19 @@ public class LevelFlowManager : MonoBehaviour
         loader.Load(settings.menuScene, SceneLoader.Reveal.Fade);
     }
 
+    // Corta a propósito: el jugador tiene que estar detrás del mostrador en unos 10 segundos.
+    // El pedido de papas no se adelanta: es la primera sorpresa de la noche.
     static readonly string[] IntroLines =
     {
         "Night shift at Potato Mart. Again.",
-        "Same humming lights. Same empty aisles. Customers who never really look at you.",
-        "Tonight, one of them asks for potato chips.",
-        "The shelf is empty, but there should be a box in the warehouse.",
-        "Just go to the back and get it. It will only take a minute.",
+        "Same humming lights. Customers who never really look at you.",
+        "Scan. Charge. Next. Until sunrise.",
     };
 
     IEnumerator NewGameRoutine()
     {
         if (loader.IsBusy) yield break;
-        yield return loader.ShowStory(IntroLines, 3.5f);
+        yield return loader.ShowStory(IntroLines, 3.2f);
         LoadStore(false);
     }
 

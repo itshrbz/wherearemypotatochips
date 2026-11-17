@@ -54182,6 +54182,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036808846}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1037486862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1037486864}
+  - component: {fileID: 1037486863}
+  m_Layer: 0
+  m_Name: Susto_Tienda
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1037486863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037486862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bce07f4466ddc479f5b2e99ea153dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StoreScare
+  queue: {fileID: 692106984}
+  fallbackSeconds: 140
+  delayAfterRequest: 0.6
+  flickerSeconds: 1.4
+  darkSeconds: 1.1
+  stareSeconds: 1.8
+  stareDistance: 0.85
+  flickerSfx: bulb_burst
+  stingSfx: scare_sting
+--- !u!4 &1037486864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037486862}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1037909187
 GameObject:
   m_ObjectHideFlags: 0
@@ -107304,6 +107357,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2110197308}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2113291089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2113291091}
+  - component: {fileID: 2113291090}
+  m_Layer: 0
+  m_Name: Vida_Calle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2113291090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113291089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d54ad9d2fbafc408275c8c1f0d0757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StoreLife
+  laneZ: 20
+  roadHalfLength: 45
+  carInterval: {x: 12, y: 30}
+  firstCarDelay: 6
+  carSpeed: 11
+  carBodyMaterial: {fileID: 2100000, guid: 27af34c112bafa843a26fd4e937d78d7, type: 2}
+  carLampMaterial: {fileID: 2100000, guid: 0c2244e142d5b3744a4116f7bde7a9e7, type: 2}
+  headlightColor: {r: 1, g: 0.9, b: 0.72, a: 1}
+  taillightColor: {r: 1, g: 0.08, b: 0.05, a: 1}
+  headlightIntensity: 9
+  headlightRange: 28
+  headlightTowardStore: 22
+  carSfx: car_pass
+  pedestrianSource: {fileID: 965829413}
+  sidewalkZ: 12.6
+  sidewalkHalfLength: 22
+  pedestrianInterval: {x: 35, y: 70}
+  firstPedestrianDelay: 25
+  pedestrianSpeed: 1.2
+  stareChance: 0.5
+  stareSeconds: 4
+--- !u!4 &2113291091
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113291089}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2114798805
 GameObject:
   m_ObjectHideFlags: 0
@@ -108619,3 +108737,5 @@ SceneRoots:
   - {fileID: 1874401123}
   - {fileID: 221440793}
   - {fileID: 1721575966}
+  - {fileID: 2113291091}
+  - {fileID: 1037486864}
