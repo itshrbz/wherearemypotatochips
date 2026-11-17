@@ -139,7 +139,10 @@ public class MainMenu : MonoBehaviour
             return original;
         }
 
-        var chips = UiBuilder.CreateLabel(panel, ChipsTitle, 92f, Vector2.zero, chipsFont);
+        // El título usa la fuente de cámara vieja; Fredoka queda solo para los botones de papa.
+        var chipsTitleFont = titleFont != null ? titleFont : chipsFont;
+        float chipsTitleSize = titleFont != null ? 112f : 92f;
+        var chips = UiBuilder.CreateLabel(panel, ChipsTitle, chipsTitleSize, Vector2.zero, chipsTitleFont);
         var rect = chips.rectTransform;
         rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 1f);
         rect.anchoredPosition = new Vector2(0f, -72f);

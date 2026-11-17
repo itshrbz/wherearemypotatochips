@@ -119,6 +119,13 @@ public class SettingsScreens
     {
         var button = UiBuilder.CreateButton(panel, text, position, onClick);
         ((RectTransform)button.transform).sizeDelta = new Vector2(460f, 90f);
-        return button.GetComponentInChildren<TextMeshProUGUI>();
+        var label = button.GetComponentInChildren<TextMeshProUGUI>();
+        // Plex Mono es más ancha que la fuente anterior: en una línea y achicando si no cabe.
+        label.textWrappingMode = TextWrappingModes.NoWrap;
+        label.enableAutoSizing = true;
+        label.fontSizeMin = 28f;
+        label.fontSizeMax = 44f;
+        label.margin = new Vector4(16f, 0f, 16f, 0f);
+        return label;
     }
 }
