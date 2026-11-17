@@ -406,3 +406,34 @@ Preparar: abrir `00_Boot`, dar Play y F2 dos veces para llegar a un espacio con 
 
 Riesgos: si te subes a un lugar inalcanzable, el jefe se va y vuelve; es a propósito, pero puede sentirse raro si pasa seguido. Avisar dónde pasa para agregar un salto ahí.
 
+
+## Rescate de tipografía, árboles y build · rama Taborga · 17 de noviembre de 2026
+
+Rama `Taborga`, rehecha desde `origin/main` (`f29dede`). Antes de cada punto se revisó si ya estaba hecho en main.
+
+| Punto | Estado | Quién |
+| --- | --- | --- |
+| Tipografía: VT323 en el título, IBM Plex Mono en HUD, historia, diálogos, opciones y rótulo de cámara | Para probar | Rafael (rescatado de `64ce634` sin la escena vieja). Los botones de papa siguen con Fredoka |
+| "Camera effects: On" se salía del botón en Ajustes | Para probar | Rafael (auto-tamaño en una línea, solo en `SettingsScreens`) |
+| Borde de Piscinas (B-006) | Ya resuelto por Alan | Confirmado: empujando al jugador hacia el muro norte se detiene en z ≈ 90 sin caer |
+| Árboles del parque sin collider | Para probar | Rafael: cápsula estática en el tronco de los 40 árboles, NavMesh rehorneada y 16 saltos del jefe regenerados |
+| Cajas escondite del almacén | Ya existían (N-02 de Cristhian) | Hay 6 HidingSpot en los callejones sin salida, junto a cajas de 1 m y 0,7 m. No se tocaron |
+| B-002 mando | Ya resuelto en main | Fila actualizada en `BUGS.md`; falta probar con un mando físico |
+
+Build de Windows en `Where_are_my_potato_chips/Builds/Windows/WhereAreMyPotatoChips.exe` (no se sube a git).
+
+Pendiente para Alan: en la consola sale `Sfx: el id 'boss_alert' no existe en el SfxBank` cuando el jefe te ve esconderte.
+
+### Prueba de tipografía, árboles y escondites
+Rama: Taborga  ·  Build: editor o `Builds/Windows/WhereAreMyPotatoChips.exe`
+
+- [ ] Menú: el título "WHERE ARE MY POTATO CHIPS?" sale en letra de terminal (VT323); los botones de papa siguen con su letra redonda (Fredoka) y su animación
+- [ ] Menú → Settings: todos los textos caben; "Camera effects: On/Off" en una sola línea
+- [ ] Tienda: los textos de historia, diálogos y avisos salen en letra de máquina (Plex Mono), sin cortes ni letras faltantes (tildes, ñ, ¿, ¡)
+- [ ] Piscinas: caminar pegado al muro norte (el del fondo) → no se puede salir ni caer
+- [ ] Parque: chocar con varios árboles → no se atraviesan; el jugador no queda trabado al rodearlos
+- [ ] Parque: el jefe rodea los árboles al perseguirte, no se queda pegado a un tronco
+- [ ] Almacén: con el jefe persiguiendo, meterse junto a las cajas de un callejón sin salida y agacharse → el jefe pierde el rastro y no te atrapa
+- [ ] Almacén: lo mismo pero de pie, a la vista del jefe → sí te ve (en la prueba automática no se pudo comprobar porque el jefe no tenía línea de vista)
+
+Riesgos: los escondites del almacén son zonas invisibles junto a cajas bajas; si se sienten poco creíbles, la tarea de agrandar las cajas (1,6 × 1,4 × 1,6 m) queda propuesta. La cápsula de los árboles mide 0,7 m de radio (la base del tronco es ancha): si se siente como una pared invisible, se puede bajar.
